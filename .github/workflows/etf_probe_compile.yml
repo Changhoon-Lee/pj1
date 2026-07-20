@@ -1,0 +1,32 @@
+name: ETF probe compile and smoke
+
+on:
+  pull_request:
+    paths:
+      - 'etf_measurement_topjournal_probe/**'
+      - '.github/workflows/etf_probe_compile.yml'
+  workflow_dispatch:
+
+jobs:
+  compile-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install -r etf_measurement_topjournal_probe/requirements.txt
+      - name: Compile
+        run: python -m py_compile etf_measurement_topjournal_probe/*.py
+      - name: Synthetic smoke test
+        run: python etf_measurement_topjournal_probe/synthetic_smoke_test.py
+      - name: Remove cache artifacts
+        run: find etf_measurement_topjournal_probe -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Upload executable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ETF_TOPJOURNAL_PROBE_CODE
+          path: etf_measurement_topjournal_probe
+          if-no-files-found: error
+          retention-days: 30

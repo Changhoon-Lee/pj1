@@ -1,0 +1,3 @@
+원본 ZIP과 이 폴더를 같은 디렉터리에 둔다.
+아래 명령 하나만 실행하고, 완료 후 ETF_TOPJOURNAL_PROBE_RUN/ETF_TOPJOURNAL_PROBE_RESULTS.zip만 반환한다.
+python -m pip install -r etf_measurement_topjournal_probe/requirements.txt && python etf_measurement_topjournal_probe/run_probe.py --input KOREA_ETF_MEASUREMENT_ERROR_EMPIRICAL_RESULTS_FINAL.zip --output ETF_TOPJOURNAL_PROBE_RUN
