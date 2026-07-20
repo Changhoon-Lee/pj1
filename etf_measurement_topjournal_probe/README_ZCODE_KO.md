@@ -20,7 +20,7 @@
 원본 ZIP과 이 디렉터리를 같은 폴더에 둔 뒤 아래 한 줄만 실행한다.
 
 ```bash
-python -m pip install -r etf_measurement_topjournal_probe/requirements.txt && python etf_measurement_topjournal_probe/run_topjournal_probe.py --input KOREA_ETF_MEASUREMENT_ERROR_EMPIRICAL_RESULTS_FINAL.zip --output ETF_TOPJOURNAL_PROBE_RUN
+python -m pip install -r etf_measurement_topjournal_probe/requirements.txt && python etf_measurement_topjournal_probe/run_probe.py --input KOREA_ETF_MEASUREMENT_ERROR_EMPIRICAL_RESULTS_FINAL.zip --output ETF_TOPJOURNAL_PROBE_RUN
 ```
 
 예상 입력 SHA-256:
@@ -50,5 +50,5 @@ a56c4cb16d67b18c5723e8f207530e985aaade992067a36f755880db0a368d08
   경제학적 결론 왜곡이 약함.
 - `STOP_REPORTED_RESULTS_NOT_REPRODUCED`: 핵심 confusion matrix가 원자료에서 재현되지 않음.
 
-`run_topjournal_probe.py`가 데이터 파일과 열 이름을 자동 탐색한다. 결과를 보고 열 이름이나
-표본을 바꾸지 않는다.
+`run_probe.py`가 데이터 파일과 열 이름을 자동 탐색하고, 실행 종료 후 manifest와 최종 ZIP을
+다시 생성한다. 결과를 보고 열 이름이나 표본을 바꾸지 않는다.
