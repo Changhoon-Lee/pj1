@@ -10,6 +10,19 @@ import run_topjournal_probe as base
 from probe_utils import deterministic_zip, sha256_file
 
 
+_original_normalize_panel = base.normalize_panel
+
+
+def safe_normalize_panel(raw: pd.DataFrame):
+    panel, report = _original_normalize_panel(raw)
+    raw_columns = [c for c in panel.columns if c.startswith("raw__")]
+    if raw_columns:
+        panel = panel.drop(columns=raw_columns)
+    report["raw_columns_dropped_from_normalized_output"] = raw_columns
+    report["normalized_columns"] = list(panel.columns)
+    return panel, report
+
+
 def hardened_scorecard(
     confusion: dict[str, float],
     issuer_summary: dict[str, float],
@@ -87,7 +100,7 @@ def rebuild_final_archive(out: Path) -> tuple[Path, str]:
 
 
 def main() -> int:
-    # Replace the scorecard imported into the base runner without changing its analysis path.
+    base.normalize_panel = safe_normalize_panel
     base.build_scorecard = hardened_scorecard
     rc = base.main()
     out = output_argument(sys.argv[1:])
