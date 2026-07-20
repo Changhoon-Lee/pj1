@@ -21,3 +21,12 @@ jobs:
         run: python -m py_compile etf_measurement_topjournal_probe/*.py
       - name: Synthetic smoke test
         run: python etf_measurement_topjournal_probe/synthetic_smoke_test.py
+      - name: Remove cache artifacts
+        run: find etf_measurement_topjournal_probe -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Upload executable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ETF_TOPJOURNAL_PROBE_CODE
+          path: etf_measurement_topjournal_probe
+          if-no-files-found: error
+          retention-days: 30
