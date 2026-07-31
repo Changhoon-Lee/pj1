@@ -1,0 +1,12 @@
+{
+  "schema": "CFSC_GEN8_PUBLIC_FREEZE_COMMITMENT_V1",
+  "program": "CFSC_FINAL_CHECKABILITY_PREDICTOR_PROSPECTIVE_GEN8",
+  "prediction_freeze_sha256": "c0a2d3294957ad38e05ab871deabeee41cff5491694a88f9975866d34b107e14",
+  "predictor_core_sha256": "45f0aa5ce2c76686affb069152fc7ea142167ce9e0b333e7292cecdb55ffe850",
+  "holdout_count": 20,
+  "development_count": 8,
+  "created_before_holdout_target_execution": true,
+  "candidate_decisive_count": 16,
+  "candidate_abstain_count": 4,
+  "corpus_exact_project_function_overlap_with_gen5_gen6_gen7": 0
+}
