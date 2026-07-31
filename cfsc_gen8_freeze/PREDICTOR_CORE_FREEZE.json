@@ -1,0 +1,36 @@
+{
+  "abstain_is_primary_class": true,
+  "core_sha256": "45f0aa5ce2c76686affb069152fc7ea142167ce9e0b333e7292cecdb55ffe850",
+  "corpus_independence_sha256": "e9f43079293f91f2ef6c24ca8b584fed976f6bbe505ab1ed467aef3e73506e5a",
+  "development_calibration_sha256": "ed6c2d0a8840719a9950d262bd0616a943aa9c81730ef785a6756d616ca0df62",
+  "feature_definitions": {
+    "extrapolation": "target size divided by largest probe size",
+    "implementation_throughput_penalty": "work compression divided by observed audit/verify wall ratio",
+    "native_floor": "fixed 0.5 ms divided by extrapolated native target time",
+    "repeatability": "maximum tolerance-normalized deviation over repeated native executions",
+    "scaling_curvature": "max absolute difference between adjacent log-log exponents over three preflight sizes",
+    "witness_extractability": "incremental candidate/native time at largest probe",
+    "work_compression": "registered independent audit work divided by verifier work"
+  },
+  "holdout_target_executed": false,
+  "predictor_source_sha256": "f8db2a9704540abc6b8c52f4a6b5a9fd992849687da2c8fef1fb604e8cc29857",
+  "preflight_runner_sha256": "e4776a43d3ebdea0acaada526b0e2362b84608466a5d68e70d99c5374468f829",
+  "program": "CFSC_FINAL_CHECKABILITY_PREDICTOR_PROSPECTIVE_GEN8",
+  "rules": {
+    "curvature_max": 3.0,
+    "extrap_max": 2.5,
+    "floor_max": 1.0,
+    "repeatability_max": 0.25,
+    "rho_factor": 1.35,
+    "s_factor": 0.6
+  },
+  "schema": "CFSC_GEN8_PREDICTOR_CORE_FREEZE_V1",
+  "target_runner_sha256": "990393c5bb5a80a5e61573e247ce67ed16e8ea83fee5c0d4edf6f77141df1c3c",
+  "thresholds": {
+    "maximum_false_positive_rate": 0.1,
+    "minimum_balanced_accuracy": 0.8,
+    "minimum_selective_coverage": 0.7,
+    "producer_rho": 2.0,
+    "validation_advantage": 10.0
+  }
+}
