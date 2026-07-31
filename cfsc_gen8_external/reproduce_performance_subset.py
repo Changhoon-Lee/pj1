@@ -69,6 +69,6 @@ for fn in [eigsh_case,assignment_case,lark_case,imageio_case,resample_case,irr_c
     try:rows.append(fn())
     except Exception as e:rows.append({'kernel_id':fn.__name__,'error':repr(e),'control':False,'producer_label_agreement':False,'validation_label_agreement':False,'joint_label_agreement':False})
 out={'schema':'CFSC_GEN8_CROSS_PLATFORM_PERFORMANCE_SUBSET_V1','environment':{'platform':platform.platform(),'machine':platform.machine(),'python':platform.python_version()},'records':rows,'semantic_controls':sum(bool(x.get('control')) for x in rows),'producer_label_agreement':sum(bool(x.get('producer_label_agreement')) for x in rows),'validation_label_agreement':sum(bool(x.get('validation_label_agreement')) for x in rows),'joint_label_agreement':sum(bool(x.get('joint_label_agreement')) for x in rows),'evidence_class':'CROSS_PLATFORM_MANAGED_ENVIRONMENT_PERFORMANCE_SUBSET_NOT_INDEPENDENT_TEAM'}
-Path('external_reproduction.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
-print(json.dumps(out,indent=2))
+Path('external_reproduction.json').write_text(json.dumps(out,indent=2,sort_keys=True,default=lambda o:o.item() if isinstance(o,np.generic) else str(o))+'\n')
+print(json.dumps(out,indent=2,default=lambda o:o.item() if isinstance(o,np.generic) else str(o)))
 if out['semantic_controls']<5:raise SystemExit(2)
