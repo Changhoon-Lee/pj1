@@ -1,0 +1,7 @@
+numpy
+scipy
+pandas
+lark
+imageio
+pillow
+numpy-financial
