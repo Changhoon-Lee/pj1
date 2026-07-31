@@ -1,0 +1,12 @@
+numpy
+scipy
+sympy
+pandas
+xarray
+networkx
+mpmath
+statsmodels
+scikit-image
+scikit-learn
+biopython
+rdkit
