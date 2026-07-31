@@ -1,0 +1,85 @@
+{
+  "schema": "CFSC_GEN7_PUBLIC_FREEZE_COMMITMENT_V1",
+  "created_before_target_execution": true,
+  "core_sha256": "0cef28645e5e01780f0b8a25949044500f87d2d3be5aacc6d10092321156de60",
+  "canonical_prediction_freeze_sha256": "85b8bc0985841a2fa0e18cd44fca885eeb531308fb610e93bd0d0fca799c8186",
+  "development_count": 12,
+  "holdout_count": 20,
+  "primary_endpoint": "WALL_TIME",
+  "thresholds": {
+    "producer_rho_max": 2.0,
+    "validation_advantage_min": 10.0,
+    "witness_extractability_veto": 1.0
+  },
+  "calibration": {
+    "usable_development_count": 11,
+    "rho_upper_factor": 1.4791548252198343,
+    "validation_lower_factor": 0.42818301852506285
+  },
+  "predicted_producer_pass": [
+    "H01_TORCH_TALL_LSTSQ",
+    "H02_TORCH_SELECTED_EIGENPAIRS",
+    "H03_JAX_SPD_SOLVE",
+    "H04_JAX_TALL_LSTSQ",
+    "H05_OPTEINSUM_CHAIN5",
+    "H06_OPENCV_HOMOGRAPHY_RANSAC",
+    "H07_OPENCV_PNP_RANSAC",
+    "H08_NASHPY_SUPPORT_ENUM",
+    "H09_SCIPY_LINEAR_LEAST_SQUARES",
+    "H10_PYTENSOR_SPD_SOLVE",
+    "H11_SCIPY_SPARSE_SPSOLVE",
+    "H13_RASTERIO_REPROJECT",
+    "H14_SHAPELY_UNARY_UNION",
+    "H15_GEOPANDAS_SPATIAL_JOIN",
+    "H16_MDTRAJ_RMSD",
+    "H17_MNE_WELCH_PSD",
+    "H18_LIBROSA_CQT",
+    "H19_PYTABLES_INDEX_QUERY"
+  ],
+  "predicted_producer_fail": [
+    "H12_SCIPY_STRONGLY_CONVEX_MINIMIZE",
+    "H20_TRIMESH_MASS_PROPERTIES"
+  ],
+  "predicted_validation_pass": [
+    "H01_TORCH_TALL_LSTSQ",
+    "H02_TORCH_SELECTED_EIGENPAIRS",
+    "H03_JAX_SPD_SOLVE",
+    "H04_JAX_TALL_LSTSQ",
+    "H08_NASHPY_SUPPORT_ENUM",
+    "H09_SCIPY_LINEAR_LEAST_SQUARES",
+    "H10_PYTENSOR_SPD_SOLVE",
+    "H11_SCIPY_SPARSE_SPSOLVE",
+    "H12_SCIPY_STRONGLY_CONVEX_MINIMIZE"
+  ],
+  "predicted_validation_fail": [
+    "H05_OPTEINSUM_CHAIN5",
+    "H06_OPENCV_HOMOGRAPHY_RANSAC",
+    "H07_OPENCV_PNP_RANSAC",
+    "H13_RASTERIO_REPROJECT",
+    "H14_SHAPELY_UNARY_UNION",
+    "H15_GEOPANDAS_SPATIAL_JOIN",
+    "H16_MDTRAJ_RMSD",
+    "H17_MNE_WELCH_PSD",
+    "H18_LIBROSA_CQT",
+    "H19_PYTABLES_INDEX_QUERY",
+    "H20_TRIMESH_MASS_PROPERTIES"
+  ],
+  "predicted_joint_pass": [
+    "H01_TORCH_TALL_LSTSQ",
+    "H02_TORCH_SELECTED_EIGENPAIRS",
+    "H03_JAX_SPD_SOLVE",
+    "H04_JAX_TALL_LSTSQ",
+    "H08_NASHPY_SUPPORT_ENUM",
+    "H09_SCIPY_LINEAR_LEAST_SQUARES",
+    "H10_PYTENSOR_SPD_SOLVE",
+    "H11_SCIPY_SPARSE_SPSOLVE"
+  ],
+  "code_hashes": {
+    "CALIBRATION_RESULTS.json": "548a5c93ca8577a2118ca4efad2b7a8c36781594722088635026e4784ab4b252",
+    "PREDICTOR_SPEC.md": "03faf996f46b589884b1e8a0e10e779fa3bb30f951cbb855aea024da0f9a18b6",
+    "cfsc_gen7/kernels.py": "b64c9ab7af9cbc8d8aeef2ca01c457e93be16663c8f89f1e2a2891751787b8d6",
+    "cfsc_gen7/registry.py": "2f0767bd2cc86ddc3fd43a6ad3b1fead44260bd77ddff66a5600dad6a1eaccc0",
+    "cfsc_gen7/run_preflight.py": "b24dfc4797d4a0889c65b71606ca75c47e610117670733bad6b1051e45273ffa",
+    "cfsc_gen7/run_target.py": "86059fa8ab526410371bf4447a7dcc072c741140a9b8ee20d6a0fbd1f36eba5f"
+  }
+}
