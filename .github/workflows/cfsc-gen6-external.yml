@@ -1,0 +1,36 @@
+name: CFSC Gen6 external semantic reproduction
+
+on:
+  push:
+    branches:
+      - cfsc-gen6-external-reproduction
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    name: ${{ matrix.os }} / Python 3.12
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: cfsc_gen6_external/requirements.txt
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r cfsc_gen6_external/requirements.txt
+      - name: Run 24-kernel semantic reproduction
+        working-directory: cfsc_gen6_external
+        run: python reproduce_semantics.py
+      - name: Upload receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cfsc-gen6-${{ matrix.os }}
+          path: cfsc_gen6_external/external_reproduction.json
+          if-no-files-found: error
