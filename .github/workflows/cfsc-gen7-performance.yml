@@ -1,0 +1,36 @@
+name: CFSC Gen7 cross-platform performance subset
+
+on:
+  push:
+    branches:
+      - cfsc-gen7-cross-platform-performance
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    name: ${{ matrix.os }} / Python 3.12
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: cfsc_gen7_external/requirements.txt
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r cfsc_gen7_external/requirements.txt
+      - name: Run frozen six-kernel performance subset
+        working-directory: cfsc_gen7_external
+        run: python reproduce_performance_subset.py
+      - name: Upload receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cfsc-gen7-${{ matrix.os }}
+          path: cfsc_gen7_external/external_reproduction.json
+          if-no-files-found: error
