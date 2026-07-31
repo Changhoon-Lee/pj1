@@ -1,0 +1,1 @@
+CFSC Gen8 managed-environment performance subset trigger after public freeze.
