@@ -3,6 +3,8 @@ name: CFSC Gen9 primary cross-platform performance
 on:
   push:
     branches: [cfsc-gen9-cross-platform-heavy]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -34,7 +36,7 @@ jobs:
           pathlib.Path('/tmp/gen9_bundle.zip').write_bytes(data)
           print(got)
           PY
-          rm -rf cfsc_gen9_external/runtime
+          rm -rf cfsc_gen9_external/runtime /tmp/gen9_unpacked
           mkdir -p cfsc_gen9_external/runtime
           python - <<'PY'
           import pathlib, zipfile
@@ -44,7 +46,8 @@ jobs:
           dst = pathlib.Path('cfsc_gen9_external/runtime')
           for p in src.rglob('*'):
               q = dst / p.relative_to(src)
-              if p.is_dir(): q.mkdir(parents=True, exist_ok=True)
+              if p.is_dir():
+                  q.mkdir(parents=True, exist_ok=True)
               else:
                   q.parent.mkdir(parents=True, exist_ok=True)
                   q.write_bytes(p.read_bytes())
