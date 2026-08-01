@@ -3,6 +3,8 @@ name: CFSC Gen10 canonical artifact repair
 on:
   push:
     branches: [cfsc-gen10-canonical-repair]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 jobs:
