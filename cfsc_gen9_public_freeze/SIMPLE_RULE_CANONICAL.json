@@ -1,0 +1,21 @@
+{
+  "abstain": false,
+  "algebraic_equivalence": "work_compression / throughput_penalty == observed audit/verifier wall ratio by Gen8 feature definition",
+  "canonical_semantics": {
+    "complete_claim_required": true,
+    "decision": "PASS iff complete and statement_binding and ratio >= 10; otherwise FAIL",
+    "external_statement_binding_required": true,
+    "probe_aggregation": "largest_probe_observed_wall_ratio",
+    "ratio": "independent_audit_wall_median_ns / sound_verifier_wall_median_ns",
+    "threshold": 10.0
+  },
+  "comparator_id": "GEN6_STATIC",
+  "coverage": 1.0,
+  "endpoint": "validation",
+  "retuning_allowed": false,
+  "schema": "CFSC_GEN9_SIMPLE_RULE_CANONICAL_V1",
+  "source_file_sha256": "f8db2a9704540abc6b8c52f4a6b5a9fd992849687da2c8fef1fb604e8cc29857",
+  "source_fragment_sha256": "1c3e406bd2cabc730868929d01d5a72fb954c4070d005e63c3898e3b8003ac5d",
+  "source_path": "cfsc_gen8/predictor.py",
+  "source_program": "CFSC_FINAL_CHECKABILITY_PREDICTOR_PROSPECTIVE_GEN8"
+}
