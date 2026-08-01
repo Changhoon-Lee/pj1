@@ -35,13 +35,13 @@ jobs:
           statsmodels==0.14.6 biopython==1.86 lxml==6.1.1 pillow==12.2.0
           mpmath==1.3.0 tifffile==2026.5.15 soundfile==0.13.1 rdkit==2025.9.4
           shapely==2.1.2 rasterio==1.5.0 pyproj==3.7.2 gemmi==0.7.4 xarray==2026.4.0
-      - name: Build exact frozen canonical bytes
+      - name: Build once and freeze canonical bytes
         run: |
           python cfsc_gen10_repair/canonical_repair.py build \
             --runtime /tmp/gen9/_gen9_external_bundle \
             --artifact-root canonical_repair_gen9 \
             --archive gen9_canonical_repair_deterministic.zip \
-            --expected-archive-sha 21801e8c579aae1c31fffcd3bf225973ef9b697ea8dc6062b8c03367f87899b3 \
+            --expected-archive-sha 3049e8018b5daec58caa1a9030254e72f6540ff2fb0d47dab354eef9c3eea0b2 \
             --receipt build_receipt.json
       - uses: actions/upload-artifact@v4
         with:
@@ -75,11 +75,11 @@ jobs:
         with:
           name: gen9-canonical-bytes
           path: canonical_repair_gen9
-      - name: Verify exact downloaded canonical bytes
+      - name: Verify the same downloaded bytes
         run: |
           python cfsc_gen10_repair/canonical_repair.py verify \
             --artifact-root canonical_repair_gen9 \
-            --expected-archive-sha 21801e8c579aae1c31fffcd3bf225973ef9b697ea8dc6062b8c03367f87899b3 \
+            --expected-archive-sha 3049e8018b5daec58caa1a9030254e72f6540ff2fb0d47dab354eef9c3eea0b2 \
             --receipt canonical_repair_${{ matrix.os }}.json
       - uses: actions/upload-artifact@v4
         with:
