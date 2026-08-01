@@ -71,6 +71,21 @@ jobs:
       - name: Run frozen 32-kernel primary performance replication
         working-directory: cfsc_gen9_external/runtime
         run: python run_cross_platform.py
+      - name: Create immutable runtime-bundle copy
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          cp /tmp/gen9_bundle.zip cfsc_gen9_external/gen9_frozen_runtime_bundle.zip
+          sha256sum cfsc_gen9_external/gen9_frozen_runtime_bundle.zip > cfsc_gen9_external/gen9_frozen_runtime_bundle.zip.sha256
+      - name: Upload runtime bundle
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cfsc-gen9-frozen-runtime-bundle
+          path: |
+            cfsc_gen9_external/gen9_frozen_runtime_bundle.zip
+            cfsc_gen9_external/gen9_frozen_runtime_bundle.zip.sha256
+          if-no-files-found: error
       - name: Upload receipt
         if: always()
         uses: actions/upload-artifact@v4
