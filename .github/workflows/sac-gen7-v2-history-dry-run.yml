@@ -62,21 +62,24 @@ jobs:
         run: |
           cd sac_rlsa_gen7v2
           ./tools/compile_oracle.sh "$RUNNER_TEMP/history_oracle" "$RUNNER_TEMP/history_oracle.build.json"
+          cp "$RUNNER_TEMP/history_oracle.build.json" "../ORACLE_BUILD_${{ matrix.os }}.json"
           PYTHONDONTWRITEBYTECODE=1 LC_ALL=C python tools/history_platform_run.py \
             --artifact-root ../history_artifact --freeze-root ../history_artifact/freeze \
             --oracle "$RUNNER_TEMP/history_oracle" --warmups 2 --runs 7 \
             --out "../HISTORY_PLATFORM_${{ matrix.os }}.json"
-          cp "$RUNNER_TEMP/history_oracle.build.json" "../ORACLE_BUILD_${{ matrix.os }}.json"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: sac-gen7-v2-history-${{ matrix.os }}
           path: |
             HISTORY_PLATFORM_${{ matrix.os }}.json
             ORACLE_BUILD_${{ matrix.os }}.json
+          if-no-files-found: error
           retention-days: 14
   aggregate-history:
     timeout-minutes: 30
     needs: verify-history-platform
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -96,9 +99,11 @@ jobs:
             --state-out-dir HISTORY_STATE_CHAIN \
             --out HISTORY_DRY_RUN_RESULTS.json
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: sac-gen7-v2-history-dry-run-summary
           path: |
             HISTORY_DRY_RUN_RESULTS.json
             HISTORY_STATE_CHAIN/**
+          if-no-files-found: warn
           retention-days: 14
