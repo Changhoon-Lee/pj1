@@ -5,30 +5,56 @@ on:
     paths: ['sac_rlsa_gen7/freeze/RUN_TRIGGER.json']
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
-  build-identical-target-bytes:
+  build-and-public-freeze-bc:
     runs-on: ubuntu-latest
+    outputs:
+      freeze_commit: ${{ steps.freeze_commit.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen7-canonical-confirmation, fetch-depth: 0}
       - uses: actions/setup-python@v5
         with: {python-version: '3.13'}
-      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 mpmath==1.3.0
       - name: Materialize frozen source bundle
         run: |
-          mkdir -p runtime_repo/sac_rlsa_gen7
+          mkdir -p runtime_repo
           python - <<'PY'
           import base64,gzip,io,tarfile
           from pathlib import Path
-          b=base64.b64decode(Path('sac_rlsa_gen7/source_bundle.tar.gz.b64').read_bytes().strip(),validate=True)
-          with tarfile.open(fileobj=io.BytesIO(gzip.decompress(b)),mode='r:') as t:t.extractall('runtime_repo')
+          encoded=Path('sac_rlsa_gen7/source_bundle.tar.gz.b64').read_bytes().strip()
+          payload=gzip.decompress(base64.b64decode(encoded,validate=True))
+          with tarfile.open(fileobj=io.BytesIO(payload),mode='r:') as archive:
+              archive.extractall('runtime_repo')
           PY
+          rm -rf runtime_repo/sac_rlsa_gen7/freeze runtime_repo/sac_rlsa_gen7/public_records
           cp -R sac_rlsa_gen7/freeze runtime_repo/sac_rlsa_gen7/
-          mkdir -p runtime_repo/sac_rlsa_gen7/public_records
-          cp -R sac_rlsa_gen7/public_records/target_reports runtime_repo/sac_rlsa_gen7/public_records/
-      - name: Regenerate and bind public no-truth reports
+      - name: Generate canonical reports and Freeze B/C without truth
         run: |
-          PYTHONDONTWRITEBYTECODE=1 python runtime_repo/sac_rlsa_gen7/tools/ci_build_targets.py --repo-root runtime_repo --artifact-root ci_artifact --out-manifest ci_artifact_manifest.json
+          FREEZE_A_COMMIT=$(python -c 'import json;print(json.load(open("sac_rlsa_gen7/freeze/RUN_TRIGGER.json"))["freeze_a_public_commit"])')
+          PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=runtime_repo python runtime_repo/sac_rlsa_gen7/tools/ci_build_and_freeze.py \
+            --repo-root runtime_repo \
+            --artifact-root ci_artifact \
+            --public-root generated_public_records \
+            --freeze-a-commit "$FREEZE_A_COMMIT" \
+            --out-manifest ci_artifact_manifest.json
+      - name: Publicly commit Freeze B/C before selected audit or full truth
+        id: freeze_commit
+        run: |
+          rm -rf sac_rlsa_gen7/public_records
+          mkdir -p sac_rlsa_gen7/public_records
+          cp -R generated_public_records/* sac_rlsa_gen7/public_records/
+          rm -f sac_rlsa_gen7/freeze/FREEZE_B_SEED*.json sac_rlsa_gen7/freeze/FREEZE_C_SEED*.json sac_rlsa_gen7/freeze/FREEZE_BC_TRIGGER.json
+          cp generated_public_records/freeze/FREEZE_B_SEED*.json sac_rlsa_gen7/freeze/
+          cp generated_public_records/freeze/FREEZE_C_SEED*.json sac_rlsa_gen7/freeze/
+          cp generated_public_records/freeze/FREEZE_BC_TRIGGER.json sac_rlsa_gen7/freeze/
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add sac_rlsa_gen7/public_records sac_rlsa_gen7/freeze
+          git commit -m 'Public Gen7 Freeze B/C before selected audit and full truth [skip ci]'
+          git push origin HEAD:sac-rlsa-gen7-canonical-confirmation
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         with:
           name: sac-gen7-identical-target-bytes
@@ -38,32 +64,39 @@ jobs:
           retention-days: 30
           compression-level: 6
   verify-platform:
-    needs: build-identical-target-bytes
+    needs: build-and-public-freeze-bc
     strategy:
       fail-fast: false
       matrix: {os: [ubuntu-latest, macos-14]}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with: {ref: '${{ needs.build-and-public-freeze-bc.outputs.freeze_commit }}'}
       - uses: actions/setup-python@v5
         with: {python-version: '3.13'}
-      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 mpmath==1.3.0
       - name: Materialize frozen source bundle
         run: |
           mkdir -p runtime_repo
           python - <<'PY'
           import base64,gzip,io,tarfile
           from pathlib import Path
-          b=base64.b64decode(Path('sac_rlsa_gen7/source_bundle.tar.gz.b64').read_bytes().strip(),validate=True)
-          with tarfile.open(fileobj=io.BytesIO(gzip.decompress(b)),mode='r:') as t:t.extractall('runtime_repo')
+          payload=gzip.decompress(base64.b64decode(Path('sac_rlsa_gen7/source_bundle.tar.gz.b64').read_bytes().strip(),validate=True))
+          with tarfile.open(fileobj=io.BytesIO(payload),mode='r:') as archive:
+              archive.extractall('runtime_repo')
           PY
       - uses: actions/download-artifact@v4
         with: {name: sac-gen7-identical-target-bytes, path: ci_bundle}
-      - name: Compile frozen oracle
+      - name: Compile frozen strict oracle
         run: bash runtime_repo/sac_rlsa_gen7/tools/compile_oracle.sh "$RUNNER_TEMP/sac_gen7_oracle"
-      - name: Selected RLSA before full truth; complete B7
+      - name: Selected RLSA first, then full canonical truth and complete B7
         run: |
-          PYTHONDONTWRITEBYTECODE=1 python runtime_repo/sac_rlsa_gen7/tools/ci_platform_run.py --artifact-root ci_bundle/ci_artifact --freeze-root ci_bundle/ci_artifact/freeze --oracle "$RUNNER_TEMP/sac_gen7_oracle" --warmups 2 --runs 11 --out "platform_${{ matrix.os }}.json"
+          PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=runtime_repo python runtime_repo/sac_rlsa_gen7/tools/ci_platform_run.py \
+            --artifact-root ci_bundle/ci_artifact \
+            --freeze-root ci_bundle/ci_artifact/freeze \
+            --oracle "$RUNNER_TEMP/sac_gen7_oracle" \
+            --warmups 2 --runs 11 \
+            --out "platform_${{ matrix.os }}.json"
       - uses: actions/upload-artifact@v4
         with: {name: 'sac-gen7-${{ matrix.os }}', path: 'platform_${{ matrix.os }}.json', retention-days: 30}
   aggregate:
@@ -78,8 +111,9 @@ jobs:
           python - <<'PY'
           import base64,gzip,io,tarfile
           from pathlib import Path
-          b=base64.b64decode(Path('sac_rlsa_gen7/source_bundle.tar.gz.b64').read_bytes().strip(),validate=True)
-          with tarfile.open(fileobj=io.BytesIO(gzip.decompress(b)),mode='r:') as t:t.extractall('runtime_repo')
+          payload=gzip.decompress(base64.b64decode(Path('sac_rlsa_gen7/source_bundle.tar.gz.b64').read_bytes().strip(),validate=True))
+          with tarfile.open(fileobj=io.BytesIO(payload),mode='r:') as archive:
+              archive.extractall('runtime_repo')
           PY
       - uses: actions/download-artifact@v4
         with: {name: sac-gen7-ubuntu-latest, path: receipts/ubuntu}
@@ -87,6 +121,50 @@ jobs:
         with: {name: sac-gen7-macos-14, path: receipts/macos}
       - name: Canonical cross-platform adjudication
         run: |
-          python runtime_repo/sac_rlsa_gen7/tools/ci_aggregate.py --ubuntu receipts/ubuntu/platform_ubuntu-latest.json --macos receipts/macos/platform_macos-14.json --out CROSS_PLATFORM_SUMMARY.json
+          set +e
+          PYTHONPATH=runtime_repo python runtime_repo/sac_rlsa_gen7/tools/ci_aggregate.py \
+            --ubuntu receipts/ubuntu/platform_ubuntu-latest.json \
+            --macos receipts/macos/platform_macos-14.json \
+            --out CROSS_PLATFORM_SUMMARY.json
+          echo $? > aggregate_exit_code.txt
+          exit 0
       - uses: actions/upload-artifact@v4
-        with: {name: sac-gen7-cross-platform-summary, path: CROSS_PLATFORM_SUMMARY.json, retention-days: 30}
+        with:
+          name: sac-gen7-cross-platform-summary
+          path: |
+            CROSS_PLATFORM_SUMMARY.json
+            aggregate_exit_code.txt
+          retention-days: 30
+  publish-public-receipts:
+    needs: [build-and-public-freeze-bc, verify-platform, aggregate]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen7-canonical-confirmation, fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-ubuntu-latest, path: receipts/ubuntu}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-macos-14, path: receipts/macos}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-cross-platform-summary, path: receipts/summary}
+      - name: Commit public truth receipts without changing frozen rules
+        run: |
+          mkdir -p sac_rlsa_gen7/public_results
+          cp receipts/ubuntu/*.json sac_rlsa_gen7/public_results/UBUNTU_PERFORMANCE_RESULTS.json
+          cp receipts/macos/*.json sac_rlsa_gen7/public_results/MACOS_PERFORMANCE_RESULTS.json
+          cp receipts/summary/CROSS_PLATFORM_SUMMARY.json sac_rlsa_gen7/public_results/CROSS_PLATFORM_SUMMARY.json
+          cp receipts/summary/aggregate_exit_code.txt sac_rlsa_gen7/public_results/aggregate_exit_code.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add sac_rlsa_gen7/public_results
+          git commit -m 'Publish Gen7 canonical cross-platform truth receipts [skip ci]'
+          git push origin HEAD:sac-rlsa-gen7-canonical-confirmation
+  final-gate:
+    needs: [aggregate, publish-public-receipts]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-cross-platform-summary, path: summary}
+      - run: python -c 'import json; d=json.load(open("summary/CROSS_PLATFORM_SUMMARY.json")); assert d["pass"], d'
