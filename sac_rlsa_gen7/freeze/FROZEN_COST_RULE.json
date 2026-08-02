@@ -1,0 +1,17 @@
+{
+  "authoritative_prediction_endpoint": "external wall-clock; fixed process component plus internal per-action slope",
+  "cost_rule_digest": "28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e",
+  "derivation": {
+    "fixed_upper": "1.50 * maximum history external selected-s=1 median",
+    "full_lower": "0.90 * minimum history external median of complete B7 portfolio {strict C++1, strict C++4, vectorized scikit-learn}",
+    "per_action_upper": "1.75 * maximum nonnegative slope of history median internal oracle wall over s in {1,512,1024,2048,4096,8192}"
+  },
+  "full_b7_wall_lower_ns": 508151457.0,
+  "history_only_seeds": [42,73,59,63],
+  "history_population": 2500000,
+  "prospective_credit": false,
+  "schema": "SAC_GEN7_FROZEN_COST_RULE_V1",
+  "selected_fixed_upper_ns": 3596970.0,
+  "selected_per_action_upper_ns": 3394.5582191780823,
+  "target_truth_accessed": false
+}
