@@ -3,6 +3,8 @@ name: SAC Gen5 development assets
 on:
   push:
     branches: [sac-gen5-dev-assets]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 jobs:
