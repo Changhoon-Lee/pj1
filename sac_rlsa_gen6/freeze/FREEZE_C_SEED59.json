@@ -1,0 +1,11 @@
+{
+  "freeze_b_sha256": "3990f0446eb007d6319b2c2bebf49ca0e4b3a53640583adc63823845df04fe17",
+  "freeze_c_sha256": "325be0d6ea8008bf4dd55ef29a0e522d6b9a164bf7374aab760f519e38076501",
+  "indices_sha256": "7aa80e113cb395ce1b0beed5c121c7309e2e8cd78b783f054a68a5846b0cb6cf",
+  "public_salt": "1d8b4ed83e3ad8471557f0d4897625d215a7f6a1|SAC-RLSA-GEN6-FREEZE-C-V2",
+  "sample_size": 1318,
+  "schema": "SAC_GEN6_FREEZE_C_V1",
+  "seed_128": 192023647787168927353896170984422951565,
+  "target_id": "GEN6_UNTOUCHED_SEED59",
+  "truth_accessed": false
+}

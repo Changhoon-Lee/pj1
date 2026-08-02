@@ -1,0 +1,22 @@
+{
+  "bad_state_family": "all truth vectors whose total adverse log-loss discrepancy can cross the frozen 0.5 decision threshold under the per-unit model-derived upper bound",
+  "cost_rule_digest": "4b474b9135c3dff95e93b5e13e5d6542bee446fcf9428c332260262385664227",
+  "freeze_b_sha256": "3990f0446eb007d6319b2c2bebf49ca0e4b3a53640583adc63823845df04fe17",
+  "hypergeometric_miss_bound": 0.00999556559077193,
+  "loss_upper": 15.310449562947818,
+  "population": 1000000,
+  "predicted_b7_wall_lower_ns": 269816477.40000004,
+  "predicted_rlsa_wall_upper_ns": 5143792.832852952,
+  "predicted_wall_speedup_lower": 52.45477144349709,
+  "q_D_lower_bound": 3486,
+  "reported_decision": true,
+  "reported_mean_loss": 0.44673217488855077,
+  "risk_limit": 0.01,
+  "sample_size": 1318,
+  "schema": "SAC_GEN6_THEORY_CERTIFICATE_V1",
+  "target_id": "GEN6_UNTOUCHED_SEED59",
+  "target_report_digest": "dd8d68e4ce3f18e64cfeafa744e5adc44230a8d4f28d4ab6abf3fbc6d9163b11",
+  "target_truth_accessed": false,
+  "theory_class": "30X_CERTIFIED",
+  "threshold": 0.5
+}

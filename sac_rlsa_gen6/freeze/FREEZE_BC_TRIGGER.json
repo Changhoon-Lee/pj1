@@ -1,0 +1,31 @@
+{
+  "freeze_a_public_commit": "1d8b4ed83e3ad8471557f0d4897625d215a7f6a1",
+  "freeze_a_sha256": "f07d44853b78d2583b580442dbccbf61c2640ebf96f0cb5eabe523a605151695",
+  "freeze_bc_bundle_sha256": "c16d9b66953c506f91def507fdb48e12ef62fc33ea7b07e57ad17d9bb892e55e",
+  "records": [
+    {
+      "freeze_b_sha256": "df64792ca97728095da75f66b67194b8e9eac51e027225f5390f93dffc10fc78",
+      "freeze_c_sha256": "be7d80e7b198ba1c5c365bffbd2cd051117212f8e1a819c6887388c7076f7499",
+      "indices_sha256": "f66239bfd889a22a72817d963137864631d4db622839bd4e0014750fa7f321cc",
+      "report_digest": "1b1462cfa284b40eb75bf5e12444190ac3cd5c72bf3e71bce5bc2d96af158164",
+      "seed": 63,
+      "target_id": "GEN6_UNTOUCHED_SEED63",
+      "target_report_sha256": "5786238d985d34df551eb01831538a64dad13eebd8d49e17f97df399eadeb6a7",
+      "target_truth_accessed": false,
+      "theory_class": "30X_CERTIFIED"
+    },
+    {
+      "freeze_b_sha256": "3990f0446eb007d6319b2c2bebf49ca0e4b3a53640583adc63823845df04fe17",
+      "freeze_c_sha256": "325be0d6ea8008bf4dd55ef29a0e522d6b9a164bf7374aab760f519e38076501",
+      "indices_sha256": "7aa80e113cb395ce1b0beed5c121c7309e2e8cd78b783f054a68a5846b0cb6cf",
+      "report_digest": "dd8d68e4ce3f18e64cfeafa744e5adc44230a8d4f28d4ab6abf3fbc6d9163b11",
+      "seed": 59,
+      "target_id": "GEN6_UNTOUCHED_SEED59",
+      "target_report_sha256": "5c2dbcfd2452c8ffc85b66efdc5f8041e96b8166e96291659e574ddc93467e7a",
+      "target_truth_accessed": false,
+      "theory_class": "30X_CERTIFIED"
+    }
+  ],
+  "schema": "SAC_GEN6_FREEZE_BC_PUBLIC_TRIGGER_V1",
+  "target_truth_accessed": false
+}

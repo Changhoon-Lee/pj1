@@ -1,0 +1,77 @@
+{
+  "files": {
+    "loss": {
+      "bytes": 8000000,
+      "path": "GEN6_UNTOUCHED_SEED59.reported_loss.f64",
+      "sha256": "1acf867e52bb332b84344afa1c59e32a56e39191f996be56be758920f9a96296"
+    },
+    "model": {
+      "bytes": 26064,
+      "path": "GEN6_UNTOUCHED_SEED59.model.bin",
+      "sha256": "ba61adf9d35b2e74df214b267fa3598af0f3c3a04de4708fc021c3709a98322b"
+    },
+    "raw": {
+      "bytes": 8000000,
+      "path": "GEN6_UNTOUCHED_SEED59.reported_raw.f64",
+      "sha256": "cebcb9302de3639e10077f18e735f7dc51b7332174619384a9c82ff7577fcf3f"
+    },
+    "x": {
+      "bytes": 80000000,
+      "path": "GEN6_UNTOUCHED_SEED59.X.f64",
+      "sha256": "eaa1e43c408b35d98780e4a5851cfe9d41c40f4880451d861cd28e24c0441cdb"
+    },
+    "y": {
+      "bytes": 8000000,
+      "path": "GEN6_UNTOUCHED_SEED59.y.f64",
+      "sha256": "b2588e893be742499f28d002647361382bf6d4f9298dcce502a7ba3813a0cd42"
+    }
+  },
+  "model_bounds": {
+    "derivation": "max(softplus(raw_max),softplus(-raw_min)) over y01 in {0,1}",
+    "init_raw": -0.022000887397759322,
+    "loss_upper": 15.310449562947818,
+    "n_features": 10,
+    "n_trees": 100,
+    "raw_max": 15.31044933868551,
+    "raw_min": -1.6853877212486823,
+    "rounding": "outward_nextafter_each_tree_term_and_sum"
+  },
+  "parameters": {
+    "learning_rate": 0.1,
+    "max_depth": 2,
+    "max_features": 2,
+    "min_samples_split": 5,
+    "n_estimators": 100
+  },
+  "policy": {
+    "decision": "PASS iff mean_loss < 0.5",
+    "formula": "logaddexp(0,raw)-y01*raw",
+    "label_mapping": "y01=1 iff make_hastie label >0",
+    "metric": "mean Bernoulli log loss from raw logits",
+    "probability_clipping": "NONE_AUTHORITATIVE_RAW_LOGIT_PATH",
+    "threshold": 0.5
+  },
+  "population": 1000000,
+  "report_digest": "dd8d68e4ce3f18e64cfeafa744e5adc44230a8d4f28d4ab6abf3fbc6d9163b11",
+  "report_generation_wall_ns": 851625646,
+  "reported_decision": true,
+  "reported_max_loss": 1.7337832235573787,
+  "reported_mean_loss": 0.44673217488855077,
+  "reported_min_loss": 0.0038557774252705457,
+  "schema": "SAC_GEN6_TARGET_REPORT_V1",
+  "seed": 59,
+  "software": {
+    "numpy": "2.3.5",
+    "platform": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+    "python": "3.13.14",
+    "sklearn": "1.8.0"
+  },
+  "target_id": "GEN6_UNTOUCHED_SEED59",
+  "target_truth_accessed": false,
+  "training_population": 2000,
+  "tree_semantics": {
+    "comparison": "float32(x_feature) <= stored float64 threshold",
+    "feature_input_cast": "float32 before each split comparison",
+    "leaf_accumulation": "float64 init + learning_rate * leaf values"
+  }
+}
