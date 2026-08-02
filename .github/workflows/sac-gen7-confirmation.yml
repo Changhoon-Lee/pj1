@@ -3,6 +3,9 @@ on:
   push:
     branches: [sac-rlsa-gen7-canonical-confirmation]
     paths: ['sac_rlsa_gen7/freeze/RUN_TRIGGER.json']
+  pull_request:
+    branches: [master]
+    paths: ['sac_rlsa_gen7/freeze/RUN_TRIGGER.json']
   workflow_dispatch:
 permissions:
   contents: write
