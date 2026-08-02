@@ -1,0 +1,92 @@
+{
+  "certifier": {
+    "risk_limit": 0.01,
+    "source": "sac_gen6/certify.py",
+    "source_sha256": "7c00fb50b9460f63bd6ff30bbbaa874917c9f7dca479bcbb774787f199292165",
+    "support_model": "heterogeneous adverse caps -> minimum support q_D -> exact fixed-size hypergeometric audit"
+  },
+  "cost_rule": {
+    "authoritative_endpoint": "wall clock",
+    "calibration_seeds": [42, 73],
+    "cost_rule_digest": "4b474b9135c3dff95e93b5e13e5d6542bee446fcf9428c332260262385664227",
+    "derivation": {
+      "fixed_upper": "1.50 * maximum calibration selected-s=1 p95",
+      "full_lower": "0.90 * minimum calibration full median",
+      "per_action_upper": "1.75 * maximum calibration incremental p95 slope over s in {512,1024,2048,4096,8192}"
+    },
+    "full_b7_wall_lower_ns": 269816477.40000004,
+    "new_target_seeds_excluded": [42, 73],
+    "schema": "SAC_GEN6_FROZEN_COST_RULE_V1",
+    "selected_fixed_upper_ns": 599783.9999999999,
+    "selected_per_action_upper_ns": 3447.6546531509503,
+    "truth_for_new_targets_accessed": false
+  },
+  "created_utc": "2026-08-02T06:35:53Z",
+  "cross_platform": {
+    "platforms": ["ubuntu-latest x86_64", "macos-14 arm64"],
+    "same_target_bytes": "Ubuntu build once, artifact downloaded by both jobs",
+    "unit_truth": "zero raw/loss mismatch for every one of 1,000,000 units at tolerance 1e-10; quantized truth digest comparison"
+  },
+  "freeze_a_sha256": "f07d44853b78d2583b580442dbccbf61c2640ebf96f0cb5eabe523a605151695",
+  "freeze_c_randomness_rule": "seed128 = first 128 bits SHA256(Freeze-B-SHA || public Freeze-A commit SHA || SAC-RLSA-GEN6-FREEZE-C-V2); uniform sample without replacement",
+  "history_only": {"prospective_credit": false, "purpose": "float32 oracle semantics and strongest-B7 cost calibration only", "seeds": [42, 73]},
+  "immutable_gen5_input": {
+    "seed42_failure_preserved": true,
+    "sha256": "7fbc2f675e617b69700ca13fa2dd8e33d44114931be8f1bcd67522b2a3861081",
+    "verdict": "SAC_RLSA_ACTION_SEMANTICS_UNSOUND",
+    "zip": "SAC_RLSA_THEORY_CERTIFIED_WORKFLOW_CROSSOVER_CHALLENGE_GEN5_v1R.zip"
+  },
+  "loss_semantics": {
+    "formula": "logaddexp(0,raw)-y01*raw",
+    "hard_upper_bound": "outward-rounded model leaf interval then max(softplus(raw_max),softplus(-raw_min))",
+    "label_mapping": "y01=1 iff y>0",
+    "nan_inf": "FAIL_CLOSED",
+    "per_unit_adverse_cap": "loss_upper - reported_loss_i",
+    "probability_clipping": "NONE_AUTHORITATIVE_RAW_LOGIT_PATH"
+  },
+  "oracle": {
+    "compiler_flags": "-O3 -std=c++20 -pthread",
+    "implementation": "independent C++20, 4-thread primary and 1-thread comparator",
+    "imports_reporter_code": false,
+    "qualification_pass": true,
+    "qualification_sha256": "28c5a4033cf93bc3e70b24aa3e0afb3d20969c889addfff96e7e5174516c873f",
+    "source": "native/gb_oracle.cpp",
+    "source_sha256": "8c743aa15685f18bf70830c78a3ce61580734d7144ac0039cd5681814bf2e46a",
+    "tolerance": 1e-10
+  },
+  "post_freeze_oracle_changes_allowed": false,
+  "post_freeze_policy_changes_allowed": false,
+  "program": "SAC_RLSA_REPAIRED_ORACLE_PROSPECTIVE_CONFIRMATION_GEN6",
+  "schema": "SAC_GEN6_FREEZE_A_POLICY_ORACLE_COST_V2",
+  "seed_selection_rule": {
+    "algorithm": "for slot i=0..: first 8 SHA256(base|slot=i) bytes mod 100; skip 42,73 and duplicates",
+    "base_string": "SAC_RLSA_GEN6_UNTOUCHED_SEED_V1|Gen5=7fbc2f675e617b69700ca13fa2dd8e33d44114931be8f1bcd67522b2a3861081|repair=8c743aa15685f18bf70830c78a3ce61580734d7144ac0039cd5681814bf2e46a",
+    "calibration_history_seeds": [42, 73],
+    "schema": "SAC_GEN6_SEED_SELECTION_RULE_V2",
+    "selected_untouched_seeds": [63, 59],
+    "target_reports_accessed": false
+  },
+  "strongest_b7": {
+    "cache_reuse": "inadmissible for first untouched validation",
+    "definition": "minimum of sound full C++ 1-thread, C++ 4-thread, and vectorized scikit full evaluation on identical bytes and precision"
+  },
+  "target_report_accessed": false,
+  "target_truth_accessed": false,
+  "timing": {"cpu_reported": true, "measured_runs": 11, "p95_reported": true, "primary": "wall median", "threads_comparator": 1, "threads_primary": 4, "warmups": 2},
+  "tree_semantics": {"accumulation": "binary64", "comparison": "float32(x_j) <= stored binary64 threshold", "feature_cast": "IEEE-754 binary32 before split"},
+  "untouched_targets": [
+    {"population": 1000000, "seed": 63, "target_id": "GEN6_UNTOUCHED_SEED63", "target_report_status": "NOT_GENERATED_AT_FREEZE_A", "truth_status": "NOT_ACCESSED_AT_FREEZE_A"},
+    {"population": 1000000, "seed": 59, "target_id": "GEN6_UNTOUCHED_SEED59", "target_report_status": "NOT_GENERATED_AT_FREEZE_A", "truth_status": "NOT_ACCESSED_AT_FREEZE_A"}
+  ],
+  "workflow": {
+    "classification": "PUBLIC_SOURCE_BOUND_SCALED_SHADOW",
+    "decision": "PASS iff mean raw-logit Bernoulli log loss < 0.5",
+    "generator": "make_hastie_10_2",
+    "model": {"learning_rate": 0.1, "max_depth": 2, "max_features": 2, "min_samples_split": 5, "n_estimators": 100, "random_state": "target seed"},
+    "project": "scikit-learn",
+    "source_test": "test_max_feature_regression",
+    "target_units": 1000000,
+    "training_units": 2000,
+    "version": "1.8.0"
+  }
+}
