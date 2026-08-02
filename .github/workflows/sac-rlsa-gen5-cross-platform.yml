@@ -3,6 +3,8 @@ name: SAC-RLSA Gen5 cross-platform crossover
 on:
   push:
     branches: [sac-rlsa-gen5-cross-platform]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 jobs:
