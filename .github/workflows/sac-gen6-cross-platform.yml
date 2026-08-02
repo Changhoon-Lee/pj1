@@ -1,0 +1,89 @@
+name: SAC RLSA Gen6 prospective cross-platform confirmation
+on:
+  push:
+    branches: [sac-rlsa-gen6-public-freeze]
+    paths: ['sac_rlsa_gen6/freeze/REPORTER_TRIGGER.json']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-and-public-freeze-bc:
+    runs-on: ubuntu-latest
+    outputs:
+      freeze_commit: ${{ steps.freeze_commit.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen6-public-freeze, fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - name: Generate reports and theory certificates without truth
+        run: |
+          mkdir -p ci_artifact generated_public_records
+          FREEZE_A_COMMIT=$(python -c 'import json;print(json.load(open("sac_rlsa_gen6/freeze/REPORTER_TRIGGER.json"))["freeze_a_public_commit"])')
+          PYTHONPATH=sac_rlsa_gen6 python sac_rlsa_gen6/tools/ci_freeze_bc.py --repo-root . --artifact-root ci_artifact --record-root generated_public_records --freeze-a-commit "$FREEZE_A_COMMIT"
+      - name: Publicly commit Freeze B/C before any truth evaluation
+        id: freeze_commit
+        run: |
+          rm -rf sac_rlsa_gen6/public_records sac_rlsa_gen6/freeze/FREEZE_B_SEED*.json sac_rlsa_gen6/freeze/FREEZE_C_SEED*.json sac_rlsa_gen6/freeze/FREEZE_C_SEED*.indices.u32 sac_rlsa_gen6/freeze/FREEZE_BC_TRIGGER.json
+          mkdir -p sac_rlsa_gen6/public_records
+          cp -R generated_public_records/target_reports sac_rlsa_gen6/public_records/
+          cp generated_public_records/freeze/FREEZE_B_SEED*.json sac_rlsa_gen6/freeze/
+          cp generated_public_records/freeze/FREEZE_C_SEED*.json sac_rlsa_gen6/freeze/
+          cp generated_public_records/freeze/FREEZE_C_SEED*.indices.u32 sac_rlsa_gen6/freeze/
+          cp generated_public_records/freeze/FREEZE_BC_TRIGGER.json sac_rlsa_gen6/freeze/
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add sac_rlsa_gen6/public_records sac_rlsa_gen6/freeze
+          git commit -m 'Public Freeze B/C before Gen6 truth evaluation [skip ci]'
+          git push origin HEAD:sac-rlsa-gen6-public-freeze
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Assemble exact artifact bundle
+        run: |
+          cp -R generated_public_records/freeze ci_artifact/freeze
+          python sac_rlsa_gen6/tools/ci_bundle.py build --artifact-root ci_artifact --freeze-root generated_public_records/freeze --out ci_artifact_manifest.json
+      - uses: actions/upload-artifact@v4
+        with: {name: sac-gen6-identical-target-bytes-and-freezes, path: 'ci_artifact/**', retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: sac-gen6-builder-receipt, path: ci_artifact_manifest.json, retention-days: 30}
+  verify-platform:
+    needs: build-and-public-freeze-bc
+    strategy:
+      fail-fast: false
+      matrix: {os: [ubuntu-latest, macos-14]}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen6-public-freeze}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen6-identical-target-bytes-and-freezes, path: ci_artifact}
+      - name: Compile repaired oracle and execute frozen selected audit then full truth
+        run: |
+          bash sac_rlsa_gen6/tools/compile_oracle.sh ci_oracle
+          python sac_rlsa_gen6/tools/ci_platform_run.py --artifact-root ci_artifact --freeze-root ci_artifact/freeze --oracle ci_oracle --warmups 2 --runs 11 --out platform_${{ matrix.os }}.json
+      - uses: actions/upload-artifact@v4
+        with: {name: 'sac-gen6-${{ matrix.os }}', path: 'platform_${{ matrix.os }}.json', retention-days: 30}
+  publish-receipts:
+    needs: [build-and-public-freeze-bc, verify-platform]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen6-public-freeze, fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen6-ubuntu-latest, path: receipts/ubuntu}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen6-macos-14, path: receipts/macos}
+      - name: Commit public cross-platform receipts
+        run: |
+          mkdir -p sac_rlsa_gen6/public_results
+          cp receipts/ubuntu/*.json sac_rlsa_gen6/public_results/UBUNTU_PERFORMANCE_RESULTS.json
+          cp receipts/macos/*.json sac_rlsa_gen6/public_results/MACOS_PERFORMANCE_RESULTS.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add sac_rlsa_gen6/public_results
+          git commit -m 'Publish Gen6 prospective cross-platform truth receipts [skip ci]'
+          git push origin HEAD:sac-rlsa-gen6-public-freeze
