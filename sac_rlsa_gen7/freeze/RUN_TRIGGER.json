@@ -1,0 +1,11 @@
+{
+  "schema": "SAC_GEN7_PUBLIC_RUN_TRIGGER_V2",
+  "freeze_a_public_commit": "0be3b331a37aa2b8d05d14d8faa4ac5a4f83ffaa",
+  "freeze_a_sha256": "54c45f4348920eaa69397cfe680071d9d4897e5ad1abe71cb0e55ac152f5e4e1",
+  "superseded_freeze_a_commit": "5a47fcdf34d7c6fcb215a27e932e29205f4db178",
+  "history_only_seeds": [42,73,59,63],
+  "untouched_target_seeds": [2168,912],
+  "target_reports_present_at_freeze_a": false,
+  "target_truth_accessed_at_freeze_a": false,
+  "authorization": "Generate canonical reports and public Freeze B/C; selected audit and full truth remain forbidden until the public Freeze B/C commit exists."
+}
