@@ -1,0 +1,12 @@
+{
+  "exclusion_rule": "exclude all Gen5/Gen6 target or calibration seeds and any duplicate",
+  "history_only_seeds": [42,73,59,63],
+  "note": "Seeds 2168 and 912 were fixed by the user-authorized Gen7 continuation before any Gen7 target artifact was generated.",
+  "outcome_based_selection": false,
+  "schema": "SAC_GEN7_SEED_SELECTION_RULE_V1",
+  "seed_rule_digest": "dea037d42d9d01aa8d80a652ee44a4a3b662eca9b0bef22224c1dc0703be95da",
+  "selected_untouched_seeds": [2168,912],
+  "selection_authority": "explicit project-authority preregistration after immutable Gen6 closure",
+  "target_reports_accessed": false,
+  "target_truth_accessed": false
+}
