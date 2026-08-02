@@ -15,4 +15,4 @@ PY
 )
 EXPECTED=8c743aa15685f18bf70830c78a3ce61580734d7144ac0039cd5681814bf2e46a
 [ "$ACTUAL" = "$EXPECTED" ] || { echo "oracle source digest mismatch: $ACTUAL" >&2; exit 2; }
-"$CXX" -O3 -std=c++20 -pthread "$SRC" -o "$OUT"
+"$CXX" -x c++ -O3 -std=c++20 -pthread "$SRC" -o "$OUT"
