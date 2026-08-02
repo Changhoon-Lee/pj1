@@ -1,0 +1,8 @@
+{
+  "algorithm": "for slot i=0..: first 8 SHA256(base|slot=i) bytes mod 100; skip 42,73 and duplicates",
+  "base_string": "SAC_RLSA_GEN6_UNTOUCHED_SEED_V1|Gen5=7fbc2f675e617b69700ca13fa2dd8e33d44114931be8f1bcd67522b2a3861081|repair=8c743aa15685f18bf70830c78a3ce61580734d7144ac0039cd5681814bf2e46a",
+  "calibration_history_seeds": [42, 73],
+  "schema": "SAC_GEN6_SEED_SELECTION_RULE_V2",
+  "selected_untouched_seeds": [63, 59],
+  "target_reports_accessed": false
+}
