@@ -26,7 +26,7 @@ def timed(oracle,td,rep,idx,threads,warmups,runs,work,prefix,truth_once=False):
  return {'runs':runs,'warmups':warmups,'threads':threads,'records':rs,'external_wall_median_ns':float(statistics.median(walls)),'external_wall_p05_ns':q(walls,0.05),'external_wall_p95_ns':q(walls,0.95),'internal_wall_median_ns':float(statistics.median(internal)),'cpu_median_ns':float(statistics.median(cpus)),'raw_mismatches_max':max(r['raw_mismatches'] for r in rs),'loss_mismatches_max':max(r['loss_mismatches'] for r in rs),'decision_agreement_all':all(r['decision']==rep['reported_decision'] for r in rs),'truth_loss_quantized_1e12_sha256':quantized_digest(truth_path) if truth_path else None}
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--artifact-root',required=True);ap.add_argument('--freeze-root',required=True);ap.add_argument('--oracle',required=True);ap.add_argument('--out',required=True);ap.add_argument('--warmups',type=int,default=2);ap.add_argument('--runs',type=int,default=11);a=ap.parse_args()
- ar=Path(a.artifact_root);fr=Path(a.freeze_root);oracle=Path(a.oracle);fa=json.loads((fr/'FREEZE_A_POLICY_ORACLE_COST.json').read_text());res=[]
+ ar=Path(a.artifact_root);fr=Path(a.freeze_root);oracle=Path(a.oracle).resolve();fa=json.loads((fr/'FREEZE_A_POLICY_ORACLE_COST.json').read_text());res=[]
  with tempfile.TemporaryDirectory() as d:
   work=Path(d)
   for target in fa['untouched_targets']:
