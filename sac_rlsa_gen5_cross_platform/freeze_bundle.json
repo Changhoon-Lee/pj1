@@ -1,0 +1,10 @@
+{
+  "freeze_a_sha256":"fb2ebac92d408ee9ec0ade74e4c0be51e18f8975326820a083dc4ed691d5414c",
+  "freeze_b_sha256":"e24d09d35cc06c661a09d6b02aaf72860079ae717c569a816896480a66c3a751",
+  "freeze_c_sha256":"ca99c281348727ccc1a571f364b5d752a43552e2cb700924b94df004f32c80d5",
+  "schema":"SAC_GEN5_CROSS_PLATFORM_FREEZE_BUNDLE_V1",
+  "partitions":[
+    {"partition":"A","seed":202608020101,"audit_seed":2965243554482064806,"artifact_sha256":"121df204cf473cfa752240c86f013c4142a5e194849020582417c8c5015dd16c","reported_pass_bits_sha256":"095fe48fabb8eb64ab844ad82db40358d9ab0ae4d545cf58cf654c0404810754","indices_sha256":"a1e0568493978d8885151351b3c04a0dabd44079cc5b51e52f3128ffdfa5923b","sample_pass":7884,"sample_fail":266},
+    {"partition":"B","seed":202608020202,"audit_seed":12888239158928363219,"artifact_sha256":"c3ac109213e9de4820ac3dbbc32c2de88e73136c164964723ba39d7063392b23","reported_pass_bits_sha256":"90aa5ab94a774ab614e51cc7059ed0cc9a08e35e1934387492e35630821920ad","indices_sha256":"0c1c20227b66df8e9c17fb3378d7a738602b3752017e394262d134b475e08a10","sample_pass":7860,"sample_fail":268}
+  ]
+}
