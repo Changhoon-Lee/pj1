@@ -1,0 +1,12 @@
+{
+  "schema": "SAC_GEN7_HISTORY_DRY_RUN_TRIGGER_V2",
+  "direct_source_commit": "b378cea920cced1b532f23f951c8b2eea95abd51",
+  "history_seeds": [42, 73],
+  "population_each": 2500000,
+  "prospective_target_seeds_selected": false,
+  "prospective_target_execution_authorized": false,
+  "forbidden_consumed_seeds": [2168, 912],
+  "required_platforms": ["ubuntu-latest x86_64", "macos-14 arm64"],
+  "required_pipeline": "reporter -> Freeze B/C -> selected audit -> full truth -> complete B7 -> exact canonical aggregate",
+  "scientific_rule_diff_required": 0
+}
