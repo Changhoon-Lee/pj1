@@ -9,8 +9,10 @@ UNTOUCHED_TARGET_SEEDS=2168,912
 TARGET_POPULATION=2,500,000 each
 TARGET_REPORTS_PRESENT=false
 TARGET_TRUTH_ACCESSED=false
-FREEZE_A_SHA256=9e39d7f9873e7320d9a884ab7552ff0856a87c49ca90f717b884124d5cee250c
+FREEZE_A_SHA256=54c45f4348920eaa69397cfe680071d9d4897e5ad1abe71cb0e55ac152f5e4e1
 ```
+
+This authoritative Freeze A supersedes commit `5a47fcdf34d7c6fcb215a27e932e29205f4db178` only because the connector-created branch-only push did not launch GitHub Actions. No target report, selected audit, full truth, or target timing existed. Scientific rules, seeds, threshold, oracle, bound, cost rule, and gates are unchanged. The orchestration now also permits the existing same-repository draft PR to launch the frozen workflow.
 
 Frozen before target reporting:
 
