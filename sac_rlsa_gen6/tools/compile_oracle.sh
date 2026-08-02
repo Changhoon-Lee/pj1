@@ -4,7 +4,10 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"; OUT="$1"; CXX="${CXX:-c++}"
 mkdir -p "$(dirname "$OUT")"
 SRC="$(mktemp -t sac_gen6_oracle_XXXXXX.cpp)"
 trap 'rm -f "$SRC"' EXIT
-base64 --decode "$ROOT/native/gb_oracle.cpp.b64" > "$SRC" 2>/dev/null || base64 -D "$ROOT/native/gb_oracle.cpp.b64" > "$SRC"
+python - "$ROOT/native/gb_oracle.cpp.b64" "$SRC" <<'PY'
+import base64,sys
+open(sys.argv[2],'wb').write(base64.b64decode(open(sys.argv[1],'rb').read(),validate=True))
+PY
 ACTUAL=$(python - "$SRC" <<'PY'
 import hashlib,sys
 print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())
