@@ -1,0 +1,151 @@
+{
+  "canonical_report": {
+    "nonauthoritative_generation_receipt_separate": true,
+    "runner_must_assert_artifact_hash_set": true,
+    "runner_must_assert_freeze_b_exact_digest": true,
+    "scientific_digest_excludes": ["generation wall time","host","platform","timestamp","diagnostic metadata"]
+  },
+  "canonical_truth": {
+    "authority": "REFERENCE_DECIMAL_40DP_FROM_STRICT_BINARY64_RAW",
+    "cross_platform_gate": ["same target bytes","same strict raw SHA-256","same canonical decimal-loss SHA-256","same canonical mean string","same decision"],
+    "loss": "Python Decimal context precision 80, Decimal.from_float(raw), fixed 40 decimal places ROUND_HALF_EVEN",
+    "native_tolerance_gate": "each platform independently has 0 raw/loss mismatches at abs tolerance 1e-10",
+    "strict_raw": "C++20, FMA disabled, FE_TONEAREST, exact binary64 raw bytes must match Ubuntu/macOS"
+  },
+  "cost_rule": {
+    "authoritative_prediction_endpoint": "external wall-clock; fixed process component plus internal per-action slope",
+    "cost_rule_digest": "28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e",
+    "derivation": {
+      "fixed_upper": "1.50 * maximum history external selected-s=1 median",
+      "full_lower": "0.90 * minimum history external median of complete B7 portfolio {strict C++1, strict C++4, vectorized scikit-learn}",
+      "per_action_upper": "1.75 * maximum nonnegative slope of history median internal oracle wall over s in {1,512,1024,2048,4096,8192}"
+    },
+    "full_b7_wall_lower_ns": 508151457.0,
+    "history_only_seeds": [42,73,59,63],
+    "history_population": 2500000,
+    "prospective_credit": false,
+    "schema": "SAC_GEN7_FROZEN_COST_RULE_V1",
+    "selected_fixed_upper_ns": 3596970.0,
+    "selected_per_action_upper_ns": 3394.5582191780823,
+    "target_truth_accessed": false
+  },
+  "freeze_a_sha256": "9e39d7f9873e7320d9a884ab7552ff0856a87c49ca90f717b884124d5cee250c",
+  "hard_gates": {
+    "canonical_truth_cross_platform": "100%",
+    "complete_b7": "both platforms",
+    "conservative_speedup": ">=10x each target/platform",
+    "median_speedup_vs_platform_b7": ">=30x each target/platform",
+    "pretruth_theory_class": "30X_CERTIFIED 2/2",
+    "report_binding": "100%",
+    "strict_loss_bound": "PASS",
+    "target_truth_leakage": 0,
+    "targets": "2/2 new untouched",
+    "unit_mismatches": "0 across 5,000,000 units per platform at 1e-10"
+  },
+  "history_only": {
+    "calibration_digest": "f1219480e3cd68447c3a57460c9f70e610bc90dbc1c6d55c3a621e844f06fe81",
+    "prospective_credit": false,
+    "seeds": [42,73,59,63]
+  },
+  "immutable_history": {
+    "gen5": {
+      "seed42_failure_preserved": true,
+      "verdict": "SAC_RLSA_ACTION_SEMANTICS_UNSOUND",
+      "zip_sha256": "7fbc2f675e617b69700ca13fa2dd8e33d44114931be8f1bcd67522b2a3861081"
+    },
+    "gen6": {
+      "seeds59_63_not_rescored": true,
+      "verdict": "SAC_RLSA_GEN6_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED",
+      "zip_sha256": "3b2c2bb6ce840a102873125333b9e253f2496571f1e8d0e99c8332ae33d4a53c"
+    }
+  },
+  "loss_semantics": {
+    "formula": "logaddexp(0,raw)-y01*raw",
+    "label_mapping": "y01=1 iff y>0",
+    "nan_inf": "FAIL_CLOSED",
+    "per_unit_adverse_cap": "strict_loss_upper - reported_loss_i",
+    "probability_clipping": "NONE",
+    "strict_upper_bound": "raw interval nextafter-outward at every term/sum; Decimal-120 endpoint softplus; final binary64 nextafter(+inf)"
+  },
+  "oracle": {
+    "compiler_flags": "-O3 -std=c++20 -pthread -fno-fast-math -ffp-contract=off",
+    "imports_reporter_code": false,
+    "source": "native/gb_oracle.cpp",
+    "source_sha256": "0d4bc494860b9f56326fa35f74fb0a1bd4151d8f1de8b25256744e620152295d"
+  },
+  "post_freeze_changes_allowed": false,
+  "program": "SAC_RLSA_CANONICAL_TRUTH_PROSPECTIVE_CONFIRMATION_GEN7",
+  "research_mode": "CONFIRMATION_ONLY_NO_NEW_THEORY",
+  "risk": {
+    "freeze_c": "uniform without replacement from public Freeze-A commit and Freeze-B digest",
+    "limit": 0.01,
+    "support_model": "heterogeneous adverse caps -> q_D lower bound -> exact fixed-size hypergeometric miss probability"
+  },
+  "schema": "SAC_GEN7_FREEZE_A_POLICY_ORACLE_COST_V1",
+  "seed_selection_rule": {
+    "exclusion_rule": "exclude all Gen5/Gen6 target or calibration seeds and any duplicate",
+    "history_only_seeds": [42,73,59,63],
+    "note": "Seeds 2168 and 912 were fixed by the user-authorized Gen7 continuation before any Gen7 target artifact was generated.",
+    "outcome_based_selection": false,
+    "schema": "SAC_GEN7_SEED_SELECTION_RULE_V1",
+    "seed_rule_digest": "dea037d42d9d01aa8d80a652ee44a4a3b662eca9b0bef22224c1dc0703be95da",
+    "selected_untouched_seeds": [2168,912],
+    "selection_authority": "explicit project-authority preregistration after immutable Gen6 closure",
+    "target_reports_accessed": false,
+    "target_truth_accessed": false
+  },
+  "sources": {
+    "files": {
+      "native/gb_oracle.cpp": "0d4bc494860b9f56326fa35f74fb0a1bd4151d8f1de8b25256744e620152295d",
+      "sac_gen7/certify.py": "2a976b344d27978edd11586fdeab0240fc45b6872981611436ad88c81753e28d",
+      "sac_gen7/common.py": "90810eff47b624b4e3f7a07b3a2d0c8b1323936129323c5e39830212acebbdca",
+      "sac_gen7/freeze_randomness.py": "f267609440d414b7c63e59ab5213b188e441dc2f26a69e6b72bfa82d8803cfe1",
+      "sac_gen7/model_io.py": "f36341917f5bd8cd93e4c02692d2d2a6835f9db5fd647b1535c7310ac86e297a",
+      "sac_gen7/reporter.py": "017fb708b5131ebafaf5581b6206cc409112f7106bc16fc4a00eeb9af9dafcb7",
+      "tools/canonical_truth.py": "6c9910ee5b437f1c0ab08fc5892bd6ec7b1f4c9f574be804f035dd41f4a05ae8",
+      "tools/ci_aggregate.py": "03e3df8272382b8592df85dea28bfb26ef0ff22b1ad6660dbd4df67d32a9ba0b",
+      "tools/ci_build_and_freeze.py": "652b3de32f9bfa79a1cdbd702c4a6b901e2e307ac35c7ecf100283e81eaf2529",
+      "tools/ci_platform_run.py": "75a4c58d3ea65bf834e1a67a796c1c7e837195a27522b837061232b01c8112fb",
+      "tools/compile_oracle.sh": "5182c69ce6eb322c55044b91a605906101bde5194de8a788f2555f0860172719",
+      "tools/sklearn_b7.py": "4d46fa36e99221aff517f71237223bd2bc59d7ff6e2c177b87cc1ae45e25751c"
+    },
+    "source_bundle_b64_sha256": "13e192fc93b11019b01e914899eca3bb54803011326b6416ec54ff32d66c62a4",
+    "source_bundle_tar_gz_sha256": "d5bb16336417f6b593759a842b09884bf42205c9bfac04b48ebcce6c31913510",
+    "workflow_sha256": "0150e8154ba87de2f9bb959d618d923aade17660a310babed2182f393ff8b709"
+  },
+  "strongest_b7": {
+    "cache_reuse": "inadmissible for first untouched validation",
+    "complete_portfolio_required_on": ["ubuntu-latest x86_64","macos-14 arm64"],
+    "definition": "platform-specific minimum external wall median across strict C++ 1-thread, strict C++ 4-thread, and vectorized scikit-learn full evaluation"
+  },
+  "target_report_accessed": false,
+  "target_truth_accessed": false,
+  "timing": {
+    "conservative": "strongest B7 p05 / selected RLSA p95",
+    "cpu_reported": true,
+    "measured_runs": 11,
+    "primary": "external wall median",
+    "warmups": 2
+  },
+  "tree_semantics": {
+    "accumulation": "ordered binary64 multiply then ordered binary64 add",
+    "comparison": "binary32(x_j) <= stored binary64 threshold",
+    "feature_cast": "IEEE-754 binary32 round-to-nearest-even before every split",
+    "fma": "disabled",
+    "rounding_mode": "FE_TONEAREST"
+  },
+  "untouched_targets": [
+    {"population":2500000,"seed":2168,"target_id":"GEN7_UNTOUCHED_SEED2168","target_report_status":"NOT_GENERATED_AT_FREEZE_A","truth_status":"NOT_ACCESSED_AT_FREEZE_A"},
+    {"population":2500000,"seed":912,"target_id":"GEN7_UNTOUCHED_SEED912","target_report_status":"NOT_GENERATED_AT_FREEZE_A","truth_status":"NOT_ACCESSED_AT_FREEZE_A"}
+  ],
+  "workflow": {
+    "classification": "PUBLIC_SOURCE_BOUND_SCALED_SHADOW_REGRESSION",
+    "decision": "PASS iff mean raw-logit Bernoulli log loss < 0.5",
+    "model": {"learning_rate":0.1,"max_depth":2,"max_features":2,"min_samples_split":5,"n_estimators":100,"random_state":"target seed"},
+    "project": "scikit-learn",
+    "source_test": "test_max_feature_regression / make_hastie_10_2 structure",
+    "target_units": 2500000,
+    "training_units": 2000,
+    "version": "1.8.0"
+  }
+}
