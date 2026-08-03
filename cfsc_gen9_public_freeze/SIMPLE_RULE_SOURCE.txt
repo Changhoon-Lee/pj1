@@ -1,0 +1,1 @@
+'GEN6_STATIC':{'producer':'PASS' if ok and f['extractability']<1 and raw['rho']<=2 else 'FAIL','validation':'PASS' if ok and f['work_compression']/max(f['throughput_penalty'],1e-12)>=10 else 'FAIL'}
