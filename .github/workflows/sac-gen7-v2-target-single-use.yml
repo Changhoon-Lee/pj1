@@ -22,24 +22,65 @@ jobs:
           test -f sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_QUALIFIED.json
           test -f sac_rlsa_gen7v2/protocol/QUALIFICATION_PROTOCOL_V2.json
           test -f sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json
+          test -f sac_rlsa_gen7v2/state/STATE_0.json
+          test -f sac_rlsa_gen7v2/PUBLIC_GIT_AUTHORITY.json
           python - <<'PY'
           import json
           h=json.load(open('sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_QUALIFIED.json'))
           p=json.load(open('sac_rlsa_gen7v2/protocol/QUALIFICATION_PROTOCOL_V2.json'))
-          assert h['pass'] is True and h['target_seeds_used'] is False
+          f=json.load(open('sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json'))
+          s=json.load(open('sac_rlsa_gen7v2/state/STATE_0.json'))
+          a=json.load(open('sac_rlsa_gen7v2/PUBLIC_GIT_AUTHORITY.json'))
+          assert h['status']['cross_platform_aggregate']=='PASS'
+          assert h['status']['ubuntu']=='PASS' and h['status']['macos']=='PASS'
+          assert h['target_seeds_used'] is False and h['target_truth_accessed'] is False
           assert p['classification']['SCIENTIFIC_RULE_DIFF']==0
           assert p['classification']['QUALIFICATION_PROTOCOL_DIFF']==1
+          assert s['state']==0 and s['seeds_consumed'] is False
+          assert s['target_reports_generated'] is False and s['target_truth_accessed'] is False
+          assert f['freeze_a_sha256']==s['freeze_a_sha256']==a['authority']['freeze_a_sha256']
+          assert f['untouched_target_seeds']==s['target_seeds']==a['authority']['untouched_seeds']
+          assert h['qualification_digest']==f['history_qualification']['qualification_digest']==a['authority']['history_qualification_digest']
           PY
       - name: Acquire single-use public execution lease before reporter
         run: |
           test -f sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json
           test ! -f sac_rlsa_gen7v2/state/EXECUTION_LEASE.json
+          test ! -f sac_rlsa_gen7v2/state/STATE_1.json
           python - <<'PY'
           import json,hashlib
           from pathlib import Path
+          def dig(x):
+              return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
           t=json.load(open('sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json'))
-          x={'schema':'SAC_GEN7_EXECUTION_LEASE_V2','freeze_a_sha256':t['freeze_a_sha256'],'target_seed_digest':t['target_seed_digest'],'single_use_lease_active':True,'target_output_generated':False}
-          x['lease_digest']=hashlib.sha256(json.dumps(x,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+          f=json.load(open('sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json'))
+          s=json.load(open('sac_rlsa_gen7v2/state/STATE_0.json'))
+          a=json.load(open('sac_rlsa_gen7v2/PUBLIC_GIT_AUTHORITY.json'))
+          tc=dict(t); stored=tc.pop('trigger_digest')
+          assert dig(tc)==stored
+          assert t['schema']=='SAC_GEN7_V2R2_SINGLE_USE_TARGET_TRIGGER_V1'
+          assert t['authority_c0_commit']==a['c0_content_commit_sha']=='dd485518ea792d135f768759fe52814dd7ac1a9c'
+          assert t['authority_c1_commit']=='c58c53fe6ef9ab77864916c92e9591bed23b9e8a'
+          assert t['freeze_a_sha256']==f['freeze_a_sha256']==s['freeze_a_sha256']
+          assert t['state_0_digest']==s['state_digest']
+          assert t['target_seed_digest']==s['target_seed_digest']
+          assert t['target_seeds']==s['target_seeds']==f['untouched_target_seeds']
+          assert t['single_use'] is True and t['target_execution_authorized'] is True
+          assert s['state']==0 and not s['seeds_consumed'] and not s['target_reports_generated'] and not s['target_truth_accessed']
+          x={
+            'schema':'SAC_GEN7_EXECUTION_LEASE_V2R2',
+            'authority_c0_commit':t['authority_c0_commit'],
+            'authority_c1_commit':t['authority_c1_commit'],
+            'freeze_a_sha256':t['freeze_a_sha256'],
+            'state_0_digest':t['state_0_digest'],
+            'target_seed_digest':t['target_seed_digest'],
+            'target_seeds':t['target_seeds'],
+            'trigger_digest':stored,
+            'single_use_nonce':t['single_use_nonce'],
+            'single_use_lease_active':True,
+            'target_output_generated':False,
+          }
+          x['lease_digest']=dig(x)
           Path('sac_rlsa_gen7v2/state').mkdir(parents=True,exist_ok=True)
           Path('sac_rlsa_gen7v2/state/EXECUTION_LEASE.json').write_text(json.dumps(x,sort_keys=True,indent=2)+'\n')
           PY
@@ -47,7 +88,7 @@ jobs:
           git config user.email github-actions@github.com
           git rm sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json
           git add sac_rlsa_gen7v2/state/EXECUTION_LEASE.json
-          git commit -m 'Gen7 V2 acquire single-use execution lease before target reporting [skip ci]'
+          git commit -m 'Gen7 V2R2 acquire single-use execution lease before target reporting [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
       - name: Generate target reports and close STATE_1
         id: state1
@@ -63,7 +104,7 @@ jobs:
           mkdir -p sac_rlsa_gen7v2/public_records/target_reports
           cp target_artifact/seed*/*.SCIENTIFIC_TARGET_REPORT.json sac_rlsa_gen7v2/public_records/target_reports/
           git add sac_rlsa_gen7v2/state/STATE_1.json sac_rlsa_gen7v2/public_records/target_reports
-          git commit -m 'Gen7 V2 STATE_1 target reports generated; seeds permanently consumed [skip ci]'
+          git commit -m 'Gen7 V2R2 STATE_1 target reports generated; seeds permanently consumed [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
@@ -93,7 +134,7 @@ jobs:
             --out-state2 sac_rlsa_gen7v2/state/STATE_2.json \
             --out-bundle sac_rlsa_gen7v2/freeze/FREEZE_BC_BUNDLE_V2.json
           git add sac_rlsa_gen7v2/state/STATE_2.json sac_rlsa_gen7v2/freeze/FREEZE_B* sac_rlsa_gen7v2/freeze/FREEZE_C* sac_rlsa_gen7v2/freeze/FREEZE_BC_BUNDLE_V2.json
-          git commit -m 'Gen7 V2 STATE_2 public Freeze B/C before selected audit [skip ci]'
+          git commit -m 'Gen7 V2R2 STATE_2 public Freeze B/C before selected audit [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   selected-platform:
@@ -141,7 +182,7 @@ jobs:
             --out-state3 sac_rlsa_gen7v2/state/STATE_3.json \
             --out sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json
           git add sac_rlsa_gen7v2/state/STATE_3.json sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json
-          git commit -m 'Gen7 V2 STATE_3 selected audits complete before full truth [skip ci]'
+          git commit -m 'Gen7 V2R2 STATE_3 selected audits complete before full truth [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   full-platform:
@@ -210,5 +251,5 @@ jobs:
           cp full/ubuntu/FULL_ubuntu-latest.json sac_rlsa_gen7v2/public_results/
           cp full/macos/FULL_macos-14.json sac_rlsa_gen7v2/public_results/
           git add sac_rlsa_gen7v2/state/STATE_4.json sac_rlsa_gen7v2/state/STATE_5.json sac_rlsa_gen7v2/state/STATE_6.json sac_rlsa_gen7v2/public_results
-          git commit -m 'Gen7 V2 STATE_6 final canonical cross-platform adjudication [skip ci]'
+          git commit -m 'Gen7 V2R2 STATE_6 final canonical cross-platform adjudication [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
