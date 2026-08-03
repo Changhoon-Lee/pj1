@@ -1,0 +1,227 @@
+name: SAC RLSA Gen7 V2R2 repository-dispatch prospective confirmation
+on:
+  repository_dispatch:
+    types: [sac_gen7_v2r2_single_use_target]
+permissions:
+  contents: write
+concurrency:
+  group: sac-gen7-v2r2-single-use-target
+  cancel-in-progress: false
+jobs:
+  lease-and-state1:
+    timeout-minutes: 180
+    runs-on: ubuntu-latest
+    outputs:
+      state1_commit: ${{ steps.state1.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen7-authoritative-v2, fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - name: Verify authority, trigger, and repository-dispatch binding
+        env:
+          DISPATCH_TRIGGER_DIGEST: ${{ github.event.client_payload.trigger_digest }}
+        run: |
+          test -f sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_QUALIFIED.json
+          test -f sac_rlsa_gen7v2/protocol/QUALIFICATION_PROTOCOL_V2.json
+          test -f sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json
+          test -f sac_rlsa_gen7v2/state/STATE_0.json
+          test -f sac_rlsa_gen7v2/PUBLIC_GIT_AUTHORITY.json
+          test -f sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json
+          test ! -f sac_rlsa_gen7v2/state/EXECUTION_LEASE.json
+          test ! -f sac_rlsa_gen7v2/state/STATE_1.json
+          python - <<'PY'
+          import hashlib,json,os
+          def dig(x): return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+          h=json.load(open('sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_QUALIFIED.json'))
+          p=json.load(open('sac_rlsa_gen7v2/protocol/QUALIFICATION_PROTOCOL_V2.json'))
+          f=json.load(open('sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json'))
+          s=json.load(open('sac_rlsa_gen7v2/state/STATE_0.json'))
+          a=json.load(open('sac_rlsa_gen7v2/PUBLIC_GIT_AUTHORITY.json'))
+          t=json.load(open('sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json'))
+          tc=dict(t); td=tc.pop('trigger_digest')
+          assert dig(tc)==td==os.environ['DISPATCH_TRIGGER_DIGEST']
+          assert h['status']['cross_platform_aggregate']=='PASS' and h['status']['ubuntu']=='PASS' and h['status']['macos']=='PASS'
+          assert h['target_seeds_used'] is False and h['target_truth_accessed'] is False
+          assert p['classification']['SCIENTIFIC_RULE_DIFF']==0 and p['classification']['QUALIFICATION_PROTOCOL_DIFF']==1
+          assert s['state']==0 and not s['seeds_consumed'] and not s['target_reports_generated'] and not s['target_truth_accessed']
+          assert f['freeze_a_sha256']==s['freeze_a_sha256']==a['authority']['freeze_a_sha256']==t['freeze_a_sha256']
+          assert f['untouched_target_seeds']==s['target_seeds']==a['authority']['untouched_seeds']==t['target_seeds']
+          assert h['qualification_digest']==f['history_qualification']['qualification_digest']==a['authority']['history_qualification_digest']
+          assert t['schema']=='SAC_GEN7_V2R2_SINGLE_USE_TARGET_TRIGGER_V1'
+          assert t['authority_c0_commit']==a['c0_content_commit_sha']=='dd485518ea792d135f768759fe52814dd7ac1a9c'
+          assert t['authority_c1_commit']=='c58c53fe6ef9ab77864916c92e9591bed23b9e8a'
+          assert t['state_0_digest']==s['state_digest'] and t['target_seed_digest']==s['target_seed_digest']
+          assert t['single_use'] is True and t['target_execution_authorized'] is True
+          PY
+      - name: Acquire public single-use execution lease
+        env:
+          DISPATCH_RUN_ID: ${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          def dig(x): return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+          t=json.load(open('sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json'))
+          tc=dict(t); td=tc.pop('trigger_digest')
+          x={'schema':'SAC_GEN7_EXECUTION_LEASE_V2R2','authority_c0_commit':t['authority_c0_commit'],'authority_c1_commit':t['authority_c1_commit'],'freeze_a_sha256':t['freeze_a_sha256'],'state_0_digest':t['state_0_digest'],'target_seed_digest':t['target_seed_digest'],'target_seeds':t['target_seeds'],'trigger_digest':td,'single_use_nonce':t['single_use_nonce'],'repository_dispatch_run_id':int(os.environ['DISPATCH_RUN_ID']),'single_use_lease_active':True,'target_output_generated':False}
+          x['lease_digest']=dig(x)
+          Path('sac_rlsa_gen7v2/state').mkdir(parents=True,exist_ok=True)
+          Path('sac_rlsa_gen7v2/state/EXECUTION_LEASE.json').write_text(json.dumps(x,sort_keys=True,indent=2)+'\n')
+          PY
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git rm sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json
+          git add sac_rlsa_gen7v2/state/EXECUTION_LEASE.json
+          git commit -m 'Gen7 V2R2 acquire single-use execution lease before target reporting [skip ci]'
+          git push origin HEAD:sac-rlsa-gen7-authoritative-v2
+      - name: Generate target reports exactly once and close STATE_1
+        id: state1
+        run: |
+          mkdir -p target_artifact
+          PYTHONDONTWRITEBYTECODE=1 python sac_rlsa_gen7v2/tools/target_generate.py --freeze-a sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json --state0 sac_rlsa_gen7v2/state/STATE_0.json --lease sac_rlsa_gen7v2/state/EXECUTION_LEASE.json --artifact-root target_artifact --out-state1 sac_rlsa_gen7v2/state/STATE_1.json --out-manifest target_artifact/TARGET_STATE1_MANIFEST.json
+          mkdir -p sac_rlsa_gen7v2/public_records/target_reports
+          cp target_artifact/seed*/*.SCIENTIFIC_TARGET_REPORT.json sac_rlsa_gen7v2/public_records/target_reports/
+          git add sac_rlsa_gen7v2/state/STATE_1.json sac_rlsa_gen7v2/public_records/target_reports
+          git commit -m 'Gen7 V2R2 STATE_1 target reports generated; seeds permanently consumed [skip ci]'
+          git push origin HEAD:sac-rlsa-gen7-authoritative-v2
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: sac-gen7-v2-target-bytes, path: 'target_artifact/**', if-no-files-found: error, retention-days: 30, compression-level: 1}
+  freeze-state2:
+    timeout-minutes: 30
+    needs: lease-and-state1
+    runs-on: ubuntu-latest
+    outputs:
+      state2_commit: ${{ steps.state2.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen7-authoritative-v2, fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-target-bytes, path: target_artifact}
+      - name: Certify and publicly close STATE_2 before selected audit
+        id: state2
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python sac_rlsa_gen7v2/tools/target_freeze_bc.py --freeze-a sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json --state1 sac_rlsa_gen7v2/state/STATE_1.json --artifact-root target_artifact --freeze-root sac_rlsa_gen7v2/freeze --cost-rule sac_rlsa_gen7v2/freeze/FROZEN_COST_RULE.json --out-state2 sac_rlsa_gen7v2/state/STATE_2.json --out-bundle sac_rlsa_gen7v2/freeze/FREEZE_BC_BUNDLE_V2.json
+          git add sac_rlsa_gen7v2/state/STATE_2.json sac_rlsa_gen7v2/freeze/FREEZE_B* sac_rlsa_gen7v2/freeze/FREEZE_C* sac_rlsa_gen7v2/freeze/FREEZE_BC_BUNDLE_V2.json
+          git commit -m 'Gen7 V2R2 STATE_2 public Freeze B/C before selected audit [skip ci]'
+          git push origin HEAD:sac-rlsa-gen7-authoritative-v2
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  selected-platform:
+    timeout-minutes: 60
+    needs: freeze-state2
+    strategy: {fail-fast: false, matrix: {os: [ubuntu-latest, macos-14]}}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: ${{ needs.freeze-state2.outputs.state2_commit }}}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-target-bytes, path: target_artifact}
+      - name: Execute selected audit
+        run: |
+          sac_rlsa_gen7v2/tools/compile_oracle.sh "$RUNNER_TEMP/oracle" "$RUNNER_TEMP/oracle.build.json"
+          set +e
+          PYTHONDONTWRITEBYTECODE=1 python sac_rlsa_gen7v2/tools/target_selected_platform.py --freeze-a sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json --state2 sac_rlsa_gen7v2/state/STATE_2.json --artifact-root target_artifact --freeze-root sac_rlsa_gen7v2/freeze --oracle "$RUNNER_TEMP/oracle" --out SELECTED_${{ matrix.os }}.json --warmups 2 --runs 11
+          echo "SELECTED_EXIT=$?" >> "$GITHUB_ENV"
+          set -e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: 'sac-gen7-v2-selected-${{ matrix.os }}', path: 'SELECTED_${{ matrix.os }}.json', if-no-files-found: error, retention-days: 30}
+      - name: Enforce selected-audit result
+        if: always()
+        run: exit "${SELECTED_EXIT:-1}"
+  selected-state3:
+    timeout-minutes: 30
+    needs: [freeze-state2, selected-platform]
+    if: ${{ always() && needs.freeze-state2.result == 'success' && needs.selected-platform.result == 'success' }}
+    runs-on: ubuntu-latest
+    outputs:
+      state3_commit: ${{ steps.state3.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen7-authoritative-v2, fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-selected-ubuntu-latest, path: selected/ubuntu}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-selected-macos-14, path: selected/macos}
+      - name: Publicly close STATE_3 before full truth
+        id: state3
+        run: |
+          python sac_rlsa_gen7v2/tools/target_selected_aggregate.py --state2 sac_rlsa_gen7v2/state/STATE_2.json --ubuntu selected/ubuntu/SELECTED_ubuntu-latest.json --macos selected/macos/SELECTED_macos-14.json --out-state3 sac_rlsa_gen7v2/state/STATE_3.json --out sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json
+          git add sac_rlsa_gen7v2/state/STATE_3.json sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json
+          git commit -m 'Gen7 V2R2 STATE_3 selected audits complete before full truth [skip ci]'
+          git push origin HEAD:sac-rlsa-gen7-authoritative-v2
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  full-platform:
+    timeout-minutes: 180
+    needs: selected-state3
+    strategy: {fail-fast: false, matrix: {os: [ubuntu-latest, macos-14]}}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: ${{ needs.selected-state3.outputs.state3_commit }}}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-target-bytes, path: target_artifact}
+      - uses: actions/download-artifact@v4
+        with: {name: 'sac-gen7-v2-selected-${{ matrix.os }}', path: selected}
+      - name: Execute raw full truth and complete B7
+        run: |
+          sac_rlsa_gen7v2/tools/compile_oracle.sh "$RUNNER_TEMP/oracle" "$RUNNER_TEMP/oracle.build.json"
+          set +e
+          PYTHONDONTWRITEBYTECODE=1 LC_ALL=C python sac_rlsa_gen7v2/tools/target_full_platform.py --freeze-a sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json --state3 sac_rlsa_gen7v2/state/STATE_3.json --selected selected/SELECTED_${{ matrix.os }}.json --selected-aggregate sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json --artifact-root target_artifact --freeze-root sac_rlsa_gen7v2/freeze --oracle "$RUNNER_TEMP/oracle" --out FULL_RAW_${{ matrix.os }}.json --warmups 2 --runs 11
+          echo "RAW_EXIT=$?" >> "$GITHUB_ENV"
+          set -e
+          test -f FULL_RAW_${{ matrix.os }}.json
+      - name: Apply frozen truth/B7 role separation
+        run: |
+          set +e
+          PYTHONDONTWRITEBYTECODE=1 python sac_rlsa_gen7v2/tools/reclassify_platform_receipt.py --input FULL_RAW_${{ matrix.os }}.json --out FULL_${{ matrix.os }}.json
+          echo "RECLASSIFY_EXIT=$?" >> "$GITHUB_ENV"
+          set -e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sac-gen7-v2-full-${{ matrix.os }}
+          path: |
+            FULL_${{ matrix.os }}.json
+            FULL_RAW_${{ matrix.os }}.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Enforce full-platform result
+        if: always()
+        run: exit "${RECLASSIFY_EXIT:-1}"
+  final-adjudication:
+    timeout-minutes: 30
+    needs: [selected-state3, full-platform]
+    if: ${{ always() && needs.selected-state3.result == 'success' && needs.full-platform.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: sac-rlsa-gen7-authoritative-v2, fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-full-ubuntu-latest, path: full/ubuntu}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-full-macos-14, path: full/macos}
+      - name: Adjudicate and publish STATE_4 through STATE_6
+        run: |
+          set +e
+          python sac_rlsa_gen7v2/tools/target_full_aggregate_v3.py --state3 sac_rlsa_gen7v2/state/STATE_3.json --ubuntu full/ubuntu/FULL_ubuntu-latest.json --macos full/macos/FULL_macos-14.json --out-state4 sac_rlsa_gen7v2/state/STATE_4.json --out-state5 sac_rlsa_gen7v2/state/STATE_5.json --out-state6 sac_rlsa_gen7v2/state/STATE_6.json --out sac_rlsa_gen7v2/public_results/CROSS_PLATFORM_FINAL_SUMMARY.json
+          FINAL_EXIT=$?
+          set -e
+          cp full/ubuntu/FULL_ubuntu-latest.json sac_rlsa_gen7v2/public_results/
+          cp full/macos/FULL_macos-14.json sac_rlsa_gen7v2/public_results/
+          git add sac_rlsa_gen7v2/state/STATE_4.json sac_rlsa_gen7v2/state/STATE_5.json sac_rlsa_gen7v2/state/STATE_6.json sac_rlsa_gen7v2/public_results
+          git commit -m 'Gen7 V2R2 STATE_6 final canonical cross-platform adjudication [skip ci]'
+          git push origin HEAD:sac-rlsa-gen7-authoritative-v2
+          exit "$FINAL_EXIT"
