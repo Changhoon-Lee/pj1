@@ -1,18 +1,18 @@
 {
-  "evidence": "AUTHORITATIVE_FREEZE_A_V2_PUBLICATION",
-  "freeze_a_commit": "dc1a157b6ca73e2ca759e8e5fde62a048c1ebd44",
-  "freeze_a_sha256": "dbd21354a74460d0bdbcf172ed73e26204d29ad498f1bd0b153506b78d454de1",
+  "campaign_id": "SAC_RLSA_GEN7_V2R2_CANONICAL_CONFIRMATION",
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
   "previous_state_digest": null,
-  "schema": "SAC_GEN7_STATE_MACHINE_V2",
+  "schema": "SAC_GEN7_SINGLE_USE_STATE_V2",
   "seeds_consumed": false,
   "state": 0,
-  "state_digest": "8cf0735059ce58a45fe473cb2fc2b308ce3bea7ddd3048f50ab03496ce540159",
+  "state_digest": "69f181690940914deee2c54f8ed3aa29f83b685fda2d7afdad1c617f205f038e",
   "state_name": "PRETARGET_FROZEN",
   "target_reports_generated": false,
-  "target_seed_digest": "8785947b2750909fd7458cf6198bd8f9a97847ef5d714534a029bf41fb8d5591",
+  "target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
   "target_seeds": [
-    543787274,
-    507852222
+    884503672,
+    756621450
   ],
-  "target_truth_accessed": false
+  "target_truth_accessed": false,
+  "transition_evidence": "AUTHORITATIVE_FREEZE_A_V2R2_CONTENT_DIGEST"
 }
