@@ -1,0 +1,44 @@
+{
+  "algorithm": "base=SHA256(domain|prior_gen7_sha|qualification_digest|history_summary_sha|protocol_digest|qualification_source_commit); candidate=uint32_be(SHA256(base_bytes|counter_be64)[0:4]) & 0x7fffffff; accept first two not excluded",
+  "base_digest": "39012a5c437f67792a8c283d301a50423c0c2177d08e8d48e5016458d46cb395",
+  "domain": "SAC-RLSA-GEN7-V2-UNTOUCHED-SEED-SELECTION-V1",
+  "draws": [
+    {
+      "accepted": true,
+      "candidate": 543787274,
+      "counter": 0,
+      "digest": "a0691c0a5452f3077b08edcf391e3d52ed42917c3eeb0680f577678589b3f63e"
+    },
+    {
+      "accepted": true,
+      "candidate": 507852222,
+      "counter": 1,
+      "digest": "9e457dbe677e1605a6dd6db871e4fde80f52f65496c4a727f062532c83f57abf"
+    }
+  ],
+  "excluded_seeds": [
+    42,
+    59,
+    63,
+    73,
+    912,
+    2168
+  ],
+  "inputs": {
+    "history_qualification_digest": "9d2101ce6f55371f9dbe4183d7db0e483e0a6fe6f034a98834ae3584cb96a3bf",
+    "history_summary_sha256": "414be1ff1f2c9ba5555cc494a1ac16110251cf59aec392567190928c115fd338",
+    "prior_gen7_authoritative_zip_sha256": "facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993",
+    "qualification_protocol_digest": "3fe32353dba792cb607dd01059ff484e2af118d2199fe77ee3624c065010bf08",
+    "qualification_source_commit": "05bfd84c107afea4d5e4ddb846bd2bb9293b20fd"
+  },
+  "outcome_based_selection": false,
+  "schema": "SAC_GEN7_V2_SEED_SELECTION_RULE_V2",
+  "seed_rule_digest": "d4031ef9517a3bd785b3a08a706075bd94500196635254d5d2b94085512b149d",
+  "selected_untouched_seeds": [
+    543787274,
+    507852222
+  ],
+  "selection_time_class": "AFTER_HISTORY_QUALIFICATION_BEFORE_TARGET_REPORTING",
+  "target_reports_accessed": false,
+  "target_truth_accessed": false
+}
