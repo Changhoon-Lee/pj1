@@ -1,0 +1,18 @@
+{
+  "evidence": "AUTHORITATIVE_FREEZE_A_V2_PUBLICATION",
+  "freeze_a_commit": "dc1a157b6ca73e2ca759e8e5fde62a048c1ebd44",
+  "freeze_a_sha256": "dbd21354a74460d0bdbcf172ed73e26204d29ad498f1bd0b153506b78d454de1",
+  "previous_state_digest": null,
+  "schema": "SAC_GEN7_STATE_MACHINE_V2",
+  "seeds_consumed": false,
+  "state": 0,
+  "state_digest": "8cf0735059ce58a45fe473cb2fc2b308ce3bea7ddd3048f50ab03496ce540159",
+  "state_name": "PRETARGET_FROZEN",
+  "target_reports_generated": false,
+  "target_seed_digest": "8785947b2750909fd7458cf6198bd8f9a97847ef5d714534a029bf41fb8d5591",
+  "target_seeds": [
+    543787274,
+    507852222
+  ],
+  "target_truth_accessed": false
+}
