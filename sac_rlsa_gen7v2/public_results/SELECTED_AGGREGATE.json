@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "both_clean": true,
+      "pass": true,
+      "same_freeze_b": true,
+      "same_freeze_c": true,
+      "same_indices": true,
+      "same_report": true,
+      "seed": 756621450
+    },
+    {
+      "both_clean": true,
+      "pass": true,
+      "same_freeze_b": true,
+      "same_freeze_c": true,
+      "same_indices": true,
+      "same_report": true,
+      "seed": 884503672
+    }
+  ],
+  "digest": "d3ccc565d6e217c406c88ba37ac71b23805977d2ea18352daa4835d20227a99c",
+  "full_truth_accessed": false,
+  "macos_receipt_digest": "eaea18c6e1e736002aed7e6a3c18b68048dcc00b3fcded7a2c194b2c7830b799",
+  "pass": true,
+  "schema": "SAC_GEN7_SELECTED_CROSS_PLATFORM_AGGREGATE_V2",
+  "ubuntu_receipt_digest": "c23de9e7278b5aec0254c5bd346e570679a7e1239ef176c0d71fc5fd1c5997be"
+}
