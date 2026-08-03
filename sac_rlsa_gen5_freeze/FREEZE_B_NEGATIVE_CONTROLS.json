@@ -1,0 +1,8 @@
+{
+  "schema":"SAC_GEN5_NEGATIVE_FREEZE_B_V1",
+  "freeze_b_negative_sha256":"48918aa57b51889725208d1001936a1bffa8b29067be2d54ddfbae1921b5deb6",
+  "target_truth_accessed":false,
+  "g1":{"class":"3X_IMPOSSIBLE","reason":"singleton q_D=1 requires inclusion probability at least 0.99; primary audit requires at least one action"},
+  "g2":{"class":"NEAR_FULL_AUDIT_REQUIRED","N":1000,"q_D":1,"minimum_fixed_size_sample":990,"reason":"all known-answer outputs are mandatory"},
+  "g3":{"class":"3X_IMPOSSIBLE","N":1000,"reported_pass_count":994,"q_low":14,"q_high":6,"sample_pass":312,"sample_fail":1,"sample_total":313,"reason":"small full audit plus fixed planner/process overhead excludes 3x"}
+}
