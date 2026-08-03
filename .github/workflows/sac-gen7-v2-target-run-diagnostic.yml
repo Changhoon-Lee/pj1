@@ -1,0 +1,36 @@
+name: SAC RLSA Gen7 active target run diagnostic
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, reopened, synchronize]
+permissions:
+  actions: read
+  contents: read
+jobs:
+  inspect:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'sac-rlsa-gen7-authoritative-v2'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query active and recent workflow-dispatch runs without mutation
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "/repos/${GITHUB_REPOSITORY}/actions/workflows/sac-gen7-v2-target-single-use-dispatch.yml/runs?branch=sac-rlsa-gen7-authoritative-v2&event=workflow_dispatch&per_page=20" \
+            > TARGET_WORKFLOW_RUNS.json
+          python - <<'PY'
+          import json
+          data=json.load(open('TARGET_WORKFLOW_RUNS.json'))
+          compact=[{k:r.get(k) for k in ['id','run_number','status','conclusion','event','head_sha','created_at','updated_at','jobs_url','artifacts_url']} for r in data.get('workflow_runs',[])]
+          open('TARGET_WORKFLOW_RUNS_COMPACT.json','w').write(json.dumps({'total_count':data.get('total_count'), 'runs':compact},sort_keys=True,indent=2)+'\n')
+          print(json.dumps(compact,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sac-gen7-active-target-run-diagnostic
+          path: |
+            TARGET_WORKFLOW_RUNS.json
+            TARGET_WORKFLOW_RUNS_COMPACT.json
+          retention-days: 7
