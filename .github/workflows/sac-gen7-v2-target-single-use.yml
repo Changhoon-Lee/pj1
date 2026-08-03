@@ -3,6 +3,10 @@ on:
   push:
     branches: [sac-rlsa-gen7-authoritative-v2]
     paths: [sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json]
+  pull_request:
+    branches: [master]
+    paths: [sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
