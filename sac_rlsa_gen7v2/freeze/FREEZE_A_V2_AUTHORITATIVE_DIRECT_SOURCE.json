@@ -1,1 +1,141 @@
-{"authority":{"consumed_seeds":[42,73,59,63,2168,912],"freeze_a_v1":"SUPERSEDED_PRETARGET_DELIVERY_FREEZE","freeze_a_v2":"AUTHORITATIVE_DIRECT_SOURCE_FREEZE","gen5_verdict":"SAC_RLSA_ACTION_SEMANTICS_UNSOUND","gen6_verdict":"SAC_RLSA_GEN6_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED","prior_gen7_verdict":"SAC_RLSA_GEN7_PUBLIC_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED","prior_gen7_zip_sha256":"facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993","wrong_or_unverified_zip_substitution_forbidden":true},"canonical_truth":{"authority":"REFERENCE_DECIMAL_40DP_FROM_STRICT_BINARY64_RAW","cross_platform_gate":["same target bytes","same strict raw SHA-256","same canonical decimal-loss SHA-256","same canonical mean string","same decision"],"loss":"Python Decimal context precision 80, Decimal.from_float(raw), fixed 40 decimal places ROUND_HALF_EVEN","serialization":"ASCII fixed point, 40 fractional digits, no exponent, negative zero normalized, trailing zeros retained, LF, original row order","strict_raw":"C++20, FMA disabled, FE_TONEAREST, exact binary64 raw bytes must match Ubuntu/macOS"},"cost_rule":{"digest":"28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e","full_b7_wall_lower_ns":508151457.0,"history_only_seeds":[42,73,59,63],"selected_fixed_upper_ns":3596970.0,"selected_per_action_upper_ns":3394.5582191780823},"environment":{"compiler_flags":["-x","c++","-O3","-std=c++20","-pthread","-fno-fast-math","-ffp-contract=off"],"numpy":"2.3.5","pytest":"8.4.2","python":"3.13","runtime_selftests_required":true,"scikit_learn":"1.8.0","scipy":"1.17.0"},"freeze_a_sha256":"dbd21354a74460d0bdbcf172ed73e26204d29ad498f1bd0b153506b78d454de1","hard_gates":{"canonical_truth_cross_platform":"100%","complete_B7_both_platforms":true,"conservative_p05_over_p95":">=10x each target/platform","critical_false_certification":0,"median_vs_B7":">=30x each target/platform","public_freeze_BC_before_selected":true,"public_freeze_before_report":true,"report_binding":"100%","selected_before_full":true,"strict_loss_bound":"PASS"},"history_qualification":{"aggregate":true,"github_run_id":30778043938,"macos":true,"public_commit":"b2e2bd0c821be79b5a852f8684c2ca67c59a0456","qualification_digest":"9d2101ce6f55371f9dbe4183d7db0e483e0a6fe6f034a98834ae3584cb96a3bf","summary_sha256":"414be1ff1f2c9ba5555cc494a1ac16110251cf59aec392567190928c115fd338","target_seeds_used":false,"ubuntu":true},"program":"SAC_RLSA_CANONICAL_TRUTH_PROSPECTIVE_CONFIRMATION_GEN7_V2","qualification_roles":{"B7":"performance denominator only; complete portfolio C++1/C++4/vectorized sklearn; sklearn raw-bit mismatch diagnostic, but loss tolerance/decision/bound safety mandatory","QUALIFICATION_PROTOCOL_DIFF":1,"SCIENTIFIC_RULE_DIFF":0,"protocol_digest":"3fe32353dba792cb607dd01059ff484e2af118d2199fe77ee3624c065010bf08","truth_authority":"strict C++ plus Decimal-40 only"},"research_mode":"CONFIRMATION_ONLY_NO_NEW_THEORY","schema":"SAC_GEN7_FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE_V1","scientific_rules":{"audit_randomness":"uniform without replacement from public Freeze-A V2 commit and Freeze-B digest","canonical_truth":"strict C++ raw exact cross-platform + Decimal precision80 fixed40 ROUND_HALF_EVEN ASCII/LF/original order","loss":"logaddexp(0,raw)-y01*raw; y01=1 iff y>0; no clipping; NaN/Inf fail-closed","loss_bound":"raw interval nextafter-outward each term/sum; Decimal-120 endpoint softplus; final binary64 nextafter(+inf)","population_N":2500000,"risk_alpha":0.01,"theory_gate":"30X_CERTIFIED 2/2 before truth","threshold":0.5,"tree":"binary32(x_j) <= stored binary64 threshold; ordered binary64 multiply then add; FE_TONEAREST; FMA disabled"},"seed_selection":{"base_digest":"39012a5c437f67792a8c283d301a50423c0c2177d08e8d48e5016458d46cb395","excluded":[42,59,63,73,912,2168],"outcome_based":false,"public_commit":"e58fdd99a8e45e14b9b15cc2f49a0a253ab53adb","rule_digest":"d4031ef9517a3bd785b3a08a706075bd94500196635254d5d2b94085512b149d","selected":[543787274,507852222],"target_reports_accessed":false,"target_truth_accessed":false},"sources":{"qualification_source_commit":"05bfd84c107afea4d5e4ddb846bd2bb9293b20fd","root_history_workflow_git_blob":"623074a50861b1772954380ed0a66d92b2afd46c","root_target_workflow_git_blob":"f0e8867534397aad544ab9305f8c0b408f49bb78","scientific_source_sha256_or_git_blob":{".github/workflows/gen7-history-dry-run.yml":"9942585167b5936fedfa326990450cb4de85bb1c610a951e804474d218654f07",".github/workflows/gen7-target-single-use.yml":"0150e8154ba87de2f9bb959d618d923aade17660a310babed2182f393ff8b709","native/gb_oracle.cpp":"c2e73f5870bafc08c789e9b3e9c75319948d3eb2842c8c618438f4441336b72c","native/oracle_model.hpp":"df43339dc9036cfbfed6afdb7b01890de474072e9a551fc0289255425119058c","native/oracle_selftest.hpp":"7a20cf05ab193646d80dfe116fa40809197bb5cf2ef652be7efe65cf93a3f67a","protocol/QUALIFICATION_PROTOCOL_V2.json":"GITHUB_BLOB:9e4417dd4a6d34eb68fb5fd188bffbe7dc3533ca","protocol/SCIENTIFIC_RULE_PROJECTION_V2.json":"GITHUB_BLOB:769d35a7f9ce3e545a6b9b730ec101fca7d414a4","sac_gen7/certify.py":"81780b3724f376530003cce2af1aeeb1532a071bfa8b417d3749e9d1f2ff840c","sac_gen7/common.py":"8c77b358ce15893cd6751d66f87fc68228ee658527dd5f12059c37a8202b05dc","sac_gen7/freeze_randomness.py":"3a5cc6cb80fb294b2f3583bf06274644600e4ddbd9b8e51894efeb220ca112df","sac_gen7/model_io.py":"12fc5d4eb0826e441764b9a069afedc9f0b016de9c103af818e4f0646e627514","sac_gen7/qualification_roles.py":"GITHUB_BLOB:c9e40f1afeaf63cc11020bc2bc5ab9fd717b3cd2","sac_gen7/reporter.py":"683c3fa1d24962275c78962da918ff92ca02fb12cc690a0f9233657dcc2a1e44","sac_gen7/state_machine.py":"d9571166fea3c003a92f782c8942ac0f198df8c7d230bb212383d3636c488f36","sac_gen7/strict_math.py":"6f2eb4a7ac03761fec615a30997f5bc6f21cc6b259206281a51df808e43b0465","tools/canonical_truth.py":"969116d2abc0248d0c0aa99721d2c48f017745064bb273f27d8302ce56072667","tools/canonical_truth_selftest.py":"965fa39333f65cae7a2273f23798c3a7162f6c377e871bd48260fedf3a870d9b","tools/compile_oracle.sh":"8fe862546946eb569c8b68c0b3b04fa7d699ae2484d72961480a05c1a2d80e91","tools/reclassify_platform_receipt.py":"GITHUB_BLOB:eb203d1ddbb555e91b5d777dbde3183547a8aa26","tools/sklearn_b7.py":"e69c8fd83b59972803b7aad93e295b9158fd844033e7e7832f6258e67bf26970","tools/target_freeze_bc.py":"a230c129b5f528408fe340a42b93fc531c7bb865df6db234555d9b4ac4f5fa22","tools/target_full_aggregate_v3.py":"GITHUB_BLOB:68e48588f1f744a0f596dbbe375d889b2cd3f619","tools/target_full_platform.py":"d0148ef0ddcdb75d3ab06edf5ce931be4d7c550c6c9613d4016d3965e54eb380","tools/target_generate.py":"5ed1719b1fa6e2206d44f6d54c456ff58a6c2213b35f266b17e99158304df23b","tools/target_selected_aggregate.py":"891ecb7a4026fef243122e642024508d4ac61ce3e2a23e7b7a50d5503f33dcf7","tools/target_selected_platform.py":"29a0aca920af3d04472d76235554f036c51a081e2448dd00116e13170137cc80"},"source_manifest_sha256":"e88debf6712fc2c73c42482f2cd17d5cd5ea377fdd44fb1a50610725011cfe1a"},"state_machine":{"0":"PRETARGET_FROZEN","1":"TARGET_REPORT_GENERATED","2":"FREEZE_B_C_PUBLIC","3":"SELECTED_AUDIT_COMPLETE","4":"FULL_TRUTH_COMPLETE","5":"CROSS_PLATFORM_COMPLETE","6":"FINAL_ADJUDICATED","single_use":"before STATE_1 failure seeds reusable; after any reporter output/STATE_1 seeds permanently consumed; n->n+1 only"},"strongest_b7":{"complete_portfolio_required_on":["ubuntu-latest x86_64","macos-14 arm64"],"definition":"platform-specific minimum external wall median across qualified strict C++ 1-thread, strict C++ 4-thread, and package-native vectorized scikit-learn","qualification":"bound-safe, frozen-loss-tolerance and decision-equivalent; strict C++ raw exact; sklearn raw bit identity diagnostic","cache_reuse":"inadmissible for first untouched validation"},"target_execution_authorized":false,"target_reports_present":false,"target_truth_accessed":false,"untouched_targets":[{"population":2500000,"report":"NOT_GENERATED","seed":543787274,"target_id":"GEN7V2_UNTOUCHED_SEED543787274","truth":"NOT_ACCESSED"},{"population":2500000,"report":"NOT_GENERATED","seed":507852222,"target_id":"GEN7V2_UNTOUCHED_SEED507852222","truth":"NOT_ACCESSED"}]}
+{
+  "authority": {
+    "freeze_a_v1": "SUPERSEDED_PRETARGET_DELIVERY_FREEZE",
+    "freeze_a_v2r1": "SUPERSEDED_PRETARGET_UNCOMMITTED_AUTHORITY_METADATA",
+    "freeze_a_v2r2": "AUTHORITATIVE_CONTENT_FREEZE",
+    "gen5_verdict": "SAC_RLSA_ACTION_SEMANTICS_UNSOUND",
+    "gen6_verdict": "SAC_RLSA_GEN6_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED",
+    "prior_gen7_verdict": "SAC_RLSA_GEN7_PUBLIC_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED",
+    "prior_gen7_zip_sha256": "facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993",
+    "wrong_or_unverified_zip_substitution_forbidden": true
+  },
+  "canonical_truth": {
+    "authority": "REFERENCE_DECIMAL_40DP_FROM_STRICT_BINARY64_RAW",
+    "cross_platform_gate": [
+      "same target bytes",
+      "same strict raw SHA-256",
+      "same canonical decimal-loss SHA-256",
+      "same canonical mean string",
+      "same decision"
+    ],
+    "loss": "Python Decimal context precision 80, Decimal.from_float(raw), fixed 40 decimal places ROUND_HALF_EVEN",
+    "serialization": "ASCII fixed point, 40 fractional digits, no exponent, negative zero normalized, trailing zeros retained, LF, original row order",
+    "strict_raw": "C++20, FMA disabled, FE_TONEAREST, exact binary64 raw bytes must match Ubuntu/macOS"
+  },
+  "content_anchor": "freeze_a_sha256; no containing Git commit SHA is embedded",
+  "cost_rule": {
+    "digest": "28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e",
+    "full_b7_wall_lower_ns": 508151457.0,
+    "history_only_seeds": [42, 73, 59, 63],
+    "selected_fixed_upper_ns": 3596970.0,
+    "selected_per_action_upper_ns": 3394.5582191780823
+  },
+  "digest_method": "SHA256(canonical JSON excluding freeze_a_sha256)",
+  "environment": {
+    "compiler_flags": ["-x", "c++", "-O3", "-std=c++20", "-pthread", "-fno-fast-math", "-ffp-contract=off"],
+    "numpy": "2.3.5",
+    "pytest": "8.4.2",
+    "python": "3.13",
+    "runtime_selftests_required": true,
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.0"
+  },
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "hard_gates": {
+    "canonical_truth_cross_platform": "100%",
+    "complete_B7_both_platforms": true,
+    "conservative_p05_over_p95": ">=10x each target/platform",
+    "critical_false_certification": 0,
+    "median_vs_B7": ">=30x each target/platform",
+    "public_freeze_BC_before_selected": true,
+    "public_freeze_before_report": true,
+    "report_binding": "100%",
+    "selected_before_full": true,
+    "strict_loss_bound": "PASS"
+  },
+  "history_qualification": {
+    "aggregate": true,
+    "github_run_id": 30778043938,
+    "macos": true,
+    "qualification_digest": "52a57af7dbb456a86a7157513c6e3da1e689f8ddebb516f67194b4fcedc6ff3c",
+    "qualification_trigger_commit": "05bfd84c107afea4d5e4ddb846bd2bb9293b20fd",
+    "summary_sha256": "93a345f77cb0a388ad949616a0c8ab62890b13a99e993e5df257e1d5c3af7684",
+    "target_seeds_used": false,
+    "ubuntu": true
+  },
+  "program": "SAC_RLSA_CANONICAL_TRUTH_PROSPECTIVE_CONFIRMATION_GEN7_V2",
+  "qualification_roles": {
+    "B7": "performance denominator only; complete portfolio C++1/C++4/vectorized sklearn",
+    "QUALIFICATION_PROTOCOL_DIFF": 1,
+    "SCIENTIFIC_RULE_DIFF": 0,
+    "package_native_raw_bits": "diagnostic only; loss tolerance, bound safety, and decision equivalence mandatory",
+    "protocol_sha256": "09e39b8a0eb3ff9dd7bbb0d1dc12ac2484f411c5d86e181b75ccef2a66aa55b8",
+    "scientific_rule_projection_sha256": "9140adc23bceea81b4e64837b8139106e2a88a7671f5b5d681224e2ef688f3c7",
+    "truth_authority": "strict independent C++ plus Decimal-40 only"
+  },
+  "research_mode": "CONFIRMATION_ONLY_NO_NEW_THEORY",
+  "schema": "SAC_GEN7_FREEZE_A_V2R2_AUTHORITATIVE_DIRECT_SOURCE_V1",
+  "scientific_rules": {
+    "audit_randomness": "uniform without replacement from Freeze-A content digest and Freeze-B digest",
+    "canonical_truth": "strict C++ raw exact cross-platform + Decimal precision80 fixed40 ROUND_HALF_EVEN ASCII/LF/original order",
+    "loss": "logaddexp(0,raw)-y01*raw; y01=1 iff y>0; no clipping; NaN/Inf fail-closed",
+    "loss_bound": "raw interval nextafter-outward each term/sum; Decimal-120 endpoint softplus; final binary64 nextafter(+inf)",
+    "population_N": 2500000,
+    "risk_alpha": 0.01,
+    "theory_gate": "30X_CERTIFIED 2/2 before truth",
+    "threshold": 0.5,
+    "tree": "binary32(x_j) <= stored binary64 threshold; ordered binary64 multiply then add; FE_TONEAREST; FMA disabled"
+  },
+  "seed_selection": {
+    "base_digest": "088f630d5491d7c9325d7bf96fc1e9ba08945681acad0158b0c27290799f4fbf",
+    "excluded": [42, 59, 63, 73, 912, 2168, 543787274, 507852222, 1101247622, 1043729700],
+    "outcome_based": false,
+    "rule_digest": "b5ec845fa72df62ea16838db23bce7978868be8fbe1d0da6da5a57bd7c07949f",
+    "selected": [884503672, 756621450],
+    "target_reports_accessed": false,
+    "target_truth_accessed": false
+  },
+  "source_authority": {
+    "history_trigger_commit": "05bfd84c107afea4d5e4ddb846bd2bb9293b20fd",
+    "qualification_source_commit": "dc1ea6bb5f029f497178a67ddd0672e1d9294517",
+    "source_completeness_sha256": "958729e52c633bde8837ea388a664a1918ffb2e12e2a1e825e045b14fd4fe70f",
+    "source_manifest_digest": "dea8bd04a6bda517cd6b8bac7ffba85f170c0e8d892f6f320365aa6fc6aab03c",
+    "starting_branch_head_before_authority_repair": "4791d8f49a8867b9a86397b6bb9ae67f402ba12b"
+  },
+  "state_machine": {
+    "0": "PRETARGET_FROZEN",
+    "1": "TARGET_REPORT_GENERATED",
+    "2": "FREEZE_B_C_PUBLIC",
+    "3": "SELECTED_AUDIT_COMPLETE",
+    "4": "FULL_TRUTH_COMPLETE",
+    "5": "CROSS_PLATFORM_COMPLETE",
+    "6": "FINAL_ADJUDICATED",
+    "single_use": "before STATE_1 failure seeds reusable; after any reporter output/STATE_1 seeds permanently consumed; n->n+1 only"
+  },
+  "strongest_b7": {
+    "cache_reuse": "inadmissible for first untouched validation",
+    "complete_portfolio_required_on": ["ubuntu-latest x86_64", "macos-14 arm64"],
+    "definition": "platform-specific minimum external wall median across qualified strict C++ 1-thread, strict C++ 4-thread, and package-native vectorized scikit-learn",
+    "qualification": "bound-safe, frozen-loss-tolerance and decision-equivalent; strict C++ raw exact; sklearn raw bit identity diagnostic"
+  },
+  "target_execution_authorized": false,
+  "target_reports_present": false,
+  "target_truth_accessed": false,
+  "untouched_target_seeds": [884503672, 756621450],
+  "untouched_targets": [
+    {
+      "population": 2500000,
+      "report": "NOT_GENERATED",
+      "seed": 884503672,
+      "target_id": "GEN7V2R2_UNTOUCHED_SEED884503672",
+      "truth": "NOT_ACCESSED"
+    },
+    {
+      "population": 2500000,
+      "report": "NOT_GENERATED",
+      "seed": 756621450,
+      "target_id": "GEN7V2R2_UNTOUCHED_SEED756621450",
+      "truth": "NOT_ACCESSED"
+    }
+  ]
+}
