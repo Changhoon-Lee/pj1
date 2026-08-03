@@ -17,6 +17,19 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.13'}
       - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - name: Require completed history qualification and authoritative protocol
+        run: |
+          test -f sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_QUALIFIED.json
+          test -f sac_rlsa_gen7v2/protocol/QUALIFICATION_PROTOCOL_V2.json
+          test -f sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json
+          python - <<'PY'
+          import json
+          h=json.load(open('sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_QUALIFIED.json'))
+          p=json.load(open('sac_rlsa_gen7v2/protocol/QUALIFICATION_PROTOCOL_V2.json'))
+          assert h['pass'] is True and h['target_seeds_used'] is False
+          assert p['classification']['SCIENTIFIC_RULE_DIFF']==0
+          assert p['classification']['QUALIFICATION_PROTOCOL_DIFF']==1
+          PY
       - name: Acquire single-use public execution lease before reporter
         run: |
           test -f sac_rlsa_gen7v2/freeze/TARGET_RUN_TRIGGER.json
@@ -146,17 +159,35 @@ jobs:
         with: {name: sac-gen7-v2-target-bytes, path: target_artifact}
       - uses: actions/download-artifact@v4
         with: {name: 'sac-gen7-v2-selected-${{ matrix.os }}', path: selected}
-      - run: |
+      - name: Execute raw full-truth and complete B7 portfolio
+        run: |
           sac_rlsa_gen7v2/tools/compile_oracle.sh "$RUNNER_TEMP/oracle" "$RUNNER_TEMP/oracle.build.json"
+          set +e
           PYTHONDONTWRITEBYTECODE=1 LC_ALL=C python sac_rlsa_gen7v2/tools/target_full_platform.py \
             --freeze-a sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json \
             --state3 sac_rlsa_gen7v2/state/STATE_3.json \
             --selected selected/SELECTED_${{ matrix.os }}.json \
             --selected-aggregate sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json \
             --artifact-root target_artifact --freeze-root sac_rlsa_gen7v2/freeze \
-            --oracle "$RUNNER_TEMP/oracle" --out FULL_${{ matrix.os }}.json --warmups 2 --runs 11
+            --oracle "$RUNNER_TEMP/oracle" --out FULL_RAW_${{ matrix.os }}.json --warmups 2 --runs 11
+          RAW_EXIT=$?
+          set -e
+          test -f FULL_RAW_${{ matrix.os }}.json
+          printf '{"raw_runner_exit":%s,"role_separation":"FROZEN_PRETARGET_PROTOCOL"}\n' "$RAW_EXIT" > FULL_RAW_STATUS_${{ matrix.os }}.json
+      - name: Apply frozen canonical-truth/B7 qualification separation
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python sac_rlsa_gen7v2/tools/reclassify_platform_receipt.py \
+            --input FULL_RAW_${{ matrix.os }}.json --out FULL_${{ matrix.os }}.json
       - uses: actions/upload-artifact@v4
-        with: {name: 'sac-gen7-v2-full-${{ matrix.os }}', path: 'FULL_${{ matrix.os }}.json', retention-days: 30}
+        if: always()
+        with:
+          name: 'sac-gen7-v2-full-${{ matrix.os }}'
+          path: |
+            FULL_${{ matrix.os }}.json
+            FULL_RAW_${{ matrix.os }}.json
+            FULL_RAW_STATUS_${{ matrix.os }}.json
+          if-no-files-found: error
+          retention-days: 30
   final-adjudication:
     timeout-minutes: 30
     needs: [selected-state3, full-platform]
@@ -169,7 +200,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with: {name: sac-gen7-v2-full-macos-14, path: full/macos}
       - run: |
-          python sac_rlsa_gen7v2/tools/target_full_aggregate.py \
+          python sac_rlsa_gen7v2/tools/target_full_aggregate_v3.py \
             --state3 sac_rlsa_gen7v2/state/STATE_3.json \
             --ubuntu full/ubuntu/FULL_ubuntu-latest.json --macos full/macos/FULL_macos-14.json \
             --out-state4 sac_rlsa_gen7v2/state/STATE_4.json \
