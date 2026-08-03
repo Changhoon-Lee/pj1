@@ -1,0 +1,21 @@
+{
+  "authority_c0_commit": "dd485518ea792d135f768759fe52814dd7ac1a9c",
+  "authority_c1_commit": "c58c53fe6ef9ab77864916c92e9591bed23b9e8a",
+  "execution_scope": "STATE_0 -> public execution lease -> reporter exactly once -> STATE_1; continue only through frozen B/C, selected audits, final full truth and cross-platform adjudication",
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "pretrigger_branch_head": "e88a64fedbdfed76eeb33ab01b758f0735c341ff",
+  "pretrigger_delivery_receipt_digest": "4851344968f986238419d39a28b48f6858b838f6a5ab77316198ea08774ecf17",
+  "schema": "SAC_GEN7_V2R2_SINGLE_USE_TARGET_TRIGGER_V1",
+  "single_use": true,
+  "single_use_nonce": "4b2c8c53abb502dc68a21960a0471460240dbb24ef4a11f51d5a13f8c8cc9e73",
+  "state_0_digest": "69f181690940914deee2c54f8ed3aa29f83b685fda2d7afdad1c617f205f038e",
+  "target_execution_authorized": true,
+  "target_reports_generated_before_trigger": false,
+  "target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
+  "target_seeds": [
+    884503672,
+    756621450
+  ],
+  "target_truth_accessed_before_trigger": false,
+  "trigger_digest": "92736e99bfc534976a5d350933034b004ec727628a980941dc9802663a8b5843"
+}
