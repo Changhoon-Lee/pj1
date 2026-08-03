@@ -1,0 +1,78 @@
+{
+  "authority_c0_commit": "dd485518ea792d135f768759fe52814dd7ac1a9c",
+  "authority_c1_commit": "c58c53fe6ef9ab77864916c92e9591bed23b9e8a",
+  "authority_freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "authority_state_0_digest": "69f181690940914deee2c54f8ed3aa29f83b685fda2d7afdad1c617f205f038e",
+  "authority_target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
+  "base_branch_head": "c58c53fe6ef9ab77864916c92e9591bed23b9e8a",
+  "branch": "sac-rlsa-gen7-authoritative-v2",
+  "classification": {
+    "DELIVERY_ONLY_DIFF": 4,
+    "SCIENTIFIC_RULE_DIFF": 0,
+    "SEEDS_CONSUMED": false,
+    "TARGET_REPORTS_GENERATED": 0,
+    "TARGET_TRIGGER_PRESENT": false,
+    "TARGET_TRUTH_ACCESSED": false
+  },
+  "frozen_values_preserved": {
+    "audit_randomness_rule": "uniform without replacement from Freeze-A content digest and Freeze-B digest",
+    "b7_portfolio": [
+      "strict_cpp_1thread",
+      "strict_cpp_4thread",
+      "vectorized_sklearn"
+    ],
+    "canonical_truth": "strict C++ raw exact cross-platform + Decimal precision80 fixed40 ROUND_HALF_EVEN",
+    "cost_rule_digest": "28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e",
+    "loss_definition": "logaddexp(0,raw)-y01*raw; no clipping",
+    "population_N": 2500000,
+    "risk_alpha": 0.01,
+    "theory_gate": "30X_CERTIFIED 2/2 before truth",
+    "threshold": 0.5,
+    "tree_semantics": "binary32(x_j) <= binary64 threshold; ordered binary64 multiply then add; FMA disabled"
+  },
+  "pre_receipt_branch_head": "a6533eb1970d20a5f2c9e94c8c040f133c2540c0",
+  "receipt_digest": "4851344968f986238419d39a28b48f6858b838f6a5ab77316198ea08774ecf17",
+  "repair_commits": [
+    "8e06d0964fc18eb7b62db8c485c74a6d1ee340e8",
+    "838c338a956c48b854ded0770834c5e1bef96b66",
+    "449120988687ee1719d287ea1355efb67909d2c1",
+    "a6533eb1970d20a5f2c9e94c8c040f133c2540c0"
+  ],
+  "repairs": [
+    {
+      "new_git_blob_sha1": "d7e49d0e3797ee4cffdc1efe6ef71a0f242c3c38",
+      "old_git_blob_sha1": "f0e8867534397aad544ab9305f8c0b408f49bb78",
+      "path": ".github/workflows/sac-gen7-v2-target-single-use.yml",
+      "reason": "Read the corrected V2R2 history status schema; bind trigger/lease to C0, C1, Freeze A, STATE_0 and exact seed digest before reporter.",
+      "scientific_effect": "NONE"
+    },
+    {
+      "new_git_blob_sha1": "c8d553b9fecce04ec1279bdde00e7b1bfdebfc85",
+      "old_git_blob_sha1": "5229d05b9002cfa5a522a544f268b95deb6a985e",
+      "path": "sac_rlsa_gen7v2/tools/target_freeze_bc.py",
+      "reason": "Read risk alpha from scientific_rules.risk_alpha and use the already-frozen Freeze-A content digest as the public salt.",
+      "scientific_effect": "NONE; exact frozen values are preserved"
+    },
+    {
+      "new_git_blob_sha1": "d2b2c1f73d49c4284594e3510e26d98c8c31ac13",
+      "old_git_blob_sha1": "623074a50861b1772954380ed0a66d92b2afd46c",
+      "path": "sac_rlsa_gen7v2/tools/reclassify_platform_receipt.py",
+      "reason": "Replace the raw receipt digest with a self-digest of the role-separated receipt consumed by final aggregation.",
+      "scientific_effect": "NONE; integrity binding only"
+    },
+    {
+      "new_git_blob_sha1": "b7a2e9326d32b22ddc3184f6c07fe2318e4889a4",
+      "old_git_blob_sha1": "a33e65d0b95e12639b36e650901b16f216ca4d8f",
+      "path": "sac_rlsa_gen7v2/tools/target_selected_platform.py",
+      "reason": "Verify STATE_2 self-digest and its frozen risk/randomness bindings before selected audit.",
+      "scientific_effect": "NONE; fail-closed binding only"
+    }
+  ],
+  "repository": "Changhoon-Lee/pj1",
+  "schema": "SAC_GEN7_V2R2_PRETARGET_DELIVERY_COMPATIBILITY_RECEIPT_V1",
+  "target_execution_authorized": false,
+  "untouched_seeds": [
+    884503672,
+    756621450
+  ]
+}
