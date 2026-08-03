@@ -7,11 +7,15 @@ import json
 import platform
 import statistics
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
 
 import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from sac_gen7.state_machine import verify
 
 
 def sha(path: Path) -> str:
@@ -55,9 +59,13 @@ def main() -> None:
     p.add_argument("--warmups", type=int, default=2); p.add_argument("--runs", type=int, default=11)
     args = p.parse_args()
     freeze_a = json.loads(Path(args.freeze_a).read_text(encoding="utf-8"))
-    state2 = json.loads(Path(args.state2).read_text(encoding="utf-8"))
+    state2 = json.loads(Path(args.state2).read_text(encoding="utf-8")); verify(state2)
     if state2["state"] != 2 or state2["target_truth_accessed"]:
         raise RuntimeError("selected runner requires STATE_2 with no truth access")
+    if state2["freeze_a_sha256"] != freeze_a["freeze_a_sha256"] or state2["target_seeds"] != freeze_a["untouched_target_seeds"]:
+        raise RuntimeError("STATE_2 is not bound to authoritative Freeze A")
+    frozen_alpha = float(freeze_a["scientific_rules"]["risk_alpha"])
+    frozen_salt = str(freeze_a["freeze_a_sha256"])
     artifact_root = Path(args.artifact_root); freeze_root = Path(args.freeze_root); oracle = Path(args.oracle).resolve()
     records = []
     with tempfile.TemporaryDirectory() as temp:
@@ -74,7 +82,9 @@ def main() -> None:
                 "report_self_digest": digest(candidate) == stored,
                 "freeze_b_report_digest": stored == freeze_b["target_report_digest"],
                 "freeze_b_report_file": sha(report_path) == freeze_b["target_report_file_sha256"],
+                "freeze_b_risk_alpha": float(freeze_b["risk_limit"]) == frozen_alpha,
                 "freeze_c_to_b": freeze_c["freeze_b_sha256"] == freeze_b["freeze_b_sha256"],
+                "freeze_c_public_salt": freeze_c["public_salt"] == frozen_salt,
                 "indices": sha(indices) == freeze_c["indices_sha256"],
                 "theory_class": freeze_b["theory_class"] == "30X_CERTIFIED",
                 "oracle": oracle.is_file(),
@@ -100,7 +110,7 @@ def main() -> None:
             record["receipt_digest"] = digest(record)
             records.append(record)
     output = {
-        "schema": "SAC_GEN7_SELECTED_PLATFORM_RECEIPT_V2", "platform": platform.platform(), "machine": platform.machine(),
+        "schema": "SAC_GEN7_SELECTED_PLATFORM_RECEIPT_V2R2", "platform": platform.platform(), "machine": platform.machine(),
         "oracle_sha256": sha(oracle), "records": records, "target_truth_accessed": False,
         "pass": all(record["selected_clean"] for record in records),
     }
