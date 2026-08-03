@@ -1,0 +1,13 @@
+{
+  "schema": "SAC_GEN7_PRIOR_AUTHORITATIVE_PACKAGE_IDENTITY_V1",
+  "zip_filename": "SAC_RLSA_CANONICAL_TRUTH_PROSPECTIVE_CONFIRMATION_GEN7_v1R.zip",
+  "zip_sha256": "facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993",
+  "authoritative_verdict": "SAC_RLSA_GEN7_PUBLIC_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED",
+  "scoped_positive_result": "SAC_RLSA_GEN7_PRETRUTH_30X_LOCAL_TWO_COMPILER_CANONICAL_CROSSOVER_CONFIRMED",
+  "manifest": "110/110 PASS",
+  "zip_entries": 111,
+  "fresh_replay": "PASS",
+  "requested_positive_token_authorized": false,
+  "wrong_or_unverified_zip_body_authorized": false,
+  "rule": "Only a ZIP whose computed SHA-256 is exactly facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993 may be called the prior authoritative Gen7 package. A sidecar alone is not a substitute for ZIP bytes."
+}

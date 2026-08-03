@@ -1,0 +1,57 @@
+{
+  "algorithm": "base=SHA256(canonical {domain,inputs}); candidate=uint32_be(SHA256(base_bytes||counter_be64)[0:4]) & 0x7fffffff; accept first two >10000 not excluded",
+  "base_digest": "088f630d5491d7c9325d7bf96fc1e9ba08945681acad0158b0c27290799f4fbf",
+  "digest_method": "SHA256(canonical JSON excluding seed_rule_digest)",
+  "domain": "SAC-RLSA-GEN7-V2R2-UNTOUCHED-SEED-SELECTION-V1",
+  "draws": [
+    {
+      "accepted": true,
+      "candidate": 884503672,
+      "counter": 0,
+      "digest": "34b8747866d0f5d3366af78275d475fcbdd85861701882be451049d8d3a0d465"
+    },
+    {
+      "accepted": true,
+      "candidate": 756621450,
+      "counter": 1,
+      "digest": "ad19208a5dee54010857d688cdde8121b43895be2bab56048964ede16613c0f8"
+    }
+  ],
+  "excluded_reason": {
+    "1101247622_1043729700": "publicly announced but never committed; conservatively retired during authority repair",
+    "42_59_63_73": "history/calibration",
+    "543787274_507852222": "superseded pretarget metadata",
+    "912_2168": "prior Gen7 consumed"
+  },
+  "excluded_seeds": [
+    42,
+    59,
+    63,
+    73,
+    912,
+    2168,
+    543787274,
+    507852222,
+    1101247622,
+    1043729700
+  ],
+  "inputs": {
+    "history_qualification_digest": "52a57af7dbb456a86a7157513c6e3da1e689f8ddebb516f67194b4fcedc6ff3c",
+    "history_summary_sha256": "93a345f77cb0a388ad949616a0c8ab62890b13a99e993e5df257e1d5c3af7684",
+    "prior_gen7_authoritative_zip_sha256": "facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993",
+    "qualification_protocol_sha256": "09e39b8a0eb3ff9dd7bbb0d1dc12ac2484f411c5d86e181b75ccef2a66aa55b8",
+    "qualification_protocol_source_commit": "dc1ea6bb5f029f497178a67ddd0672e1d9294517",
+    "qualification_trigger_commit": "05bfd84c107afea4d5e4ddb846bd2bb9293b20fd",
+    "scientific_rule_projection_sha256": "9140adc23bceea81b4e64837b8139106e2a88a7671f5b5d681224e2ef688f3c7"
+  },
+  "outcome_based_selection": false,
+  "schema": "SAC_GEN7_V2R2_SEED_SELECTION_RULE_V1",
+  "seed_rule_digest": "b5ec845fa72df62ea16838db23bce7978868be8fbe1d0da6da5a57bd7c07949f",
+  "selected_untouched_seeds": [
+    884503672,
+    756621450
+  ],
+  "selection_time_class": "AFTER_HISTORY_QUALIFICATION_BEFORE_TARGET_REPORTING",
+  "target_reports_accessed": false,
+  "target_truth_accessed": false
+}

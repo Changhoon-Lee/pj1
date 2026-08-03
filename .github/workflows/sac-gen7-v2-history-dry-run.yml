@@ -1,0 +1,129 @@
+name: SAC RLSA Gen7 V2 direct-source history dry run
+on:
+  push:
+    branches: [sac-rlsa-gen7-authoritative-v2]
+    paths: [sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_TRIGGER.json]
+  pull_request:
+    branches: [master]
+    paths: [sac_rlsa_gen7v2/preflight/HISTORY_DRY_RUN_TRIGGER.json]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-history-bytes:
+    timeout-minutes: 180
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 pytest==8.4.2
+      - name: Direct-source, authoritative-package, and protocol audits
+        run: |
+          cd sac_rlsa_gen7v2
+          python tools/source_completeness_v3.py --root . --out preflight/SOURCE_COMPLETENESS_CI.json
+          python tools/protocol_scientific_rule_diff_v3.py \
+            --v1 freeze/FREEZE_A_V1_SUPERSEDED_PRETARGET_DELIVERY_FREEZE.json \
+            --v2 protocol/SCIENTIFIC_RULE_PROJECTION_V2.json \
+            --protocol protocol/QUALIFICATION_PROTOCOL_V2.json \
+            --cost freeze/FROZEN_COST_RULE.json \
+            --out preflight/SCIENTIFIC_RULE_DIFF_CI.json
+          python tools/canonical_truth_selftest.py > preflight/CANONICAL_TRUTH_SELFTEST_CI.json
+          ./tools/compile_oracle.sh "$RUNNER_TEMP/history_oracle" preflight/ORACLE_BUILD_CI.json
+          pytest -q -p no:cacheprovider
+      - name: Build two 2.5M-unit history-only targets and Freeze B/C
+        run: |
+          mkdir -p history_artifact
+          PYTHONDONTWRITEBYTECODE=1 python sac_rlsa_gen7v2/tools/history_build.py \
+            --root sac_rlsa_gen7v2 --artifact-root history_artifact \
+            --out history_artifact/HISTORY_BUILD_MANIFEST.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sac-gen7-v2-history-identical-bytes
+          path: history_artifact/**
+          retention-days: 14
+          compression-level: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sac-gen7-v2-history-builder-audits
+          path: |
+            sac_rlsa_gen7v2/preflight/*CI.json
+            sac_rlsa_gen7v2/protocol/**
+            sac_rlsa_gen7v2/preflight/PRIOR_GEN7_AUTHORITATIVE_PACKAGE.json
+          retention-days: 14
+  verify-history-platform:
+    timeout-minutes: 180
+    needs: build-history-bytes
+    strategy:
+      fail-fast: false
+      matrix: {os: [ubuntu-latest, macos-14]}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-history-identical-bytes, path: history_artifact}
+      - name: Compile oracle and execute raw history receipt
+        run: |
+          cd sac_rlsa_gen7v2
+          ./tools/compile_oracle.sh "$RUNNER_TEMP/history_oracle" "$RUNNER_TEMP/history_oracle.build.json"
+          cp "$RUNNER_TEMP/history_oracle.build.json" "../ORACLE_BUILD_${{ matrix.os }}.json"
+          set +e
+          PYTHONDONTWRITEBYTECODE=1 LC_ALL=C python tools/history_platform_run.py \
+            --artifact-root ../history_artifact --freeze-root ../history_artifact/freeze \
+            --oracle "$RUNNER_TEMP/history_oracle" --warmups 2 --runs 7 \
+            --out "../HISTORY_PLATFORM_RAW_${{ matrix.os }}.json"
+          RAW_EXIT=$?
+          set -e
+          test -f "../HISTORY_PLATFORM_RAW_${{ matrix.os }}.json"
+          printf '{"raw_runner_exit":%s,"role_separation":"PRETARGET_PROTOCOL_REPAIR"}\n' "$RAW_EXIT" > "../RAW_RUNNER_STATUS_${{ matrix.os }}.json"
+      - name: Apply frozen role-separated qualification
+        run: |
+          cd sac_rlsa_gen7v2
+          PYTHONDONTWRITEBYTECODE=1 python tools/reclassify_platform_receipt.py \
+            --input "../HISTORY_PLATFORM_RAW_${{ matrix.os }}.json" \
+            --out "../HISTORY_PLATFORM_${{ matrix.os }}.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sac-gen7-v2-history-${{ matrix.os }}
+          path: |
+            HISTORY_PLATFORM_${{ matrix.os }}.json
+            HISTORY_PLATFORM_RAW_${{ matrix.os }}.json
+            RAW_RUNNER_STATUS_${{ matrix.os }}.json
+            ORACLE_BUILD_${{ matrix.os }}.json
+          if-no-files-found: error
+          retention-days: 14
+  aggregate-history:
+    timeout-minutes: 30
+    needs: verify-history-platform
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-history-identical-bytes, path: history_artifact}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-history-ubuntu-latest, path: receipts/ubuntu}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen7-v2-history-macos-14, path: receipts/macos}
+      - name: Exact cross-platform history adjudication and resource preflight
+        run: |
+          python sac_rlsa_gen7v2/tools/history_aggregate_v3.py \
+            --ubuntu receipts/ubuntu/HISTORY_PLATFORM_ubuntu-latest.json \
+            --macos receipts/macos/HISTORY_PLATFORM_macos-14.json \
+            --build-manifest history_artifact/HISTORY_BUILD_MANIFEST.json \
+            --state2 history_artifact/freeze/HISTORY_STATE_2.json \
+            --state-out-dir HISTORY_STATE_CHAIN \
+            --out HISTORY_DRY_RUN_RESULTS.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sac-gen7-v2-history-dry-run-summary
+          path: |
+            HISTORY_DRY_RUN_RESULTS.json
+            HISTORY_STATE_CHAIN/**
+          if-no-files-found: warn
+          retention-days: 14
