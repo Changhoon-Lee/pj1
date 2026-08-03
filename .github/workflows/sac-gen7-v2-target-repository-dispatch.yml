@@ -108,6 +108,8 @@ jobs:
         id: state2
         run: |
           PYTHONDONTWRITEBYTECODE=1 python sac_rlsa_gen7v2/tools/target_freeze_bc.py --freeze-a sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json --state1 sac_rlsa_gen7v2/state/STATE_1.json --artifact-root target_artifact --freeze-root sac_rlsa_gen7v2/freeze --cost-rule sac_rlsa_gen7v2/freeze/FROZEN_COST_RULE.json --out-state2 sac_rlsa_gen7v2/state/STATE_2.json --out-bundle sac_rlsa_gen7v2/freeze/FREEZE_BC_BUNDLE_V2.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add sac_rlsa_gen7v2/state/STATE_2.json sac_rlsa_gen7v2/freeze/FREEZE_B* sac_rlsa_gen7v2/freeze/FREEZE_C* sac_rlsa_gen7v2/freeze/FREEZE_BC_BUNDLE_V2.json
           git commit -m 'Gen7 V2R2 STATE_2 public Freeze B/C before selected audit [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
@@ -156,6 +158,8 @@ jobs:
         id: state3
         run: |
           python sac_rlsa_gen7v2/tools/target_selected_aggregate.py --state2 sac_rlsa_gen7v2/state/STATE_2.json --ubuntu selected/ubuntu/SELECTED_ubuntu-latest.json --macos selected/macos/SELECTED_macos-14.json --out-state3 sac_rlsa_gen7v2/state/STATE_3.json --out sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add sac_rlsa_gen7v2/state/STATE_3.json sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json
           git commit -m 'Gen7 V2R2 STATE_3 selected audits complete before full truth [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
@@ -221,6 +225,8 @@ jobs:
           set -e
           cp full/ubuntu/FULL_ubuntu-latest.json sac_rlsa_gen7v2/public_results/
           cp full/macos/FULL_macos-14.json sac_rlsa_gen7v2/public_results/
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add sac_rlsa_gen7v2/state/STATE_4.json sac_rlsa_gen7v2/state/STATE_5.json sac_rlsa_gen7v2/state/STATE_6.json sac_rlsa_gen7v2/public_results
           git commit -m 'Gen7 V2R2 STATE_6 final canonical cross-platform adjudication [skip ci]'
           git push origin HEAD:sac-rlsa-gen7-authoritative-v2
