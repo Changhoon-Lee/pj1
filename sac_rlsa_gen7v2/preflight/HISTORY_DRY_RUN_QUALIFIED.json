@@ -23,7 +23,10 @@
   "evidence_role": "HISTORY_ONLY_NO_PROSPECTIVE_TARGET_CREDIT",
   "github_run_id": 30778043938,
   "history_population_each": 2500000,
-  "history_seeds": [42, 73],
+  "history_seeds": [
+    42,
+    73
+  ],
   "prior_gen7_authority": {
     "exact_zip_body_in_this_bundle": false,
     "wrong_body_substitution_authorized": false,
