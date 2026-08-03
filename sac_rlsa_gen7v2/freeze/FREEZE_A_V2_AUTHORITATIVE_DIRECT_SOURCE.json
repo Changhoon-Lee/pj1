@@ -26,13 +26,26 @@
   "cost_rule": {
     "digest": "28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e",
     "full_b7_wall_lower_ns": 508151457.0,
-    "history_only_seeds": [42, 73, 59, 63],
+    "history_only_seeds": [
+      42,
+      73,
+      59,
+      63
+    ],
     "selected_fixed_upper_ns": 3596970.0,
     "selected_per_action_upper_ns": 3394.5582191780823
   },
   "digest_method": "SHA256(canonical JSON excluding freeze_a_sha256)",
   "environment": {
-    "compiler_flags": ["-x", "c++", "-O3", "-std=c++20", "-pthread", "-fno-fast-math", "-ffp-contract=off"],
+    "compiler_flags": [
+      "-x",
+      "c++",
+      "-O3",
+      "-std=c++20",
+      "-pthread",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ],
     "numpy": "2.3.5",
     "pytest": "8.4.2",
     "python": "3.13",
@@ -88,10 +101,24 @@
   },
   "seed_selection": {
     "base_digest": "088f630d5491d7c9325d7bf96fc1e9ba08945681acad0158b0c27290799f4fbf",
-    "excluded": [42, 59, 63, 73, 912, 2168, 543787274, 507852222, 1101247622, 1043729700],
+    "excluded": [
+      42,
+      59,
+      63,
+      73,
+      912,
+      2168,
+      543787274,
+      507852222,
+      1101247622,
+      1043729700
+    ],
     "outcome_based": false,
     "rule_digest": "b5ec845fa72df62ea16838db23bce7978868be8fbe1d0da6da5a57bd7c07949f",
-    "selected": [884503672, 756621450],
+    "selected": [
+      884503672,
+      756621450
+    ],
     "target_reports_accessed": false,
     "target_truth_accessed": false
   },
@@ -114,14 +141,20 @@
   },
   "strongest_b7": {
     "cache_reuse": "inadmissible for first untouched validation",
-    "complete_portfolio_required_on": ["ubuntu-latest x86_64", "macos-14 arm64"],
+    "complete_portfolio_required_on": [
+      "ubuntu-latest x86_64",
+      "macos-14 arm64"
+    ],
     "definition": "platform-specific minimum external wall median across qualified strict C++ 1-thread, strict C++ 4-thread, and package-native vectorized scikit-learn",
     "qualification": "bound-safe, frozen-loss-tolerance and decision-equivalent; strict C++ raw exact; sklearn raw bit identity diagnostic"
   },
   "target_execution_authorized": false,
   "target_reports_present": false,
   "target_truth_accessed": false,
-  "untouched_target_seeds": [884503672, 756621450],
+  "untouched_target_seeds": [
+    884503672,
+    756621450
+  ],
   "untouched_targets": [
     {
       "population": 2500000,
