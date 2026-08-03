@@ -1,17 +1,21 @@
 {
   "authority_c0_commit": "dd485518ea792d135f768759fe52814dd7ac1a9c",
   "authority_c1_commit": "c58c53fe6ef9ab77864916c92e9591bed23b9e8a",
+  "default_branch_dispatcher_bootstrap_commit": "5d69f98272350370d570ff3a1eeafc0f3f2449bc",
   "default_branch_workflow_bootstrap_commit": "07509bb09f2db149da8161bc11533d3f4de6afe0",
   "execution_scope": "STATE_0 -> public execution lease -> reporter exactly once -> STATE_1; continue only through frozen B/C, selected audits, final full truth and cross-platform adjudication",
   "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
-  "pretrigger_branch_head": "1151e48bf361406f6249d99cd25bac02399e0517",
+  "pretrigger_branch_head": "0401779f2a6083adf06e3df3a58d34b47ead751a",
   "pretrigger_delivery_receipt_digest": "4851344968f986238419d39a28b48f6858b838f6a5ab77316198ea08774ecf17",
   "schema": "SAC_GEN7_V2R2_SINGLE_USE_TARGET_TRIGGER_V1",
   "single_use": true,
-  "single_use_nonce": "a6f5b9dccbad93e84d4b1635ece530e784d85fa09cd76b0b76f9231fb3d7358b",
+  "single_use_nonce": "3df4b5d2c30be4e0d4eb62c5516daa4ae15c51bf139a3f450da2822fd9202096",
   "state_0_digest": "69f181690940914deee2c54f8ed3aa29f83b685fda2d7afdad1c617f205f038e",
-  "superseded_nonexecuting_trigger_digest": "92736e99bfc534976a5d350933034b004ec727628a980941dc9802663a8b5843",
-  "supersession_reason": "GitHub App push did not create a run because the target workflow was absent from the default branch; no lease, report, selected audit or truth existed.",
+  "superseded_nonexecuting_trigger_digests": [
+    "92736e99bfc534976a5d350933034b004ec727628a980941dc9802663a8b5843",
+    "12fa0594282a50912dd7518c8cd7c4bde700355a5791953656c759af381c254a"
+  ],
+  "supersession_reason": "Prior GitHub App/PR events produced no target workflow run, no execution lease, no STATE_1 and no target report; default-branch dispatcher now explicitly calls workflow_dispatch.",
   "target_execution_authorized": true,
   "target_reports_generated_before_trigger": false,
   "target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
@@ -20,5 +24,5 @@
     756621450
   ],
   "target_truth_accessed_before_trigger": false,
-  "trigger_digest": "12fa0594282a50912dd7518c8cd7c4bde700355a5791953656c759af381c254a"
+  "trigger_digest": "38d6b0d02408b8fcf355831878c1423c8cc8f51f76aca5c4816cff5e4d6abb35"
 }
