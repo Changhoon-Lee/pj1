@@ -1,0 +1,50 @@
+{
+  "aggregate_pass": true,
+  "artifact_sha256": {
+    "canonical_selftest": "31dcb993017bd38e28c0c8bdaf4b43813a2a4e1de487102ced77a3b6c87d83ec",
+    "macos_receipt": "875233f7722711afc3f596f4ba16e6b30c0856544273980f51fc873215d00a2c",
+    "oracle_build": "87b07f3cd3dc12d8f3ae36fe52dc77774309ba56bad104a7a842df1a5a56aba4",
+    "rule_diff": "27a609075325a35d8e3412d04c878bfce2d8f764f1b0883195b72ff2e1c4bf81",
+    "source_completeness": "e88debf6712fc2c73c42482f2cd17d5cd5ea377fdd44fb1a50610725011cfe1a",
+    "summary": "414be1ff1f2c9ba5555cc494a1ac16110251cf59aec392567190928c115fd338",
+    "ubuntu_receipt": "cdd12d27f6ff74581bb3db050f0aab74a848adf4b795ac000bc137f793af4cd1"
+  },
+  "canonical_oracle_and_b7_roles_separated": true,
+  "canonical_truth_selftest_pass": true,
+  "exact_cross_platform_history": true,
+  "github_run_id": 30778043938,
+  "history_population_each": 2500000,
+  "history_seeds": [
+    42,
+    73
+  ],
+  "macos_pass": true,
+  "oracle_build_pass": true,
+  "program": "SAC_RLSA_GEN7_V2_DIRECT_SOURCE_QUALIFICATION",
+  "prospective_seed_selection_authorized": true,
+  "prospective_target_execution_authorized": false,
+  "qualification_digest": "9d2101ce6f55371f9dbe4183d7db0e483e0a6fe6f034a98834ae3584cb96a3bf",
+  "qualification_protocol_diff": 1,
+  "qualification_source_commit": "05bfd84c107afea4d5e4ddb846bd2bb9293b20fd",
+  "resource_preflight": {
+    "artifact_bytes": 520239082,
+    "artifact_retention_days": 14,
+    "artifact_under_disk_budget": true,
+    "artifact_under_upload_budget": true,
+    "complete_b7_runtime_macos_ns": 9349928852.0,
+    "complete_b7_runtime_ubuntu_ns": 24218293728.0,
+    "decimal_runtime_macos_ns": 76976122380,
+    "decimal_runtime_ubuntu_ns": 96890102908,
+    "job_timeout_minutes": 180,
+    "macos_peak_rss_native_units": 788752,
+    "ubuntu_peak_rss_native_units": 6466148
+  },
+  "schema": "SAC_GEN7_V2_HISTORY_DRY_RUN_QUALIFIED_V1",
+  "scientific_rule_diff": 0,
+  "source_completeness_pass": true,
+  "state_machine_final_digest": "2d6a9514d27a5787d2cfd8c29f7bc87c8ebd3277ab47dad7914a80e1d4a58b5e",
+  "target_reports_generated": false,
+  "target_seeds_used": false,
+  "target_truth_accessed": false,
+  "ubuntu_pass": true
+}
