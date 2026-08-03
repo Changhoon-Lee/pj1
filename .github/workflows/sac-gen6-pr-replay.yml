@@ -1,0 +1,79 @@
+name: SAC RLSA Gen6 frozen PR replay
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-identical-bytes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+      - name: Regenerate and verify the already-public target bytes
+        run: |
+          mkdir -p ci_artifact/seed63 ci_artifact/seed59 ci_artifact/freeze
+          PYTHONPATH=sac_rlsa_gen6 python -m sac_gen6.reporter --out ci_artifact/seed63 --target-id GEN6_UNTOUCHED_SEED63 --seed 63 --n 1000000
+          PYTHONPATH=sac_rlsa_gen6 python -m sac_gen6.reporter --out ci_artifact/seed59 --target-id GEN6_UNTOUCHED_SEED59 --seed 59 --n 1000000
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          for seed in (63,59):
+              tid=f'GEN6_UNTOUCHED_SEED{seed}'
+              public=json.load(open(f'sac_rlsa_gen6/public_records/target_reports/{tid}.TARGET_REPORT.json'))
+              regen=json.load(open(f'ci_artifact/seed{seed}/{tid}.TARGET_REPORT.json'))
+              assert {k:v['sha256'] for k,v in public['files'].items()} == {k:v['sha256'] for k,v in regen['files'].items()}
+          PY
+          cp sac_rlsa_gen6/freeze/FREEZE_A_POLICY_ORACLE_COST.json ci_artifact/freeze/
+          cp sac_rlsa_gen6/freeze/FREEZE_B_SEED*.json ci_artifact/freeze/
+          cp sac_rlsa_gen6/freeze/FREEZE_C_SEED*.json ci_artifact/freeze/
+          cp sac_rlsa_gen6/freeze/FREEZE_C_SEED*.indices.u32 ci_artifact/freeze/
+      - uses: actions/upload-artifact@v4
+        with: {name: sac-gen6-frozen-identical-bytes, path: 'ci_artifact/**', retention-days: 30}
+  verify-platform:
+    needs: build-identical-bytes
+    strategy:
+      fail-fast: false
+      matrix: {os: [ubuntu-latest, macos-14]}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install numpy==2.3.5
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen6-frozen-identical-bytes, path: ci_artifact}
+      - name: Compile frozen repaired oracle and run selected audit before full truth
+        run: |
+          bash sac_rlsa_gen6/tools/compile_oracle.sh ci_oracle
+          python sac_rlsa_gen6/tools/ci_platform_run.py --artifact-root ci_artifact --freeze-root ci_artifact/freeze --oracle ci_oracle --warmups 2 --runs 11 --out platform_${{ matrix.os }}.json
+      - uses: actions/upload-artifact@v4
+        with: {name: 'sac-gen6-frozen-${{ matrix.os }}', path: 'platform_${{ matrix.os }}.json', retention-days: 30}
+  aggregate:
+    needs: verify-platform
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen6-frozen-ubuntu-latest, path: receipts/ubuntu}
+      - uses: actions/download-artifact@v4
+        with: {name: sac-gen6-frozen-macos-14, path: receipts/macos}
+      - name: Build cross-platform summary
+        run: |
+          python - <<'PY'
+          import json,glob
+          u=json.load(open(glob.glob('receipts/ubuntu/*.json')[0]));m=json.load(open(glob.glob('receipts/macos/*.json')[0]))
+          def compact(x):
+              return {'platform':x['platform'],'machine':x['machine'],'pass':x['pass'],'records':[{'seed':r['seed'],'theory_class':r['theory_class'],'measured_wall_speedup':r['measured_wall_speedup'],'conservative_wall_speedup':r['conservative_p05_over_p95_wall_speedup'],'unit_truth_agreement':r['unit_truth_agreement'],'decision_agreement':r['decision_agreement'],'target_bytes_digest':r['target_bytes_digest'],'truth_digest':r['full_modes'][r['strongest_b7_mode']]['truth_loss_quantized_1e12_sha256']} for r in x['records']]}
+          out={'schema':'SAC_GEN6_PR_CROSS_PLATFORM_SUMMARY_V1','ubuntu':compact(u),'macos':compact(m)}
+          out['same_target_bytes']=all(a['target_bytes_digest']==b['target_bytes_digest'] for a,b in zip(out['ubuntu']['records'],out['macos']['records']))
+          out['same_unit_truth_digest']=all(a['truth_digest']==b['truth_digest'] for a,b in zip(out['ubuntu']['records'],out['macos']['records']))
+          out['pass']=u['pass'] and m['pass'] and out['same_target_bytes'] and out['same_unit_truth_digest']
+          open('CROSS_PLATFORM_SUMMARY.json','w').write(json.dumps(out,sort_keys=True,indent=2)+'\n')
+          assert out['pass']
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: sac-gen6-frozen-cross-platform-summary, path: CROSS_PLATFORM_SUMMARY.json, retention-days: 30}

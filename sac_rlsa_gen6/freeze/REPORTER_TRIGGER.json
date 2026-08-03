@@ -1,0 +1,10 @@
+{
+  "schema": "SAC_GEN6_REPORTER_TRIGGER_V1",
+  "freeze_a_public_commit": "1d8b4ed83e3ad8471557f0d4897625d215a7f6a1",
+  "freeze_a_sha256": "f07d44853b78d2583b580442dbccbf61c2640ebf96f0cb5eabe523a605151695",
+  "untouched_seeds": [63, 59],
+  "history_only_seeds": [42, 73],
+  "required_theory_class": "30X_CERTIFIED",
+  "target_report_may_now_run": true,
+  "target_truth_may_run_only_after_public_freeze_bc_commit": true
+}
