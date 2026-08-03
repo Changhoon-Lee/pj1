@@ -23,14 +23,17 @@ def main() -> None:
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
     source = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    source_digest = digest(source)
     output = dict(source)
-    output["schema"] = "SAC_GEN7_ROLE_SEPARATED_PLATFORM_RECEIPT_V1"
-    output["source_receipt_sha256"] = digest(source)
+    output["schema"] = "SAC_GEN7_ROLE_SEPARATED_PLATFORM_RECEIPT_V2"
+    output["source_receipt_digest"] = source_digest
     output["protocol"] = "CANONICAL_ORACLE_AND_B7_COMPARATOR_SEPARATED"
     output["records"] = [reclassify_record(record) for record in source["records"]]
     output["pass"] = all(record["pass"] for record in output["records"])
+    # Replace the raw receipt digest.  The aggregate must bind the role-separated receipt itself.
+    output.pop("receipt_digest", None)
     output.pop("receipt_sha256", None)
-    output["receipt_sha256"] = digest(output)
+    output["receipt_digest"] = digest(output)
     Path(args.out).write_text(
         json.dumps(output, sort_keys=True, indent=2) + "\n", encoding="utf-8"
     )
