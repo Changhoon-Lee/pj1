@@ -1,0 +1,12 @@
+{
+  "consumed_seeds": [2168, 912],
+  "consumption_evidence": "prior local package contains reports, Freeze B/C, selected audit, full truth and two-compiler results",
+  "freeze_b_records": [
+    {"freeze_b_sha256": "aafc41fdd88985d73e5360513f84fd1346b47bb5b6e2035a8f83d5e0fe2caeb8", "full_truth_recorded": true, "seed": 2168, "theory_class": "30X_CERTIFIED"},
+    {"freeze_b_sha256": "436e8250f0d7517ae3f28ad33678ff9a13fe5971423aa7e562328e7061baca9a", "full_truth_recorded": true, "seed": 912, "theory_class": "30X_CERTIFIED"}
+  ],
+  "prior_local_verdict": "SAC_RLSA_GEN7_PUBLIC_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED",
+  "prior_local_zip_sha256": "facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993",
+  "prospective_reuse_authorized": false,
+  "schema": "SAC_GEN7_PRIOR_LOCAL_TARGET_CONSUMPTION_AUDIT_V1"
+}

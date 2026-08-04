@@ -1,0 +1,18 @@
+{
+  "campaign_id": "SAC_RLSA_GEN7_V2R2_CANONICAL_CONFIRMATION",
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "previous_state_digest": "8a340eec0666f109bdd7d6c4aa4c0997ef799771bf887965137670cc7ad084aa",
+  "schema": "SAC_GEN7_SINGLE_USE_STATE_V2",
+  "seeds_consumed": true,
+  "state": 5,
+  "state_digest": "d2f0dd69f95ae8c1e1aa38b30ce49a60c2e58236e8bfd32d5fdf8dc835042b00",
+  "state_name": "CROSS_PLATFORM_COMPLETE",
+  "target_reports_generated": true,
+  "target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
+  "target_seeds": [
+    884503672,
+    756621450
+  ],
+  "target_truth_accessed": true,
+  "transition_evidence": "CANONICAL_CROSS_PLATFORM_AND_COMPLETE_B7_ADJUDICATED"
+}

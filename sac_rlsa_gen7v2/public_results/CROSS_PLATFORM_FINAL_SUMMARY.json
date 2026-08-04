@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "b7_portfolio_qualified_both": true,
+      "canonical_oracle_qualified_both": true,
+      "complete_b7_both": true,
+      "conservative_10x_both": true,
+      "median_30x_both": true,
+      "pass": true,
+      "same_canonical_decimal_loss_sha256": true,
+      "same_canonical_mean": true,
+      "same_decision": true,
+      "same_report_digest": true,
+      "same_strict_raw_sha256": true,
+      "same_target_bytes_digest": true,
+      "seed": 756621450
+    },
+    {
+      "b7_portfolio_qualified_both": true,
+      "canonical_oracle_qualified_both": true,
+      "complete_b7_both": true,
+      "conservative_10x_both": true,
+      "median_30x_both": true,
+      "pass": true,
+      "same_canonical_decimal_loss_sha256": true,
+      "same_canonical_mean": true,
+      "same_decision": true,
+      "same_report_digest": true,
+      "same_strict_raw_sha256": true,
+      "same_target_bytes_digest": true,
+      "seed": 884503672
+    }
+  ],
+  "digest": "c26159cc485940f175ceadcaafe4d79c7800a161483dfc6e49fc8db5a4796861",
+  "macos_receipt_digest": "d221118b088ecbe1dda0caec4ed8b35e57f065fb378eda2056f41a0de59a910b",
+  "pass": true,
+  "protocol": "CANONICAL_ORACLE_AND_B7_COMPARATOR_SEPARATED",
+  "schema": "SAC_GEN7_CROSS_PLATFORM_FINAL_SUMMARY_V3",
+  "ubuntu_receipt_digest": "1566a7c0b5a7116815ff8b61b550cfccb134dc78d230cd51c4022648d03932aa"
+}

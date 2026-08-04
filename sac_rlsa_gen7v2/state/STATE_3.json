@@ -1,0 +1,18 @@
+{
+  "campaign_id": "SAC_RLSA_GEN7_V2R2_CANONICAL_CONFIRMATION",
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "previous_state_digest": "a4dbcbb2c3c194031ab55438c92427f688ee84dd6fed5133e95f192eaa64ec08",
+  "schema": "SAC_GEN7_SINGLE_USE_STATE_V2",
+  "seeds_consumed": true,
+  "state": 3,
+  "state_digest": "2a841b6847aed89e8b3773cb8724d99306b98d12799a996b84f843d594b6a575",
+  "state_name": "SELECTED_AUDIT_COMPLETE",
+  "target_reports_generated": true,
+  "target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
+  "target_seeds": [
+    884503672,
+    756621450
+  ],
+  "target_truth_accessed": false,
+  "transition_evidence": "BOTH_PLATFORM_SELECTED_AUDITS_COMPLETE_AND_PUBLIC"
+}

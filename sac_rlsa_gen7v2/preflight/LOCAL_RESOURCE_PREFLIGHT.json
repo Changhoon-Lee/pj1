@@ -1,0 +1,25 @@
+{
+  "artifact_budget_pass": true,
+  "artifact_upload_budget_bytes": 1500000000,
+  "complete_b7_medians_ns": {
+    "independent_cpp_1thread": 2248283694.0,
+    "independent_cpp_4thread": 613651952.0,
+    "package_native_vectorized_sklearn": 3105734077.0
+  },
+  "decimal_full_wall_ns": 31835216659,
+  "history_seed": 42,
+  "max_rss_kb": 542208,
+  "measured_speedup": 128.17854243925507,
+  "memory_budget_bytes": 12000000000,
+  "memory_budget_pass": true,
+  "one_target_artifact_bytes": 260119520,
+  "pass": true,
+  "pipeline_elapsed": "0:40.07",
+  "population": 2500000,
+  "record_digest": "c6f320b71a7360116cde5b459a7038d006f6bce4ebfefd240cad2a399de27a91",
+  "schema": "SAC_GEN7_LOCAL_RESOURCE_PREFLIGHT_V2",
+  "selected_median_ns": 4787478.0,
+  "target_seeds_used": false,
+  "two_target_artifact_projection_bytes": 520239040,
+  "unit_truth_zero_mismatch": true
+}

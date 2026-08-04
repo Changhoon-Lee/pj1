@@ -1,0 +1,11 @@
+{
+  "freeze_b_sha256": "8d813d3b39431483b917f56d78cf5bdce2b13da40e1c18c08b05abb01c458506",
+  "freeze_c_sha256": "ea8fe55fec66bcd864637a38ce17701557e5ec75782ba39e3bdd7bf6d18523d2",
+  "indices_sha256": "4dbe70f728df44cff2f525cce1fc4aed506ea0f7d6885db12ae60d8e122e410c",
+  "public_salt": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "sample_size": 1347,
+  "schema": "SAC_GEN7_FREEZE_C_V2",
+  "seed_128": 251091267438457372468700819790314309807,
+  "target_id": "GEN7V2R2_UNTOUCHED_SEED884503672",
+  "truth_accessed": false
+}
