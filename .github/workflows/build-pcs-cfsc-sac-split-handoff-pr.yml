@@ -1,0 +1,66 @@
+name: Build PCS CFSC SAC split handoff PR
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - handoff_split/BUILD_TRIGGER_PR.json
+      - handoff_split/build_split_handoff.py
+      - .github/workflows/build-pcs-cfsc-sac-split-handoff-pr.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: sac-gen7-v2-target-bytes
+          path: target_artifact
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: '30814530108'
+      - run: python handoff_split/build_split_handoff.py --repo . --target-artifact target_artifact --output handoff_output
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-01-CORE
+          path: |
+            handoff_output/01_CORE_HANDOFF.zip
+            handoff_output/VOLUME_INDEX.json
+            handoff_output/ALL_FILES_SHA256.txt
+            handoff_output/REASSEMBLE_TARGET_EVIDENCE.sh
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-02-CURRENT-SOURCE
+          path: handoff_output/02_CURRENT_SOURCE_AND_PUBLIC_EVIDENCE.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-03-HISTORY-REPORTS
+          path: handoff_output/03_HISTORICAL_REPORTS.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL01, path: handoff_output/04_TARGET_EVIDENCE_VOL01.zip, compression-level: 0, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL02, path: handoff_output/04_TARGET_EVIDENCE_VOL02.zip, compression-level: 0, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL03, path: handoff_output/04_TARGET_EVIDENCE_VOL03.zip, compression-level: 0, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL04, path: handoff_output/04_TARGET_EVIDENCE_VOL04.zip, compression-level: 0, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL05, path: handoff_output/04_TARGET_EVIDENCE_VOL05.zip, compression-level: 0, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL06, path: handoff_output/04_TARGET_EVIDENCE_VOL06.zip, compression-level: 0, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL07, path: handoff_output/04_TARGET_EVIDENCE_VOL07.zip, compression-level: 0, retention-days: 30}
+      - uses: actions/upload-artifact@v4
+        with: {name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL08, path: handoff_output/04_TARGET_EVIDENCE_VOL08.zip, compression-level: 0, retention-days: 30}
