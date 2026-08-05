@@ -80,12 +80,20 @@ jobs:
         run: |
           set -euo pipefail
           export PATH="$HOME/.elan/bin:$PATH"
-          export LEAN_VERSION="$(lean --version 2>&1 | head -n 1)"
-          export LAKE_VERSION="$(lake --version 2>&1 | head -n 1)"
+          TOOLCHAIN='leanprover/lean4:v4.32.2'
+          TOOLCHAIN_DIR="$HOME/.elan/toolchains/leanprover--lean4---v4.32.2"
+          test -x "$TOOLCHAIN_DIR/bin/lean"
+          test -x "$TOOLCHAIN_DIR/bin/lake"
+          export LEAN_VERSION="$(elan run "$TOOLCHAIN" lean --version 2>&1 | head -n 1)"
+          export LAKE_VERSION="$(elan run "$TOOLCHAIN" lake --version 2>&1 | head -n 1)"
+          export LEAN_BIN_SHA256="$(sha256sum "$TOOLCHAIN_DIR/bin/lean" | cut -d' ' -f1)"
+          export LAKE_BIN_SHA256="$(sha256sum "$TOOLCHAIN_DIR/bin/lake" | cut -d' ' -f1)"
           export RUST_VERSION="$(rustc +1.97.1 --version 2>&1)"
           export CARGO_VERSION="$(cargo +1.97.1 --version 2>&1)"
           test -n "$LEAN_VERSION"
           test -n "$LAKE_VERSION"
+          test -n "$LEAN_BIN_SHA256"
+          test -n "$LAKE_BIN_SHA256"
           test -n "$RUST_VERSION"
           test -n "$CARGO_VERSION"
           case "$LEAN_VERSION" in *"4.32.2"*) ;; *) echo "wrong Lean version: $LEAN_VERSION" >&2; exit 3;; esac
@@ -110,13 +118,15 @@ jobs:
                   'sha256': hashlib.sha256(data).hexdigest(),
               })
           receipt = {
-              'schema': 'SAC_TAC_GEN8_PINNED_FORMAL_BUILD_RECEIPT_V2',
+              'schema': 'SAC_TAC_GEN8_PINNED_FORMAL_BUILD_RECEIPT_V3',
               'repository': os.environ['REPOSITORY'],
               'commit_sha': os.environ['COMMIT_SHA'],
               'workflow_run_id': int(os.environ['RUN_ID']),
               'workflow_run_attempt': int(os.environ['RUN_ATTEMPT']),
               'lean_version': os.environ['LEAN_VERSION'],
               'lake_version': os.environ['LAKE_VERSION'],
+              'lean_executable_sha256': os.environ['LEAN_BIN_SHA256'],
+              'lake_executable_sha256': os.environ['LAKE_BIN_SHA256'],
               'rust_version': os.environ['RUST_VERSION'],
               'cargo_version': os.environ['CARGO_VERSION'],
               'lean_placeholder_tokens': [],
