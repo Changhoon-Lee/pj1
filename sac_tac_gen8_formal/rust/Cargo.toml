@@ -1,0 +1,11 @@
+[package]
+name = "sac_tac_exact_checker"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+
+[profile.release]
+overflow-checks = true
+lto = true
+codegen-units = 1
