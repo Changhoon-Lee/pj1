@@ -1,0 +1,143 @@
+name: SAC TAC Gen8 V2R pinned formal build
+
+on:
+  push:
+    branches: [sac-tac-gen8-v2r-formal-build]
+    paths:
+      - 'sac_tac_gen8_formal/**'
+      - '.github/workflows/sac-tac-gen8-v2r-formal.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sac-tac-gen8-v2r-formal-build
+  cancel-in-progress: false
+
+jobs:
+  pinned-formal-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject Lean placeholders
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RnwE '\b(sorry|admit|axiom)\b' sac_tac_gen8_formal/lean --include='*.lean'; then
+            echo 'forbidden Lean placeholder token found' >&2
+            exit 2
+          fi
+
+      - name: Install pinned elan 4.2.1 and Lean 4.32.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL \
+            https://github.com/leanprover/elan/releases/download/v4.2.1/elan-x86_64-unknown-linux-gnu.tar.gz \
+            -o "$RUNNER_TEMP/elan.tar.gz"
+          echo '4e717523217af592fa2d7b9c479410a31816c065d66ccbf0c2149337cfec0f5c  '"$RUNNER_TEMP/elan.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/elan-init" -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install leanprover/lean4:v4.32.2
+
+      - name: Build Lean finite theorem core
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cd sac_tac_gen8_formal/lean
+          lean --version
+          lake build
+
+      - name: Install and verify Rust 1.97.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install 1.97.1 --profile minimal --component rustfmt,clippy
+          rustc +1.97.1 --version
+          cargo +1.97.1 --version
+
+      - name: Test, lint, format, and release-build Rust checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd sac_tac_gen8_formal/rust
+          cargo +1.97.1 test --locked
+          cargo +1.97.1 clippy --locked -- -D warnings
+          cargo +1.97.1 fmt --check
+          cargo +1.97.1 build --release --locked
+
+      - name: Generate source-bound formal receipt
+        shell: bash
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          COMMIT_SHA: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          export LEAN_VERSION="$(lean --version | head -n 1)"
+          export LAKE_VERSION="$(lake --version | head -n 1)"
+          export RUST_VERSION="$(rustc +1.97.1 --version)"
+          export CARGO_VERSION="$(cargo +1.97.1 --version)"
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+
+          root = Path('sac_tac_gen8_formal')
+          paths = sorted(
+              p for p in root.rglob('*')
+              if p.is_file()
+              and 'target' not in p.parts
+              and '.lake' not in p.parts
+          )
+          files = []
+          for p in paths:
+              data = p.read_bytes()
+              files.append({
+                  'path': p.as_posix(),
+                  'bytes': len(data),
+                  'sha256': hashlib.sha256(data).hexdigest(),
+              })
+          receipt = {
+              'schema': 'SAC_TAC_GEN8_PINNED_FORMAL_BUILD_RECEIPT_V1',
+              'repository': os.environ['REPOSITORY'],
+              'commit_sha': os.environ['COMMIT_SHA'],
+              'workflow_run_id': int(os.environ['RUN_ID']),
+              'workflow_run_attempt': int(os.environ['RUN_ATTEMPT']),
+              'lean_version': os.environ['LEAN_VERSION'],
+              'lake_version': os.environ['LAKE_VERSION'],
+              'rust_version': os.environ['RUST_VERSION'],
+              'cargo_version': os.environ['CARGO_VERSION'],
+              'lean_placeholder_tokens': [],
+              'lean_build': 'PASS',
+              'rust_test': 'PASS',
+              'rust_clippy': 'PASS',
+              'rust_fmt': 'PASS',
+              'rust_release_build': 'PASS',
+              'source_files': files,
+              'primary_target_data_accessed': False,
+              'external_independent_reproduction': False,
+              'managed_ci_toolchain_build_only': True,
+              'pass': True,
+          }
+          canonical = json.dumps(receipt, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+          receipt['receipt_digest'] = hashlib.sha256(canonical).hexdigest()
+          Path('formal_receipt.json').write_text(json.dumps(receipt, sort_keys=True, indent=2) + '\n')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sac-tac-gen8-v2r-formal-receipt
+          path: |
+            formal_receipt.json
+            sac_tac_gen8_formal/lean/lean-toolchain
+            sac_tac_gen8_formal/rust/rust-toolchain.toml
+            sac_tac_gen8_formal/rust/Cargo.lock
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
