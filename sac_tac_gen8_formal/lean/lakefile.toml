@@ -1,0 +1,6 @@
+name = "SACTAC"
+version = "0.2.0"
+defaultTargets = ["SACTAC"]
+
+[[lean_lib]]
+name = "SACTAC"
