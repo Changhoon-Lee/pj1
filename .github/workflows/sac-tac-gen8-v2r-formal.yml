@@ -80,10 +80,16 @@ jobs:
         run: |
           set -euo pipefail
           export PATH="$HOME/.elan/bin:$PATH"
-          export LEAN_VERSION="$(lean --version | head -n 1)"
-          export LAKE_VERSION="$(lake --version | head -n 1)"
-          export RUST_VERSION="$(rustc +1.97.1 --version)"
-          export CARGO_VERSION="$(cargo +1.97.1 --version)"
+          export LEAN_VERSION="$(lean --version 2>&1 | head -n 1)"
+          export LAKE_VERSION="$(lake --version 2>&1 | head -n 1)"
+          export RUST_VERSION="$(rustc +1.97.1 --version 2>&1)"
+          export CARGO_VERSION="$(cargo +1.97.1 --version 2>&1)"
+          test -n "$LEAN_VERSION"
+          test -n "$LAKE_VERSION"
+          test -n "$RUST_VERSION"
+          test -n "$CARGO_VERSION"
+          case "$LEAN_VERSION" in *"4.32.2"*) ;; *) echo "wrong Lean version: $LEAN_VERSION" >&2; exit 3;; esac
+          case "$RUST_VERSION" in *"1.97.1"*) ;; *) echo "wrong Rust version: $RUST_VERSION" >&2; exit 3;; esac
           python - <<'PY'
           import hashlib, json, os
           from pathlib import Path
@@ -104,7 +110,7 @@ jobs:
                   'sha256': hashlib.sha256(data).hexdigest(),
               })
           receipt = {
-              'schema': 'SAC_TAC_GEN8_PINNED_FORMAL_BUILD_RECEIPT_V1',
+              'schema': 'SAC_TAC_GEN8_PINNED_FORMAL_BUILD_RECEIPT_V2',
               'repository': os.environ['REPOSITORY'],
               'commit_sha': os.environ['COMMIT_SHA'],
               'workflow_run_id': int(os.environ['RUN_ID']),
