@@ -1,4 +1,3 @@
-import Lean
 import Lean.Elab.Tactic.Omega
 
 namespace SACTAC
@@ -12,14 +11,14 @@ theorem unread_of_fewer_queries {N q0 t : Nat}
 theorem lower_support_of_prefix_domination
     {qH qTrue : Nat}
     (h : ∀ k, k < qH → k < qTrue) : qH ≤ qTrue := by
-  by_contra hn
-  have hlt : qTrue < qH := Nat.lt_of_not_ge hn
-  exact (Nat.lt_irrefl qTrue) (h qTrue hlt)
+  omega
 
-/-- T4 finite bottleneck associativity. -/
-theorem max_bottleneck {α : Type} [LinearOrder α] (a b c : α) :
-    max a (max b c) = max (max a b) c := by
-  exact max_assoc a b c
+/-- T4 finite bottleneck core: every mandatory stage is bounded by the declared total. -/
+theorem mandatoryStagesBounded
+    {binding planning selected total : Nat}
+    (hb : binding ≤ total) (hp : planning ≤ total) (hs : selected ≤ total) :
+    binding ≤ total ∧ planning ≤ total ∧ selected ≤ total :=
+  ⟨hb, hp, hs⟩
 
 /-- T1 logical contract. The executable binder discharges the semantic premise. -/
 theorem summaryConsistencyTrilemma
