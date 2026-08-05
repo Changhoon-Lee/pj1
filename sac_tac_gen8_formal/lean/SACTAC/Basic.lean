@@ -1,3 +1,4 @@
+import Lean
 import Lean.Elab.Tactic.Omega
 
 namespace SACTAC
