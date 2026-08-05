@@ -7,10 +7,10 @@ theorem unread_of_fewer_queries {N q0 t : Nat}
     (hq : q0 ≤ N) (ht : t < N - q0 + 1) : q0 ≤ N - t := by
   omega
 
-/-- T3 support-order core after the executable binder establishes all prefix bounds. -/
-theorem lower_support_of_prefix_domination
+/-- T3 support-order core using the final valid prefix witness produced by the executable binder. -/
+theorem lower_support_of_last_prefix
     {qH qTrue : Nat}
-    (h : ∀ k, k < qH → k < qTrue) : qH ≤ qTrue := by
+    (h : qH = 0 ∨ qH - 1 < qTrue) : qH ≤ qTrue := by
   omega
 
 /-- T4 finite bottleneck core: every mandatory stage is bounded by the declared total. -/
