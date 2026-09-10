@@ -1,0 +1,21 @@
+{
+  "all_calibration_unit_truth_mismatch_zero": true,
+  "all_reported_losses_within_model_bound": true,
+  "calibration_history_only_seeds": [42, 73],
+  "float32_tree_semantics_implemented_before_freeze_a": true,
+  "new_target_seeds_executed": [],
+  "oracle_binary_sha256": "c3d1fc7a23f8308bb106b80b167f6c707e9da777ebee74e94d50c5b6bd7093e2",
+  "oracle_source_sha256": "8c743aa15685f18bf70830c78a3ce61580734d7144ac0039cd5681814bf2e46a",
+  "outward_rounded_model_bound": true,
+  "pass": true,
+  "prospective_target_truth_accessed": false,
+  "raw_logit_loss_no_probability_clipping_frozen_before_freeze_a": true,
+  "records": [
+    {"full_loss_mismatches_max": 0, "full_raw_mismatches_max": 0, "full_wall_median_ns": 299796086.0, "loss_upper": 15.248076579151554, "raw_bound_contains_report": true, "reported_max_loss": 1.6458882052579962, "reported_mean_loss": 0.4458026669055364, "seed": 42, "target_id": "CALIBRATION_HISTORY_SEED42"},
+    {"full_loss_mismatches_max": 0, "full_raw_mismatches_max": 0, "full_wall_median_ns": 315549793.0, "loss_upper": 15.3445078955901, "raw_bound_contains_report": true, "reported_max_loss": 1.7356405658564937, "reported_mean_loss": 0.4436907133213093, "seed": 73, "target_id": "CALIBRATION_HISTORY_SEED73"}
+  ],
+  "schema": "SAC_GEN6_REPAIRED_ORACLE_PRE_FREEZE_QUALIFICATION_V2",
+  "threshold_boundary_cases": 180,
+  "threshold_boundary_loss_mismatches": 0,
+  "threshold_boundary_raw_mismatches": 0
+}
