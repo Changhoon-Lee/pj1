@@ -1,0 +1,110 @@
+name: Phase-II MAX-VALUE ATLAs frozen run
+
+on:
+  push:
+    branches:
+      - phase2-max-value-atlas-20260915
+    paths:
+      - '.github/workflows/phase2-max-value-atlas.yml'
+      - 'phase2_max_value/**'
+
+permissions:
+  contents: read
+
+env:
+  EXPECTED_SCRIPT_SHA256: a946195219bfc17f82bc82be94d8c9d0751c4a59b274b1b18d1e65fa3946ff1c
+  EXPECTED_ATLAS_MD5: c2395e53731144209b809cf077aa8644
+  ATLAS_URL: https://zenodo.org/records/15227808/files/davidainman/atlas-data-v2025.1.zip?download=1
+
+jobs:
+  frozen-atlas-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout execution branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install frozen-run runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'numpy==2.3.5' 'pandas==2.2.3'
+          python --version
+          python - <<'PY'
+          import numpy, pandas
+          print('numpy', numpy.__version__)
+          print('pandas', pandas.__version__)
+          PY
+
+      - name: Reconstruct and verify exact frozen script
+        run: |
+          cat phase2_max_value/frozen_script_parts/part*.b64 | tr -d '\r\n' | base64 -d > phase2_atlas_deep_replication.py
+          ACTUAL=$(sha256sum phase2_atlas_deep_replication.py | awk '{print $1}')
+          echo "frozen script sha256=$ACTUAL"
+          test "$ACTUAL" = "$EXPECTED_SCRIPT_SHA256"
+
+      - name: Download and verify frozen ATLAs v2025.1 archive
+        run: |
+          curl -L --fail --retry 5 --retry-delay 5 --connect-timeout 30 -o atlas-data-v2025.1.zip "$ATLAS_URL"
+          echo "$EXPECTED_ATLAS_MD5  atlas-data-v2025.1.zip" | md5sum -c -
+          sha256sum atlas-data-v2025.1.zip
+          unzip -t atlas-data-v2025.1.zip >/dev/null
+
+      - name: Record execution provenance before analysis
+        run: |
+          mkdir -p results
+          {
+            echo '# Phase-II ATLAs execution provenance'
+            echo
+            echo "- GitHub repository: $GITHUB_REPOSITORY"
+            echo "- execution branch: $GITHUB_REF_NAME"
+            echo "- execution commit: $GITHUB_SHA"
+            echo "- workflow run id: $GITHUB_RUN_ID"
+            echo "- workflow run attempt: $GITHUB_RUN_ATTEMPT"
+            echo "- runner OS: $RUNNER_OS"
+            echo "- protocol SHA-256: 8a3fd33cee0f7fefcae911d825a68c3540d4f83dacc6c4030d80e24fb266e43d"
+            echo "- frozen script SHA-256: $EXPECTED_SCRIPT_SHA256"
+            echo "- R3 immutable baseline SHA-256: bb1a735084ff31c8b33460248087c0e30a1d4b583800a840bbaeb83bc9c6b3b4"
+            echo "- ATLAs Zenodo release: v2025.1 / DOI 10.5281/zenodo.15227808"
+            echo "- ATLAs expected archive MD5: $EXPECTED_ATLAS_MD5"
+            echo "- ATLAs archive SHA-256: $(sha256sum atlas-data-v2025.1.zip | awk '{print $1}')"
+            echo "- Python: $(python --version 2>&1)"
+            python - <<'PY'
+          import numpy, pandas
+          print('- numpy:', numpy.__version__)
+          print('- pandas:', pandas.__version__)
+          PY
+          } > results/RUN_PROVENANCE.md
+          cp phase2_max_value/FREEZE_RECORD.md results/FREEZE_RECORD.md
+          cp phase2_atlas_deep_replication.py results/phase2_atlas_deep_replication.py
+
+      - name: Execute frozen Phase-II analysis once
+        run: |
+          set -o pipefail
+          python phase2_atlas_deep_replication.py \
+            --archive atlas-data-v2025.1.zip \
+            --outdir results 2>&1 | tee results/runner_stdout.txt
+
+      - name: Seal result checksums
+        if: always()
+        run: |
+          if [ -d results ]; then
+            (cd results && find . -maxdepth 1 -type f ! -name SHA256SUMS.txt -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS.txt)
+            python -m pip freeze > results/PIP_FREEZE.txt
+            (cd results && zip -9 -r ../phase2-atlas-results.zip .)
+            sha256sum phase2-atlas-results.zip
+          fi
+
+      - name: Upload sealed Phase-II results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase2-atlas-results
+          path: phase2-atlas-results.zip
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0
