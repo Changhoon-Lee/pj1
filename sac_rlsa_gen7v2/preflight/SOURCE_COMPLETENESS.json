@@ -1,0 +1,11 @@
+{
+  "schema": "SAC_GEN7_DIRECT_SOURCE_COMPLETENESS_V2",
+  "qualification_class": "LOCAL_PREPUBLICATION_DIRECT_SOURCE_CHECK; CI regenerates source-specific hashes",
+  "all_required_direct_sources_present": true,
+  "required_file_count": 23,
+  "forbidden_transport_artifacts": [],
+  "base64_bundle_removed": true,
+  "chunk_materializer_removed": true,
+  "source_bundle_removed": true,
+  "pass": true
+}

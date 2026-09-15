@@ -1,0 +1,18 @@
+{
+  "schema": "SAC_GEN7_HISTORY_DRY_RUN_CONFIG_V2",
+  "evidence_role": "HISTORY_ONLY_NO_PROSPECTIVE_CREDIT",
+  "history_seeds": [42, 73],
+  "population_each": 2500000,
+  "target_ids": ["GEN7_HISTORY_SEED42", "GEN7_HISTORY_SEED73"],
+  "public_salt": "SAC_GEN7_V2_HISTORY_DRY_RUN_FIXED_SALT",
+  "risk_limit": 0.01,
+  "warmups": 2,
+  "measured_runs": 7,
+  "job_timeout_minutes": 180,
+  "artifact_retention_days": 14,
+  "disk_budget_bytes": 3000000000,
+  "artifact_upload_budget_bytes": 1500000000,
+  "memory_budget_bytes": 12000000000,
+  "target_seeds_forbidden": [2168, 912],
+  "prospective_target_execution_authorized": false
+}

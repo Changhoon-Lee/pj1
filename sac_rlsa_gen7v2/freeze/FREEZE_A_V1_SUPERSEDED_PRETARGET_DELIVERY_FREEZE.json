@@ -1,0 +1,33 @@
+{
+  "schema": "SAC_GEN7_FREEZE_A_V1_PROTECTED_PROJECTION",
+  "historical_full_freeze_sha256": "54c45f4348920eaa69397cfe680071d9d4897e5ad1abe71cb0e55ac152f5e4e1",
+  "status": "SUPERSEDED_PRETARGET_DELIVERY_FREEZE",
+  "projection_scope": "Only fields used by the automated scientific-rule diff; the immutable prior Gen7 ZIP remains the full authority.",
+  "workflow": {"target_units": 2500000},
+  "risk": {"limit": 0.01, "freeze_c": "uniform without replacement from public Freeze-A commit and Freeze-B digest"},
+  "loss_semantics": {
+    "formula": "logaddexp(0,raw)-y01*raw",
+    "label_mapping": "y01=1 iff y>0",
+    "nan_inf": "FAIL_CLOSED",
+    "per_unit_adverse_cap": "strict_loss_upper - reported_loss_i",
+    "probability_clipping": "NONE",
+    "strict_upper_bound": "raw interval nextafter-outward at every term/sum; Decimal-120 endpoint softplus; final binary64 nextafter(+inf)"
+  },
+  "tree_semantics": {
+    "accumulation": "ordered binary64 multiply then ordered binary64 add",
+    "comparison": "binary32(x_j) <= stored binary64 threshold",
+    "feature_cast": "IEEE-754 binary32 round-to-nearest-even before every split",
+    "fma": "disabled",
+    "rounding_mode": "FE_TONEAREST"
+  },
+  "canonical_truth": {
+    "authority": "REFERENCE_DECIMAL_40DP_FROM_STRICT_BINARY64_RAW",
+    "loss": "Python Decimal context precision 80, Decimal.from_float(raw), fixed 40 decimal places ROUND_HALF_EVEN",
+    "strict_raw": "C++20, FMA disabled, FE_TONEAREST, exact binary64 raw bytes must match Ubuntu/macOS",
+    "cross_platform_gate": ["same target bytes", "same strict raw SHA-256", "same canonical decimal-loss SHA-256", "same canonical mean string", "same decision"]
+  },
+  "cost_rule": {"cost_rule_digest": "28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e"},
+  "strongest_b7": {"definition": "platform-specific minimum external wall median across strict C++ 1-thread, strict C++ 4-thread, and vectorized scikit-learn full evaluation", "complete_portfolio_required_on": ["ubuntu-latest x86_64", "macos-14 arm64"], "cache_reuse": "inadmissible for first untouched validation"},
+  "hard_gates": {"median_speedup_vs_platform_b7": ">=30x each target/platform", "conservative_speedup": ">=10x each target/platform", "pretruth_theory_class": "30X_CERTIFIED 2/2"},
+  "consumed_target_seeds": [2168, 912]
+}

@@ -1,0 +1,413 @@
+name: Build PCS CFSC SAC split handoff
+
+on:
+  push:
+    branches: [pcs-cfsc-sac-handoff-split-v1]
+    paths: [handoff_split/BUILD_TRIGGER.json]
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pcs-cfsc-sac-handoff-split-v1
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: sac-gen7-v2-target-bytes
+          path: target_artifact
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: '30814530108'
+
+      - name: Build small independent ZIP volumes
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import hashlib, json, os, shutil, stat, textwrap, zipfile
+          from pathlib import Path
+
+          root = Path.cwd()
+          out = root / 'handoff_output'
+          stage = root / 'handoff_stage'
+          shutil.rmtree(out, ignore_errors=True)
+          shutil.rmtree(stage, ignore_errors=True)
+          out.mkdir()
+          stage.mkdir()
+
+          project = stage / 'PCS_CFSC_SAC_NATURE_PATH_HANDOFF_CORE_GEN7_V2R2'
+          (project / '00_START_HERE').mkdir(parents=True)
+          (project / '01_EXECUTIVE_HANDOFF').mkdir()
+          (project / '02_EXTREME_HARSH_RED_TEAM').mkdir()
+          (project / '03_CURRENT_GEN7_EVIDENCE').mkdir()
+          (project / '04_NEXT_GENERATION').mkdir()
+          (project / '05_INTEGRITY').mkdir()
+
+          new_chat = '''ZIP을 풀고 00_START_HERE/NEW_CHAT_FIRST_MESSAGE.txt를 최상위 권위 지시로 사용하세요.
+
+먼저 05_INTEGRITY/VERIFY_CORE.py를 실행하고 결과를 보고하세요.
+그 뒤 MASTER_HANDOFF.md, 01_EXECUTIVE_HANDOFF/PROJECT_TIMELINE.md,
+02_EXTREME_HARSH_RED_TEAM/EXTREME_HARSH_RED_TEAM_AUDIT.md를 읽으세요.
+
+현행 권위 결과는 Gen7 V2R2의 restricted-scope prospective public-source-bound crossover입니다.
+추가 seed 복제나 같은 workflow 반복은 금지합니다. 다음 연구는 실제 decision-bearing scientific workflow와 외부 독립 재현을 요구하는 Gen8이어야 합니다.
+
+선택적 evidence volume은 CORE를 읽은 뒤 필요할 때만 추가 업로드하세요.
+'''
+          (project/'00_START_HERE'/'NEW_CHAT_FIRST_MESSAGE.txt').write_text(new_chat, encoding='utf-8')
+
+          master = '''# MASTER HANDOFF — PCS → CFSC → SAC-RLSA
+
+## 현재 권위 결과
+
+`SAC_RLSA_30X_THEORY_CERTIFIED_PUBLIC_SOURCE_BOUND_WORKFLOW_CROSSOVER_ESTABLISHED`
+
+범위는 `PUBLIC_SOURCE_BOUND_SCALED_SHADOW_REGRESSION`으로 제한한다.
+두 untouched targets는 full truth 전에 30X_CERTIFIED로 동결됐고, Ubuntu x86-64와 macOS arm64에서 canonical strict-C++ raw truth, Decimal-40 truth, same target bytes, same report digest, same decision, complete platform-specific B7를 통과했다.
+
+## 절대 금지 claim
+
+- 모든 계산과학에서 30×
+- 실제 기관 lifecycle 30×
+- 외부 독립 연구팀 재현 완료
+- 실제 decision-bearing science에서 확립
+- Nature Computational Science 게재 준비 완료
+- 개별 RLA, hypergraph, LP, KL 개념 자체의 최초 발명
+
+## 가장 중요한 다음 단계
+
+같은 scikit-learn seed/target을 늘리지 않는다. Gen8은 최소 2개 scientific domain의 실제 decision-bearing workflow, official policy owner, independent B10, external independent team, lifecycle ledger, 사전 phase prediction과 negative regime을 요구한다.
+
+## 증거 우선순위
+
+1. Public Git commit `2e57eb2c7b0215ed7e59ee4338c730bf88aa9577`
+2. CORE 내부 current Gen7 evidence snapshot
+3. optional current-source/public-evidence volume
+4. optional historical-report volume
+5. optional target-byte volumes
+
+Stale local summary나 존재하지 않는 commit을 가리키는 과거 M5 kit는 권위가 아니다.
+'''
+          (project/'MASTER_HANDOFF.md').write_text(master, encoding='utf-8')
+
+          executive = '''# Executive Summary
+
+프로젝트는 세 번 연구 객체를 바꿨다.
+
+1. **PCS:** proof/certificate wrapper가 계산 자체를 빠르게 하지 못하며, semantic factoring·passport·compiler 계열은 strongest native/manual/generic baseline에서 parity 또는 loss였다.
+2. **CFSC:** verifier는 빠를 수 있으나 prover overhead, 실제 demand, predictor generalization, statement truth validation과 strongest B10 때문에 generic wrapper 경로가 닫혔다.
+3. **SAC-RLSA:** 모든 output을 증명하는 대신 최종 scientific decision을 뒤집는 discrepancy만 risk-limit 아래 독립 감사하는 문제로 전환했다. Gen3–4에서 action-hypergraph/decision-flip-support phase theory를 만들고, Gen5–6 실패를 거쳐 Gen7 V2R2에서 restricted prospective crossover를 달성했다.
+
+가장 중요한 과학적 명제 후보는 다음이다.
+
+> Scientific assurance cost is governed by the action hypergraph of decision-flipping discrepancies. In support-complete symmetric classes, q_D = Theta(N^gamma) implies optimal audit speedup Theta(N^gamma); in general, fractional action-cover duality, correlation geometry, noisy survival and information-per-cost govern the phase.
+
+그러나 현재 empirical support는 한 workflow family와 두 targets뿐이다.
+'''
+          (project/'01_EXECUTIVE_HANDOFF'/'EXECUTIVE_SUMMARY.md').write_text(executive, encoding='utf-8')
+
+          timeline = '''# Project Timeline
+
+## PCS
+- Same-algorithm-plus-proof dominance: proof overhead cannot beat the same proofless plan.
+- Materials obligation factoring: supported non-native cross-property relation 0; branch killed.
+- Evidence passport: buildable but generic typed/provenance/policy architecture parity.
+- VSSC/EMCS/PSKIR: contract re-encoding, source-binding TCB, typed/translation/modular baseline parity or loss.
+- CCAS: useful attribution discipline, but not itself an operational breakthrough.
+
+## CFSC
+- Verifier asymmetry exists in selected exact kernels.
+- Fused prover overhead did not meet the needed producer economics broadly.
+- Checkability predictor failed prospective generalization.
+- Expected-statement binding was necessary but not sufficient: a resealed false witness was accepted.
+- Sound witness reconstruction moved capability back to native/B10, which won 21/21 evaluable workflows.
+
+## SAC-RLSA
+- Gen1: restricted finite-population theory; primary efficiency failed under broad influence bounds.
+- Gen2: operational joint-evidence package not found; no target audit authorized.
+- Gen3: decision-flip support and action-hypergraph phase theory; finite 10×/30× witness families.
+- Gen4: exact integral classes, support-complete logarithmic tightness, noisy LP and sequential information lower bound.
+- Gen5: first prospective signal, but float32 tree semantics failure; authoritative negative.
+- Gen6: two new local/cross-platform >30× signals, but canonical digest, report binding, strict bound and complete B7 defects prevented exact confirmation.
+- Gen7 V2R2: corrected non-self-referential authority, history-only platform qualification, single-use target chronology, public Freeze A/B/C, selected-before-full, exact canonical truth and complete B7; restricted positive established.
+'''
+          (project/'01_EXECUTIVE_HANDOFF'/'PROJECT_TIMELINE.md').write_text(timeline, encoding='utf-8')
+
+          redteam = '''# Extreme Harsh Red Team Audit
+
+## Survived
+- Policy/semantics frozen before report.
+- Theory class and audit size frozen before full truth.
+- Selected audit completed before full truth.
+- Same target bytes and report digests across platforms.
+- Strict independent C++ raw truth exact across platforms.
+- Decimal precision-80, 40-decimal ROUND_HALF_EVEN canonical truth exact across platforms.
+- Complete B7 portfolio on Ubuntu and macOS.
+- Two targets: all platform median speedups >=30× and conservative p05/p95 ratios >=10×.
+- Package-native sklearn raw-bit differences on macOS were recorded and kept diagnostic; scientific truth authority remained independent strict C++ + Decimal-40.
+
+## Still open / publication blockers
+1. Targets=2, workflow family=1, domain=1.
+2. Public-source-bound scaled shadow regression is not a live external scientific decision.
+3. Both platform executions were managed GitHub CI, not an independent external research team.
+4. Computational audit-stage speedup is not complete institutional lifecycle speedup.
+5. Canonical Decimal-40 adjudication cost was separated from operational denominator; a lifecycle paper must cost it explicitly.
+6. Per-target risk is about 1%; a joint two-target family-wise 1% claim was not established.
+7. Broad novelty must be defended against RLA, finite-population testing, hypergraph cover, LP duality, active testing and sequential information literature.
+8. The source-bound workflow is a scaled shadow of an official regression, not an official release decision.
+9. Actual scientific impact and changed research throughput remain unmeasured.
+10. External policy owner, adoption and maintenance/migration evidence remain absent.
+
+## Nature editorial verdict
+`SERIOUS_RESTRICTED_SCOPE_CANDIDATE`, not submission-ready. The sharpest next paper path is theory + one real decision-bearing workflow + prospective negative control + external replication, not more seeds in the same benchmark.
+'''
+          (project/'02_EXTREME_HARSH_RED_TEAM'/'EXTREME_HARSH_RED_TEAM_AUDIT.md').write_text(redteam, encoding='utf-8')
+
+          claims = {
+            'authoritative_verdict': 'SAC_RLSA_30X_THEORY_CERTIFIED_PUBLIC_SOURCE_BOUND_WORKFLOW_CROSSOVER_ESTABLISHED',
+            'evidence_scope': 'PUBLIC_SOURCE_BOUND_SCALED_SHADOW_REGRESSION',
+            'public_final_commit': '2e57eb2c7b0215ed7e59ee4338c730bf88aa9577',
+            'targets': [884503672, 756621450],
+            'pretruth_30x_certified': '2/2',
+            'cross_platform_canonical_truth': 'ESTABLISHED',
+            'complete_b7': 'ESTABLISHED',
+            'external_independent_team': 'NOT_ESTABLISHED',
+            'institutional_lifecycle': 'NOT_ESTABLISHED',
+            'nature_readiness': 'SERIOUS_RESTRICTED_SCOPE_CANDIDATE_NOT_SUBMISSION_READY'
+          }
+          (project/'CLAIM_LEDGER.json').write_text(json.dumps(claims, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+
+          gen8 = '''# Gen8 Nature Path Blueprint
+
+Do not add more seeds to the same workflow.
+
+Minimum design:
+- actual decision-bearing scientific workflows >=3
+- scientific domains >=2
+- external official policy owner >=1 per workflow
+- independent B10 truth path
+- theory-certified positive regime >=1
+- preregistered fragile/impossible regime >=1
+- external independent team >=1
+- public pretruth Freeze A/B/C
+- complete computational and engineering lifecycle ledger
+- critical false certification =0
+- decision agreement with full truth =100%
+- positive workflow median >=10×, conservative >=3×; flagship >=30× target
+- fragile workflow correctly escalates toward full audit
+
+The main scientific test is predictive phase validity across structurally different workflows, not a third target from the current source-bound regression.
+'''
+          (project/'04_NEXT_GENERATION'/'GEN8_NATURE_PATH_BLUEPRINT.md').write_text(gen8, encoding='utf-8')
+
+          # Copy current public evidence, fail if the key files are absent.
+          key_paths = [
+            'sac_rlsa_gen7v2/freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json',
+            'sac_rlsa_gen7v2/freeze/FREEZE_BC_BUNDLE_V2.json',
+            'sac_rlsa_gen7v2/public_results/SELECTED_AGGREGATE.json',
+            'sac_rlsa_gen7v2/public_results/CROSS_PLATFORM_FINAL_SUMMARY.json',
+            'sac_rlsa_gen7v2/state/STATE_0.json',
+            'sac_rlsa_gen7v2/state/STATE_1.json',
+            'sac_rlsa_gen7v2/state/STATE_2.json',
+            'sac_rlsa_gen7v2/state/STATE_3.json',
+            'sac_rlsa_gen7v2/state/STATE_4.json',
+            'sac_rlsa_gen7v2/state/STATE_5.json',
+            'sac_rlsa_gen7v2/state/STATE_6.json',
+            'sac_rlsa_gen7v2/public_records/target_reports/GEN7V2R2_UNTOUCHED_SEED884503672.SCIENTIFIC_TARGET_REPORT.json',
+            'sac_rlsa_gen7v2/public_records/target_reports/GEN7V2R2_UNTOUCHED_SEED756621450.SCIENTIFIC_TARGET_REPORT.json',
+          ]
+          for rel in key_paths:
+            src = root / rel
+            if not src.exists():
+              raise SystemExit(f'missing authoritative file: {rel}')
+            dst = project / '03_CURRENT_GEN7_EVIDENCE' / rel.replace('/', '__')
+            shutil.copy2(src, dst)
+
+          verify_py = '''#!/usr/bin/env python3
+import hashlib, json
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+manifest=root/'05_INTEGRITY'/'MANIFEST.sha256'
+fail=[]
+for line in manifest.read_text().splitlines():
+    h, rel=line.split('  ',1)
+    p=root/rel
+    if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest()!=h:
+        fail.append(rel)
+print(json.dumps({'pass':not fail,'failures':fail,'checks':len(manifest.read_text().splitlines())},indent=2))
+raise SystemExit(1 if fail else 0)
+'''
+          (project/'05_INTEGRITY'/'VERIFY_CORE.py').write_text(verify_py, encoding='utf-8')
+          os.chmod(project/'05_INTEGRITY'/'VERIFY_CORE.py', 0o755)
+
+          # Manifest, excluding the manifest itself.
+          lines=[]
+          for p in sorted(project.rglob('*')):
+            if p.is_file() and p.name != 'MANIFEST.sha256':
+              rel=p.relative_to(project).as_posix()
+              lines.append(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+rel)
+          (project/'05_INTEGRITY'/'MANIFEST.sha256').write_text('\n'.join(lines)+'\n', encoding='utf-8')
+
+          def deterministic_zip(src: Path, dst: Path):
+            with zipfile.ZipFile(dst,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+              for p in sorted(src.rglob('*')):
+                if not p.is_file(): continue
+                arc=p.relative_to(src.parent).as_posix()
+                info=zipfile.ZipInfo(arc, date_time=(2026,8,4,0,0,0))
+                info.compress_type=zipfile.ZIP_DEFLATED
+                info.external_attr=(0o755 if os.access(p,os.X_OK) else 0o644)<<16
+                z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=6)
+
+          deterministic_zip(project, out/'01_CORE_HANDOFF.zip')
+
+          # Current source and public evidence volume.
+          source_stage=stage/'CURRENT_SOURCE_AND_PUBLIC_EVIDENCE'
+          shutil.copytree(root/'sac_rlsa_gen7v2', source_stage/'sac_rlsa_gen7v2')
+          workflows=source_stage/'.github'/'workflows'; workflows.mkdir(parents=True)
+          for p in (root/'.github'/'workflows').glob('*gen7*'):
+            if p.is_file(): shutil.copy2(p, workflows/p.name)
+          deterministic_zip(source_stage, out/'02_CURRENT_SOURCE_AND_PUBLIC_EVIDENCE.zip')
+
+          # Historical reports from the repository, preserving paths.
+          hist=stage/'HISTORICAL_REPORTS'
+          hist.mkdir()
+          names={'FINAL_STATUS.txt','MASTER_HANDOFF.md','THEORY.md','PROOFS.md','CLAIM_LEDGER.md','NATURE_READINESS.md','AUTHORITATIVE_BOUNDARIES.md','RESULTS_REPORT.md'}
+          count=0
+          for p in sorted(root.rglob('*')):
+            if '.git' in p.parts or not p.is_file() or p.name not in names: continue
+            rel=p.relative_to(root)
+            dst=hist/rel
+            dst.parent.mkdir(parents=True,exist_ok=True)
+            shutil.copy2(p,dst); count+=1
+          (hist/'HISTORICAL_REPORT_INDEX.json').write_text(json.dumps({'files':count,'source':'current public repository tree; not a byte-complete copy of expired chat-session artifacts'},indent=2)+'\n')
+          deterministic_zip(hist, out/'03_HISTORICAL_REPORTS.zip')
+
+          # Deterministic target artifact ZIP, then 60 MiB binary pieces wrapped as small ZIPs.
+          target_root=root/'target_artifact'
+          if not target_root.exists(): raise SystemExit('downloaded target artifact missing')
+          target_zip=stage/'GEN7_V2R2_TARGET_BYTES_REPACKED.zip'
+          with zipfile.ZipFile(target_zip,'w',compression=zipfile.ZIP_STORED) as z:
+            for p in sorted(target_root.rglob('*')):
+              if not p.is_file(): continue
+              info=zipfile.ZipInfo(p.relative_to(target_root).as_posix(),date_time=(2026,8,4,0,0,0))
+              info.compress_type=zipfile.ZIP_STORED; info.external_attr=0o644<<16
+              z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_STORED)
+          whole_sha=hashlib.sha256(target_zip.read_bytes()).hexdigest()
+          piece_size=60*1024*1024
+          data=target_zip.read_bytes()
+          pieces=[data[i:i+piece_size] for i in range(0,len(data),piece_size)]
+          if len(pieces)>8: raise SystemExit(f'unexpected target volume count {len(pieces)}')
+          for i,piece in enumerate(pieces,1):
+            name=f'04_TARGET_EVIDENCE_VOL{i:02d}.zip'
+            with zipfile.ZipFile(out/name,'w',compression=zipfile.ZIP_STORED) as z:
+              part_name=f'GEN7_TARGET_BYTES.part{i:02d}'
+              info=zipfile.ZipInfo(part_name,date_time=(2026,8,4,0,0,0)); info.compress_type=zipfile.ZIP_STORED; info.external_attr=0o644<<16
+              z.writestr(info,piece,compress_type=zipfile.ZIP_STORED)
+              meta={'volume':i,'total_volumes':len(pieces),'part_name':part_name,'part_sha256':hashlib.sha256(piece).hexdigest(),'reassembled_zip_sha256':whole_sha,'reassembled_zip_bytes':len(data)}
+              z.writestr('VOLUME_INFO.json',json.dumps(meta,indent=2,sort_keys=True)+'\n')
+          # Fill absent static volume names so upload steps remain deterministic.
+          for i in range(len(pieces)+1,9):
+            name=f'04_TARGET_EVIDENCE_VOL{i:02d}.zip'
+            with zipfile.ZipFile(out/name,'w',compression=zipfile.ZIP_DEFLATED) as z:
+              z.writestr('UNUSED_VOLUME.txt','This volume is intentionally unused.\n')
+
+          reassemble='''#!/bin/sh
+set -eu
+rm -f GEN7_V2R2_TARGET_BYTES_REPACKED.zip
+for z in 04_TARGET_EVIDENCE_VOL*.zip; do
+  unzip -oq "$z" -d .target_parts
+ done
+cat .target_parts/GEN7_TARGET_BYTES.part* > GEN7_V2R2_TARGET_BYTES_REPACKED.zip
+sha256sum GEN7_V2R2_TARGET_BYTES_REPACKED.zip
+'''
+          (out/'REASSEMBLE_TARGET_EVIDENCE.sh').write_text(reassemble)
+          os.chmod(out/'REASSEMBLE_TARGET_EVIDENCE.sh',0o755)
+          summary={'core_required_only':True,'optional_volumes':['02_CURRENT_SOURCE_AND_PUBLIC_EVIDENCE.zip','03_HISTORICAL_REPORTS.zip'],'target_volume_count':len(pieces),'target_reassembled_sha256':whole_sha,'target_reassembled_bytes':len(data),'public_final_commit':'2e57eb2c7b0215ed7e59ee4338c730bf88aa9577'}
+          (out/'VOLUME_INDEX.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
+          sha_lines=[]
+          for p in sorted(out.iterdir()):
+            if p.is_file() and p.name!='ALL_FILES_SHA256.txt': sha_lines.append(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name)
+          (out/'ALL_FILES_SHA256.txt').write_text('\n'.join(sha_lines)+'\n')
+          print(json.dumps({'outputs':[{ 'name':p.name,'bytes':p.stat().st_size} for p in sorted(out.iterdir())]},indent=2))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-01-CORE
+          path: |
+            handoff_output/01_CORE_HANDOFF.zip
+            handoff_output/VOLUME_INDEX.json
+            handoff_output/ALL_FILES_SHA256.txt
+            handoff_output/REASSEMBLE_TARGET_EVIDENCE.sh
+          compression-level: 0
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-02-CURRENT-SOURCE
+          path: handoff_output/02_CURRENT_SOURCE_AND_PUBLIC_EVIDENCE.zip
+          compression-level: 0
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-03-HISTORY-REPORTS
+          path: handoff_output/03_HISTORICAL_REPORTS.zip
+          compression-level: 0
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL01
+          path: handoff_output/04_TARGET_EVIDENCE_VOL01.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL02
+          path: handoff_output/04_TARGET_EVIDENCE_VOL02.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL03
+          path: handoff_output/04_TARGET_EVIDENCE_VOL03.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL04
+          path: handoff_output/04_TARGET_EVIDENCE_VOL04.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL05
+          path: handoff_output/04_TARGET_EVIDENCE_VOL05.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL06
+          path: handoff_output/04_TARGET_EVIDENCE_VOL06.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL07
+          path: handoff_output/04_TARGET_EVIDENCE_VOL07.zip
+          compression-level: 0
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PCS-CFSC-SAC-HANDOFF-TARGET-VOL08
+          path: handoff_output/04_TARGET_EVIDENCE_VOL08.zip
+          compression-level: 0
+          retention-days: 30
