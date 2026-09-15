@@ -1,0 +1,106 @@
+{
+  "canonical_report_digest": "ab7b9ac9885f0e0e061bd2f2d9bd0d1a180df136ad7c36ac223f4355f7b61c84",
+  "canonical_truth": {
+    "authority_scope": "truth adjudication only; canonicalization cost excluded from B7 and RLSA denominator and reported separately",
+    "cross_platform_gate": "same target bytes, same strict raw SHA-256, same canonical decimal-loss SHA-256, same canonical mean string, same decision",
+    "decimal_places": 40,
+    "mode": "DECIMAL_REFERENCE_40DP_FROM_STRICT_BINARY64_RAW",
+    "python_decimal_context_precision": 80,
+    "raw_identity": "exact SHA-256 of strict binary64 B10 raw-score bytes",
+    "rounding": "ROUND_HALF_EVEN",
+    "serialization": "ASCII fixed point, trailing zeros retained, exponent forbidden, -0 normalized to 0, LF, original row order"
+  },
+  "evidence_role": "PROSPECTIVE_TARGET",
+  "files": {
+    "model_bin": {
+      "bytes": 26072,
+      "path": "GEN7V2R2_UNTOUCHED_SEED756621450.model.bin",
+      "sha256": "a22a702db88bccddccb9ed302b0cea6afc37c888eb7022872a6a8050b1cb80dd"
+    },
+    "model_pickle": {
+      "bytes": 79716,
+      "path": "GEN7V2R2_UNTOUCHED_SEED756621450.sklearn.pkl",
+      "sha256": "61fd7a83a9302d0f06bc8a9e0675268f2412bf995cfbc38913cce90733fd64fe"
+    },
+    "reported_loss": {
+      "bytes": 20000000,
+      "path": "GEN7V2R2_UNTOUCHED_SEED756621450.reported_loss.f64",
+      "sha256": "2a8d7dbc4f875cf4878d785f9eeb61158ca18a3fccdc47f969f8b4d2bbe443f9"
+    },
+    "reported_raw": {
+      "bytes": 20000000,
+      "path": "GEN7V2R2_UNTOUCHED_SEED756621450.reported_raw.f64",
+      "sha256": "7babeccf4db2da1b5401a379d676bba779b827fc6c0092b23ee26dec2d113062"
+    },
+    "x": {
+      "bytes": 200000000,
+      "path": "GEN7V2R2_UNTOUCHED_SEED756621450.X.f64",
+      "sha256": "8c07e2dc9406de7daf431f37a8e9853f4ee6788da6b4ba92eca787abd2eaf203"
+    },
+    "y": {
+      "bytes": 20000000,
+      "path": "GEN7V2R2_UNTOUCHED_SEED756621450.y.f64",
+      "sha256": "894d094f15d3e24e4917302eab0cf1fee8fa5bf4bc1ad6b0604d2e68cc2bacaa"
+    }
+  },
+  "model_bounds": {
+    "init_raw": 0.02400115209954306,
+    "loss_bound": {
+      "binary64_hex": "0x1.e5d6c649adb87p+3",
+      "binary64_strictly_above_reference": true,
+      "construction": "max(softplus_decimal(raw_max),softplus_decimal(-raw_min)); nextafter(+inf) until Decimal.from_float(bound)>reference",
+      "decimal_precision": 120,
+      "loss_upper_binary64": 15.182467597869403,
+      "reference_decimal_upper": "15.1824675978694014175531724920977928010030723734752666776931665920252735888254692867182466529635374650930817862171929572"
+    },
+    "loss_upper_binary64": 15.182467597869403,
+    "n_features": 10,
+    "n_trees": 100,
+    "raw_max": 15.182467342987994,
+    "raw_min": -1.4118623143459827,
+    "raw_rounding": "binary64 nextafter outward on init, each tree term, and each accumulation"
+  },
+  "numeric_tolerance": {
+    "canonical_decimal_vs_reported_loss_abs": 1.1e-10,
+    "interpretation": "the risk certificate subtracts N*tolerance from the reported decision margin; Decimal-40 canonical loss is the final cross-platform truth",
+    "producer_vs_independent_loss_abs": 1e-10,
+    "producer_vs_independent_raw_abs": 0.0,
+    "risk_margin_reserve_per_unit": 1.1e-10
+  },
+  "parameters": {
+    "learning_rate": 0.1,
+    "max_depth": 2,
+    "max_features": 2,
+    "min_samples_split": 5,
+    "n_estimators": 100
+  },
+  "policy": {
+    "decision": "PASS iff mean_loss < 0.5",
+    "formula": "logaddexp(0,raw)-y01*raw",
+    "label_mapping": "y01=1 iff make_hastie label >0",
+    "metric": "mean Bernoulli log loss from raw logits",
+    "probability_clipping": "NONE_AUTHORITATIVE_RAW_LOGIT_PATH",
+    "threshold": 0.5
+  },
+  "population": 2500000,
+  "reported_decision": true,
+  "reported_max_loss": 2.069013533491037,
+  "reported_mean_loss": 0.44452289957439534,
+  "reported_min_loss": 0.002813090736854207,
+  "schema": "SAC_GEN7_CANONICAL_SCIENTIFIC_REPORT_V3",
+  "seed": 756621450,
+  "software_semantics": {
+    "numpy": "2.3.5",
+    "python_major_minor": "3.13",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.0"
+  },
+  "target_id": "GEN7V2R2_UNTOUCHED_SEED756621450",
+  "target_truth_accessed": false,
+  "training_population": 2000,
+  "tree_semantics": {
+    "comparison": "binary32(x_feature) <= stored binary64 threshold",
+    "feature_input_cast": "IEEE-754 binary32 round-to-nearest-even before each split comparison",
+    "leaf_accumulation": "strict ordered binary64 multiply then binary64 add; FMA disabled"
+  }
+}

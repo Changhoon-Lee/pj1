@@ -1,0 +1,39 @@
+{
+  "authority": {
+    "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+    "history_qualification_digest": "52a57af7dbb456a86a7157513c6e3da1e689f8ddebb516f67194b4fcedc6ff3c",
+    "seed_rule_digest": "b5ec845fa72df62ea16838db23bce7978868be8fbe1d0da6da5a57bd7c07949f",
+    "state_0_digest": "69f181690940914deee2c54f8ed3aa29f83b685fda2d7afdad1c617f205f038e",
+    "target_reports_present": false,
+    "target_trigger_present": false,
+    "target_truth_accessed": false,
+    "untouched_seeds": [
+      884503672,
+      756621450
+    ]
+  },
+  "authority_receipt_digest": "316b42394c9ecd11b9f8f239e890869464fa9f6934ee1f7712c188d4019fdd1b",
+  "branch": "sac-rlsa-gen7-authoritative-v2",
+  "branch_invariant": "branch head must be this receipt commit or a descendant of c0_content_commit_sha",
+  "c0_commit_role": "self-reference-free corrected authority content tree",
+  "c0_content_commit_sha": "dd485518ea792d135f768759fe52814dd7ac1a9c",
+  "c0_content_set": {
+    "content_set_digest": "c1c281bbdde6427a33d3b1028ac692693e7a862283056df4718548bf8b47594a",
+    "git_blob_sha1": "64163861c5b3235bffa4ff8bb94cbd04cafd75bf",
+    "path": "sac_rlsa_gen7v2/authority/C0_CONTENT_SET.json",
+    "sha256": "d55864a44f1c504b10689f045373af9ef978e3f53f9e9453148030b838093047"
+  },
+  "digest_method": "SHA256(canonical JSON excluding authority_receipt_digest)",
+  "prior_false_references": {
+    "nonexistent_commit_64dcd25bde7482bd414ac735fc50bb4c1c2dd809": "REVOKED",
+    "uncommitted_freeze_digest_84de18e7dec2761b16371084276a62beac5bfed235449dc70e5e289835cece1c": "REVOKED",
+    "uncommitted_seed_pair_1101247622_1043729700": "RETIRED_WITHOUT_TARGET_EXECUTION"
+  },
+  "pull_request": 18,
+  "repository": "Changhoon-Lee/pj1",
+  "schema": "SAC_GEN7_V2R2_PUBLIC_GIT_AUTHORITY_RECEIPT_V1",
+  "self_reference_policy": {
+    "C0": "content files only; no C0 SHA embedded",
+    "C1": "this receipt binds C0 SHA; C1 SHA is resolved from Git branch head/PR metadata and is not embedded in itself"
+  }
+}

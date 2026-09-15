@@ -1,0 +1,46 @@
+{
+  "authority_c0_commit": "dd485518ea792d135f768759fe52814dd7ac1a9c",
+  "authority_c1_commit": "c58c53fe6ef9ab77864916c92e9591bed23b9e8a",
+  "delivery_only_resume": true,
+  "expected_freeze_bc_bundle_sha256": "64b47b57af6ffc37e1c98e29bb9cc77f167a48d96edadd368c17b9c94ebf0f83",
+  "expected_records": {
+    "756621450": {
+      "freeze_b_sha256": "99e13cf64fd755e22e7717f79e1521ef70f86d592f0ccf34a2b7873f53eaebcf",
+      "freeze_c_sha256": "ee25974ad785282fac8257aed597ef38dd4f07f43e23821b8d9ab33c9511e4de",
+      "indices_sha256": "0d088a497cd67728e16fd32688d67f84fb24da2b02ef94eefae37962b0585cb8",
+      "predicted_speedup_lower": 64.64591138261659,
+      "risk_bound": 0.009976128150257509,
+      "sample_size": 1256,
+      "target_truth_accessed": false,
+      "theory_class": "30X_CERTIFIED"
+    },
+    "884503672": {
+      "freeze_b_sha256": "8d813d3b39431483b917f56d78cf5bdce2b13da40e1c18c08b05abb01c458506",
+      "freeze_c_sha256": "ea8fe55fec66bcd864637a38ce17701557e5ec75782ba39e3bdd7bf6d18523d2",
+      "indices_sha256": "4dbe70f728df44cff2f525cce1fc4aed506ea0f7d6885db12ae60d8e122e410c",
+      "predicted_speedup_lower": 62.20150486440119,
+      "risk_bound": 0.009979446329875002,
+      "sample_size": 1347,
+      "target_truth_accessed": false,
+      "theory_class": "30X_CERTIFIED"
+    }
+  },
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "full_truth_accessed_before_resume": false,
+  "purpose": "Resume the consumed prospective campaign from public STATE_1 using the exact preserved target artifact; reporter rerun is forbidden",
+  "reporter_rerun_forbidden": true,
+  "resume_trigger_digest": "25308ce95eb17b22fb9a0740665f74a40df0557f19fa604f0af69cbd0d9a1333",
+  "schema": "SAC_GEN7_V2R2_RESUME_FROM_STATE1_TRIGGER_V1",
+  "scientific_rule_diff": 0,
+  "source_artifact_id": 8856162665,
+  "source_artifact_name": "sac-gen7-v2-target-bytes",
+  "source_artifact_zip_sha256": "f8022ab51391b0f42e3f2ab15724bfe4d0229170482272092d72741d988c379b",
+  "source_run_id": 30814530108,
+  "state1_commit": "4df897ced97285e19ac467b8f2d11a9a7450c6a4",
+  "state1_digest": "f5e5fba6158958487ee2dc86cbdaef6ff930723835d47f0cee8af033ebccddf4",
+  "target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
+  "target_seeds": [
+    884503672,
+    756621450
+  ]
+}

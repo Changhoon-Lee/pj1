@@ -1,0 +1,34 @@
+{
+  "audit_randomness_public_salt": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "freeze_bc_bundle_sha256": "64b47b57af6ffc37e1c98e29bb9cc77f167a48d96edadd368c17b9c94ebf0f83",
+  "records": [
+    {
+      "freeze_b_sha256": "8d813d3b39431483b917f56d78cf5bdce2b13da40e1c18c08b05abb01c458506",
+      "freeze_c_sha256": "ea8fe55fec66bcd864637a38ce17701557e5ec75782ba39e3bdd7bf6d18523d2",
+      "indices_sha256": "4dbe70f728df44cff2f525cce1fc4aed506ea0f7d6885db12ae60d8e122e410c",
+      "predicted_speedup_lower": 62.20150486440119,
+      "risk_bound": 0.009979446329875002,
+      "sample_size": 1347,
+      "seed": 884503672,
+      "target_id": "GEN7V2R2_UNTOUCHED_SEED884503672",
+      "target_truth_accessed": false,
+      "theory_class": "30X_CERTIFIED"
+    },
+    {
+      "freeze_b_sha256": "99e13cf64fd755e22e7717f79e1521ef70f86d592f0ccf34a2b7873f53eaebcf",
+      "freeze_c_sha256": "ee25974ad785282fac8257aed597ef38dd4f07f43e23821b8d9ab33c9511e4de",
+      "indices_sha256": "0d088a497cd67728e16fd32688d67f84fb24da2b02ef94eefae37962b0585cb8",
+      "predicted_speedup_lower": 64.64591138261659,
+      "risk_bound": 0.009976128150257509,
+      "sample_size": 1256,
+      "seed": 756621450,
+      "target_id": "GEN7V2R2_UNTOUCHED_SEED756621450",
+      "target_truth_accessed": false,
+      "theory_class": "30X_CERTIFIED"
+    }
+  ],
+  "risk_alpha": 0.01,
+  "schema": "SAC_GEN7_PUBLIC_FREEZE_BC_BUNDLE_V2",
+  "target_truth_accessed": false
+}

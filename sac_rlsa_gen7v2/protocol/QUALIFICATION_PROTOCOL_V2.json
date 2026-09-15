@@ -1,0 +1,68 @@
+{
+  "schema": "SAC_GEN7_QUALIFICATION_PROTOCOL_V2",
+  "status": "PRETARGET_HISTORY_ONLY_REPAIR",
+  "authoritative_scope": "Gen7 V2 history qualification and all later prospective target runs",
+  "canonical_truth_oracle": {
+    "role": "scientific_adjudication_truth",
+    "implementation": "strict independent C++ tree evaluator plus Decimal-40 canonical loss",
+    "requirements": [
+      "IEEE-754 binary32 tree inputs and binary64 thresholds",
+      "FE_TONEAREST",
+      "-fno-fast-math",
+      "-ffp-contract=off",
+      "ordered binary64 multiply then add",
+      "strict C++ 1-thread and 4-thread raw digests identical",
+      "reported per-unit loss within frozen tolerance",
+      "strict upward-rounded loss bound",
+      "Decimal precision 80",
+      "ROUND_HALF_EVEN",
+      "fixed 40-decimal canonical serialization",
+      "Ubuntu and macOS strict-raw and Decimal-40 digests identical"
+    ]
+  },
+  "b7_comparator": {
+    "role": "strongest_deployable_full_audit_performance_denominator_only",
+    "frozen_portfolio": [
+      "independent C++ 1-thread",
+      "independent C++ 4-thread",
+      "package-native vectorized scikit-learn"
+    ],
+    "qualification": {
+      "all_modes": [
+        "same frozen target, model, policy and precision scope",
+        "loss within frozen producer-vs-independent tolerance",
+        "no strict loss-bound violation",
+        "same frozen Boolean decision"
+      ],
+      "strict_cpp_modes": [
+        "exact raw identity required"
+      ],
+      "package_native_sklearn": [
+        "raw-bit identity recorded as diagnostic only",
+        "raw-bit identity is not a canonical-truth qualification",
+        "frozen tolerance and decision equivalence are required"
+      ]
+    },
+    "denominator_rule": "fastest qualified frozen B7 mode on each platform"
+  },
+  "unchanged_scientific_rules": {
+    "population": 2500000,
+    "threshold": 0.5,
+    "risk_alpha": 0.01,
+    "loss": "logaddexp(0, raw) - y01*raw",
+    "loss_bound": "strict outward tree interval plus final upward nextafter",
+    "tree_semantics": "float32 feature comparison against frozen binary64 threshold; ordered binary64 accumulation",
+    "canonical_loss": "Decimal precision 80, ROUND_HALF_EVEN, 40 fractional digits",
+    "median_speedup_gate": 30,
+    "conservative_speedup_gate": 10,
+    "audit_randomness": "without replacement from frozen domain-separated Freeze-B digest and public salt"
+  },
+  "classification": {
+    "SCIENTIFIC_RULE_DIFF": 0,
+    "QUALIFICATION_PROTOCOL_DIFF": 1,
+    "reason": "pretarget correction of role conflation; no target identity, policy, risk, cost, truth, B7 membership or performance gate retuned"
+  },
+  "history_only": true,
+  "target_seeds_used": false,
+  "freeze_a_v2_authorized_before_history_pass": false
+}
