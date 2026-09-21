@@ -9,7 +9,7 @@ permissions:
 jobs:
   discover:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,79 +18,185 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch and audit public market files
+      - name: Deep public-data audit
         run: |
           python - <<'PY'
-          import csv, hashlib, io, json, os, sys, urllib.request, zipfile
-          from collections import Counter
+          import csv, hashlib, io, json, math, statistics, urllib.request, zipfile
+          from collections import Counter, defaultdict
           from pathlib import Path
           out=Path('r39_electricity'); out.mkdir(exist_ok=True)
           UA={'User-Agent':'Mozilla/5.0 R39-academic-research'}
-          def fetch(url):
+          def fetch(url, timeout=120):
               req=urllib.request.Request(url,headers=UA)
               try:
-                  with urllib.request.urlopen(req,timeout=60) as r:
+                  with urllib.request.urlopen(req,timeout=timeout) as r:
                       b=r.read()
-                      return {'ok':True,'status':getattr(r,'status',200),'content_type':r.headers.get('Content-Type'),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'body':b}
+                      return {'ok':True,'status':getattr(r,'status',200),'content_type':r.headers.get('Content-Type'),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'body':b,'url':url}
               except Exception as e:
                   return {'ok':False,'error':repr(e),'url':url}
-          results={}
-          urls={
-            'isone_rt':'https://www.iso-ne.com/static-transform/csv/histRpts/rt-import-export/hbrealtimeimpexp_20260531.csv',
-            'isone_da':'https://www.iso-ne.com/static-transform/csv/histRpts/da-import-export/hbdayaheadimpexp_20260531.csv',
-            'nyiso_tran':'https://mis.nyiso.com/public/csv/biddata/20250101biddata_tranbids_csv.zip',
-            'nyiso_extflows':'https://mis.nyiso.com/public/csv/ExternalLimitsFlows/currentExternalLimitsFlows.csv',
-          }
-          for key,url in urls.items():
-              f=fetch(url); meta={k:v for k,v in f.items() if k!='body'}; meta['url']=url
+          def first_ok(urls):
+              tries=[]
+              for u in urls:
+                  f=fetch(u); tries.append({k:v for k,v in f.items() if k!='body'})
+                  if f.get('ok'):
+                      f['tries']=tries; return f
+              return {'ok':False,'tries':tries,'url':urls[-1] if urls else None}
+          def clean(x):
+              return x.strip().strip('"').strip()
+          def flt(x):
+              try:return float(clean(x))
+              except:return None
+          def qs(vals):
+              a=sorted(v for v in vals if v is not None and math.isfinite(v))
+              if not a:return {'n':0}
+              def q(p):
+                  j=(len(a)-1)*p; lo=int(math.floor(j)); hi=int(math.ceil(j))
+                  return a[lo] if lo==hi else a[lo]*(hi-j)+a[hi]*(j-lo)
+              return {'n':len(a),'mean':sum(a)/len(a),'min':a[0],'p10':q(.1),'p25':q(.25),'median':q(.5),'p75':q(.75),'p90':q(.9),'max':a[-1]}
+          def rows_from_bytes(b):
+              return list(csv.reader(io.StringIO(b.decode('utf-8-sig',errors='replace'))))
+          res={}
+
+          # 1. NYISO May 2026 transaction-bid archive
+          f=fetch('https://mis.nyiso.com/public/csv/biddata/20260501biddata_tranbids_csv.zip',180)
+          m={k:v for k,v in f.items() if k!='body'}
+          if f.get('ok'):
+              z=zipfile.ZipFile(io.BytesIO(f['body'])); names=z.namelist(); m['zip_names']=names
+              nm=next(n for n in names if n.lower().endswith('.csv'))
+              rr=rows_from_bytes(z.read(nm)); hdr=[clean(x) for x in rr[0]]; data=[[clean(x) for x in r] for r in rr[1:] if r]
+              m['header']=hdr; m['rows']=len(data)
+              idx={h:i for i,h in enumerate(hdr)}
+              def val(r,c): return r[idx[c]] if c in idx and len(r)>idx[c] else ''
+              m['market_counts']=dict(Counter(val(r,'Market') for r in data))
+              m['bid_schedule_type_counts']=dict(Counter(val(r,'Bid Schd Type ID') for r in data))
+              m['control_area_pairs']=[[list(k),v] for k,v in Counter((val(r,'Sending Control Area'),val(r,'Receiving Control Area')) for r in data).most_common(30)]
+              cts=[r for r in data if val(r,'Market')=='HAM' and val(r,'Bid Schd Type ID') in {'4','5'}]
+              ne=[r for r in cts if {val(r,'Sending Control Area'),val(r,'Receiving Control Area')}=={'NYIS','ISNE'}]
+              m['cts_rows']=len(cts); m['nyis_isne_cts_rows']=len(ne)
+              m['nyis_isne_cts_unique_bidders']=len(set(val(r,'Masked Bidder ID') for r in ne))
+              m['nyis_isne_cts_unique_pse']=len(set(val(r,'Masked PSE') for r in ne))
+              m['nyis_isne_cts_schedule_types']=dict(Counter(val(r,'Bid Schd Type ID') for r in ne))
+              m['nyis_isne_cts_mw']=qs([flt(val(r,'Bid Energy MW')) for r in ne])
+              curve_prices=[]
+              for r in ne:
+                  for j in range(1,13):
+                      x=flt(val(r,f'Dispatch $/MW{j}'))
+                      if x is not None: curve_prices.append(x)
+              m['nyis_isne_cts_curve_prices']=qs(curve_prices)
+              m['nyis_isne_cts_first5']=[{h:val(r,h) for h in hdr if val(r,h)!=''} for r in ne[:5]]
+              # DA/HAM linkage by masked route/bidder and hour
+              def hourkey(r):
+                  dt=val(r,'Date Time')
+                  return (dt,val(r,'Masked Source ID'),val(r,'Masked Sink ID'),val(r,'Masked Bidder ID'),val(r,'Sending Control Area'),val(r,'Receiving Control Area'))
+              dam=defaultdict(list); ham=defaultdict(list)
+              for r in data:
+                  if val(r,'Market')=='DAM': dam[hourkey(r)].append(r)
+                  if val(r,'Market')=='HAM': ham[hourkey(r)].append(r)
+              overlap=set(dam)&set(ham)
+              m['dam_ham_linkage']={'dam_keys':len(dam),'ham_keys':len(ham),'overlap_keys':len(overlap),'overlap_share_ham':len(overlap)/len(ham) if ham else None}
+          res['nyiso_tran_may2026']=m
+
+          # 2. NYISO external RTO CTS projected prices - monthly archive/daily fallback
+          f=first_ok([
+              'https://mis.nyiso.com/public/csv/extrtoctsprice/20260501ext_rto_cts_price_csv.zip',
+              'https://mis.nyiso.com/public/csv/extrtoctsprice/20260531ext_rto_cts_price.csv',
+              'https://mis.nyiso.com/public/csv/extrtoctsprice/20260910ext_rto_cts_price.csv'])
+          m={k:v for k,v in f.items() if k not in ('body','tries')}; m['tries']=f.get('tries')
+          if f.get('ok'):
+              b=f['body']; files=[]
+              if zipfile.is_zipfile(io.BytesIO(b)):
+                  z=zipfile.ZipFile(io.BytesIO(b))
+                  for nm in z.namelist():
+                      if nm.lower().endswith('.csv'): files.append((nm,z.read(nm)))
+              else: files=[('direct.csv',b)]
+              allr=[]
+              for nm,bb in files:
+                  rr=rows_from_bytes(bb)
+                  if rr:
+                      h=[clean(x) for x in rr[0]]
+                      for r in rr[1:]: allr.append((h,[clean(x) for x in r]))
+              m['file_count']=len(files); m['rows']=len(allr)
+              if allr:
+                  h=allr[0][0]; m['header']=h; m['first10']=[r for _,r in allr[:10]]
+                  for j,col in enumerate(h[:15]):
+                      m['top_'+col]=Counter(r[j] if len(r)>j else '' for _,r in allr).most_common(12)
+          res['nyiso_cts_prices']=m
+
+          # 3. NYISO historical interface limits/flows May 2026
+          f=fetch('https://mis.nyiso.com/public/csv/ExternalLimitsFlows/20260501ExternalLimitsFlows_csv.zip',180)
+          m={k:v for k,v in f.items() if k!='body'}
+          if f.get('ok'):
+              z=zipfile.ZipFile(io.BytesIO(f['body'])); files=[n for n in z.namelist() if n.lower().endswith('.csv')]
+              rows=[]; hdr=None
+              for nm in files:
+                  rr=rows_from_bytes(z.read(nm))
+                  if rr:
+                      hdr=[clean(x) for x in rr[0]]
+                      rows += [[clean(x) for x in r] for r in rr[1:] if r]
+              m['file_count']=len(files);m['rows']=len(rows);m['header']=hdr
+              if hdr:
+                  idx={h:i for i,h in enumerate(hdr)}
+                  def v(r,c):return r[idx[c]] if c in idx and len(r)>idx[c] else ''
+                  m['interfaces']=Counter(v(r,'Interface Name') for r in rows).most_common(50)
+                  ner=[r for r in rows if 'NE' in v(r,'Interface Name').upper() or 'NPX' in v(r,'Interface Name').upper()]
+                  m['ne_like_rows']=len(ner);m['ne_like_first10']=ner[:10]
+                  m['ne_like_flow']=qs([flt(v(r,'Flow (MWH)')) for r in ner])
+          res['nyiso_extflows_may2026']=m
+
+          # 4. ISO-NE DA/RT transaction matching for May 31 and LMP discovery
+          def isone_bid(url):
+              f=fetch(url); mm={k:v for k,v in f.items() if k!='body'}; d=[]
               if f.get('ok'):
-                  b=f['body']
-                  if key.startswith('isone'):
-                      text=b.decode('utf-8-sig',errors='replace')
-                      rows=list(csv.reader(io.StringIO(text)))
-                      meta['first_rows']=rows[:12]
-                      meta['line_count']=len(rows)
-                      # ISO-NE format has H/D records. Extract D rows and infer fixed positions from report description.
-                      d=[r for r in rows if r and r[0]=='D']
-                      meta['data_rows']=len(d)
-                      if d:
-                          meta['data_first5']=d[:5]
-                          meta['market_counts']=Counter(r[3] if len(r)>3 else '' for r in d)
-                          meta['direction_counts']=Counter(r[7] if len(r)>7 else '' for r in d)
-                          meta['transaction_type_counts']=Counter(r[9] if len(r)>9 else '' for r in d)
-                  elif key=='nyiso_tran':
-                      z=zipfile.ZipFile(io.BytesIO(b))
-                      meta['zip_names']=z.namelist()
-                      csvname=next((n for n in z.namelist() if n.lower().endswith('.csv')),None)
-                      if csvname:
-                          raw=z.read(csvname).decode('utf-8-sig',errors='replace')
-                          rows=list(csv.reader(io.StringIO(raw)))
-                          meta['line_count']=len(rows)
-                          meta['header']=rows[0] if rows else []
-                          meta['first5']=rows[1:6]
-                          hdr=meta['header']
-                          def col(name):
-                              try:return hdr.index(name)
-                              except:return None
-                          mi=col('Market'); sci=col('Sending Control Area'); rci=col('Receiving Control Area')
-                          if mi is not None: meta['market_counts']=Counter(r[mi] for r in rows[1:] if len(r)>mi)
-                          if sci is not None and rci is not None: meta['control_area_pairs']=Counter((r[sci],r[rci]) for r in rows[1:] if len(r)>max(sci,rci)).most_common(30)
-                  else:
-                      text=b.decode('utf-8-sig',errors='replace')
-                      rows=list(csv.reader(io.StringIO(text)))
-                      meta['line_count']=len(rows); meta['first10']=rows[:10]
-              # Counters to JSON
-              for k,v in list(meta.items()):
-                  if isinstance(v,Counter): meta[k]=dict(v)
-              results[key]=meta
-          Path('r39_electricity/FIELDTEST_DISCOVERY.json').write_text(json.dumps(results,indent=2,sort_keys=True,default=str)+'\n')
+                  rr=rows_from_bytes(f['body']); hh=next((r for r in rr if r and r[0]=='H' and len(r)>5),None)
+                  d=[r for r in rr if r and r[0]=='D']; mm['header']=hh;mm['rows']=len(d);mm['first5']=d[:5]
+              return f,mm,d
+          fda,mda,da=isone_bid('https://www.iso-ne.com/static-transform/csv/histRpts/da-import-export/hbdayaheadimpexp_20260531.csv')
+          frt,mrt,rt=isone_bid('https://www.iso-ne.com/static-transform/csv/histRpts/rt-import-export/hbrealtimeimpexp_20260531.csv')
+          def parse_isone(d):
+              out=[]
+              for r in d:
+                  if len(r)>=12:
+                      out.append({'day':clean(r[1]),'hour':clean(r[2]),'market':clean(r[3]),'cust':clean(r[4]),'orig':clean(r[5]),'dest':clean(r[6]),'emerg':clean(r[7]),'direction':clean(r[8]),'type':clean(r[9]),'price':flt(r[10]),'mw':flt(r[11])})
+              return out
+          A=parse_isone(da);B=parse_isone(rt)
+          key=lambda x:(x['day'],x['hour'],x['cust'],x['orig'],x['dest'],x['direction'],x['type'])
+          ka=defaultdict(list);kb=defaultdict(list)
+          for x in A:ka[key(x)].append(x)
+          for x in B:kb[key(x)].append(x)
+          ov=set(ka)&set(kb)
+          pairs=[]
+          for k in ov:
+              # only unique-key rows for unambiguous direct linkage
+              if len(ka[k])==1 and len(kb[k])==1:pairs.append((ka[k][0],kb[k][0]))
+          mm={'da':mda,'rt':mrt,'da_keys':len(ka),'rt_keys':len(kb),'overlap_keys':len(ov),'unique_link_pairs':len(pairs),
+              'dispatchable_unique_pairs':sum(a['type']=='DISPATCHABLE' for a,b in pairs),
+              'priced_dispatchable_pairs':sum(a['type']=='DISPATCHABLE' and a['price'] is not None and b['price'] is not None for a,b in pairs)}
+          pdiff=[b['price']-a['price'] for a,b in pairs if a['type']=='DISPATCHABLE' and a['price'] is not None and b['price'] is not None]
+          mm['rt_minus_da_bid_price']=qs(pdiff)
+          res['isone_match_20260531']=mm
+
+          # LMP public CSVs to test ability to observe external-node prices
+          lmps={}
+          for name,url in {
+            'da':'https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260531.csv',
+            'rt':'https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260531.csv'}.items():
+              f=fetch(url); mm={k:v for k,v in f.items() if k!='body'}
+              if f.get('ok'):
+                  rr=rows_from_bytes(f['body']); mm['first15']=rr[:15];mm['lines']=len(rr)
+                  # Surface rows containing likely external labels.
+                  ext=[r for r in rr if any(tok in ' '.join(r).upper() for tok in ['NEW YORK','NY-','NY_','EXTERNAL','ROSETON','SANDY POND','SALBRYN','HIGHGATE','NB','QUEBEC'])]
+                  mm['external_like_first30']=ext[:30];mm['external_like_count']=len(ext)
+              lmps[name]=mm
+          res['isone_lmp_20260531']=lmps
+
+          Path('r39_electricity/FIELDTEST2_DISCOVERY.json').write_text(json.dumps(res,indent=2,sort_keys=True,default=str)+'\n')
           PY
       - name: Commit discovery output
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add r39_electricity/FIELDTEST_DISCOVERY.json
+          git add r39_electricity/FIELDTEST2_DISCOVERY.json
           if ! git diff --cached --quiet; then
-            git commit -m 'R39 electricity public-data discovery [skip ci]'
+            git commit -m 'R39 electricity deep field-test discovery [skip ci]'
             git push origin HEAD:r39-electricity-fieldtest
           fi
