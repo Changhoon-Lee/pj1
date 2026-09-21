@@ -90,7 +90,7 @@ jobs:
               for ts,v in obs.items():
                   # examples 05/01/2026 00:00 or 01MAY2026...
                   parsed=None
-                  for fmt in ['%m/%d/%Y %H:%M','%d%b%Y:%H:%M:%S']:
+                  for fmt in ['%m/%d/%Y %H:%M','%m/%d/%Y %H:%M:%S','%d%b%Y:%H:%M:%S']:
                       try: parsed=dt.datetime.strptime(ts,fmt); break
                       except: pass
                   if parsed is None: continue
@@ -126,13 +126,13 @@ jobs:
             },
             'source_summary':{'NYISO':{m:{k:v for k,v in ny[m].items() if k!='obs'} for m in ny},
                               'ISONE':{m:{'source_count':len(ne[m]['sources']),'sources':ne[m]['sources']} for m in ne}},
-            'matched_hours':len(rows),
+            'matched_hours':len(rows),'ny_da_key_sample':list(nym['DA'])[:5],'ny_rt_key_sample':list(nym['RT'])[:5],'ne_da_key_sample':list(ne['DA']['obs'])[:5],'ne_rt_key_sample':list(ne['RT']['obs'])[:5],
             's_stats':stats([r['s_DA_usd_per_mwh'] for r in rows]),
             'T_stats':stats([r['T_RT_same_direction_usd_per_mwh'] for r in rows]),
             'wedge_stats':stats([r['option_destruction_wedge_s_minus_T'] for r in rows]),
-            'share_T_positive':sum(r['T_RT_same_direction_usd_per_mwh']>0 for r in rows)/len(rows),
-            'share_wedge_positive':sum(r['option_destruction_wedge_s_minus_T']>0 for r in rows)/len(rows),
-            'direction_reversal_share':sum(r['direction_reversal'] for r in rows)/len(rows),
+            'share_T_positive':(sum(r['T_RT_same_direction_usd_per_mwh']>0 for r in rows)/len(rows) if rows else None),
+            'share_wedge_positive':(sum(r['option_destruction_wedge_s_minus_T']>0 for r in rows)/len(rows) if rows else None),
+            'direction_reversal_share':(sum(r['direction_reversal'] for r in rows)/len(rows) if rows else None),
             'rows':rows
           }
           Path('r39_electricity/DIRECT_MONETARY_MEASUREMENT_MAY2026.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
