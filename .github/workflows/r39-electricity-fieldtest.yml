@@ -1,0 +1,96 @@
+name: R39 electricity public-data discovery
+on:
+  push:
+    branches: [r39-electricity-fieldtest]
+    paths:
+      - 'r39_electricity/TRIGGER.txt'
+permissions:
+  contents: write
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: r39-electricity-fieldtest
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch and audit public market files
+        run: |
+          python - <<'PY'
+          import csv, hashlib, io, json, os, sys, urllib.request, zipfile
+          from collections import Counter
+          from pathlib import Path
+          out=Path('r39_electricity'); out.mkdir(exist_ok=True)
+          UA={'User-Agent':'Mozilla/5.0 R39-academic-research'}
+          def fetch(url):
+              req=urllib.request.Request(url,headers=UA)
+              try:
+                  with urllib.request.urlopen(req,timeout=60) as r:
+                      b=r.read()
+                      return {'ok':True,'status':getattr(r,'status',200),'content_type':r.headers.get('Content-Type'),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'body':b}
+              except Exception as e:
+                  return {'ok':False,'error':repr(e),'url':url}
+          results={}
+          urls={
+            'isone_rt':'https://www.iso-ne.com/static-transform/csv/histRpts/rt-import-export/hbrealtimeimpexp_20260531.csv',
+            'isone_da':'https://www.iso-ne.com/static-transform/csv/histRpts/da-import-export/hbdayaheadimpexp_20260531.csv',
+            'nyiso_tran':'https://mis.nyiso.com/public/csv/biddata/20250101biddata_tranbids_csv.zip',
+            'nyiso_extflows':'https://mis.nyiso.com/public/csv/ExternalLimitsFlows/currentExternalLimitsFlows.csv',
+          }
+          for key,url in urls.items():
+              f=fetch(url); meta={k:v for k,v in f.items() if k!='body'}; meta['url']=url
+              if f.get('ok'):
+                  b=f['body']
+                  if key.startswith('isone'):
+                      text=b.decode('utf-8-sig',errors='replace')
+                      rows=list(csv.reader(io.StringIO(text)))
+                      meta['first_rows']=rows[:12]
+                      meta['line_count']=len(rows)
+                      # ISO-NE format has H/D records. Extract D rows and infer fixed positions from report description.
+                      d=[r for r in rows if r and r[0]=='D']
+                      meta['data_rows']=len(d)
+                      if d:
+                          meta['data_first5']=d[:5]
+                          meta['market_counts']=Counter(r[3] if len(r)>3 else '' for r in d)
+                          meta['direction_counts']=Counter(r[7] if len(r)>7 else '' for r in d)
+                          meta['transaction_type_counts']=Counter(r[9] if len(r)>9 else '' for r in d)
+                  elif key=='nyiso_tran':
+                      z=zipfile.ZipFile(io.BytesIO(b))
+                      meta['zip_names']=z.namelist()
+                      csvname=next((n for n in z.namelist() if n.lower().endswith('.csv')),None)
+                      if csvname:
+                          raw=z.read(csvname).decode('utf-8-sig',errors='replace')
+                          rows=list(csv.reader(io.StringIO(raw)))
+                          meta['line_count']=len(rows)
+                          meta['header']=rows[0] if rows else []
+                          meta['first5']=rows[1:6]
+                          hdr=meta['header']
+                          def col(name):
+                              try:return hdr.index(name)
+                              except:return None
+                          mi=col('Market'); sci=col('Sending Control Area'); rci=col('Receiving Control Area')
+                          if mi is not None: meta['market_counts']=Counter(r[mi] for r in rows[1:] if len(r)>mi)
+                          if sci is not None and rci is not None: meta['control_area_pairs']=Counter((r[sci],r[rci]) for r in rows[1:] if len(r)>max(sci,rci)).most_common(30)
+                  else:
+                      text=b.decode('utf-8-sig',errors='replace')
+                      rows=list(csv.reader(io.StringIO(text)))
+                      meta['line_count']=len(rows); meta['first10']=rows[:10]
+              # Counters to JSON
+              for k,v in list(meta.items()):
+                  if isinstance(v,Counter): meta[k]=dict(v)
+              results[key]=meta
+          Path('r39_electricity/FIELDTEST_DISCOVERY.json').write_text(json.dumps(results,indent=2,sort_keys=True,default=str)+'\n')
+          PY
+      - name: Commit discovery output
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add r39_electricity/FIELDTEST_DISCOVERY.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'R39 electricity public-data discovery [skip ci]'
+            git push origin HEAD:r39-electricity-fieldtest
+          fi
