@@ -2,82 +2,22 @@ name: R39 electricity field-test bridge
 on:
   pull_request:
     branches: [master]
-    paths:
-      - 'r39_electricity/**'
+    paths: ['r39_electricity/**']
 permissions:
   contents: read
 jobs:
-  discover:
+  measure:
     if: github.head_ref == 'r39-electricity-fieldtest'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: r39-electricity-fieldtest
+        with: {ref: r39-electricity-fieldtest}
       - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Fetch public market files
-        run: |
-          python - <<'PY'
-          import csv, hashlib, io, json, urllib.request, zipfile
-          from collections import Counter
-          from pathlib import Path
-          out=Path('r39_electricity'); out.mkdir(exist_ok=True)
-          UA={'User-Agent':'Mozilla/5.0 R39-academic-research'}
-          def fetch(url):
-              req=urllib.request.Request(url,headers=UA)
-              try:
-                  with urllib.request.urlopen(req,timeout=90) as r:
-                      b=r.read()
-                      return {'ok':True,'status':getattr(r,'status',200),'content_type':r.headers.get('Content-Type'),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'body':b}
-              except Exception as e:
-                  return {'ok':False,'error':repr(e),'url':url}
-          urls={
-            'isone_rt':'https://www.iso-ne.com/static-transform/csv/histRpts/rt-import-export/hbrealtimeimpexp_20260531.csv',
-            'isone_da':'https://www.iso-ne.com/static-transform/csv/histRpts/da-import-export/hbdayaheadimpexp_20260531.csv',
-            'nyiso_tran':'https://mis.nyiso.com/public/csv/biddata/20250101biddata_tranbids_csv.zip',
-            'nyiso_extflows':'https://mis.nyiso.com/public/csv/ExternalLimitsFlows/currentExternalLimitsFlows.csv',
-          }
-          results={}
-          for key,url in urls.items():
-              f=fetch(url); meta={k:v for k,v in f.items() if k!='body'}; meta['url']=url
-              if f.get('ok'):
-                  b=f['body']
-                  if key.startswith('isone'):
-                      text=b.decode('utf-8-sig',errors='replace')
-                      rows=list(csv.reader(io.StringIO(text)))
-                      meta['first_rows']=rows[:15]; meta['line_count']=len(rows)
-                      d=[r for r in rows if r and r[0]=='D']
-                      meta['data_rows']=len(d); meta['data_first5']=d[:5]
-                      if d:
-                          meta['row_lengths']=dict(Counter(map(len,d)))
-                  elif key=='nyiso_tran':
-                      z=zipfile.ZipFile(io.BytesIO(b))
-                      meta['zip_names']=z.namelist()
-                      csvname=next((n for n in z.namelist() if n.lower().endswith('.csv')),None)
-                      if csvname:
-                          raw=z.read(csvname).decode('utf-8-sig',errors='replace')
-                          rows=list(csv.reader(io.StringIO(raw)))
-                          meta['line_count']=len(rows); meta['header']=rows[0] if rows else []; meta['first5']=rows[1:6]
-                          hdr=meta['header']
-                          for colname in ['Market','Sending Control Area','Receiving Control Area','Masked Bidder ID','Masked Source ID','Masked Sink ID','Bid Energy MW','Sink Price Cap Dollar','Decremental Dollar']:
-                              if colname in hdr: meta['col_'+colname]=hdr.index(colname)
-                          if 'Market' in hdr:
-                              j=hdr.index('Market'); meta['market_counts']=dict(Counter(r[j] for r in rows[1:] if len(r)>j))
-                          if 'Sending Control Area' in hdr and 'Receiving Control Area' in hdr:
-                              a,bx=hdr.index('Sending Control Area'),hdr.index('Receiving Control Area')
-                              meta['control_area_pairs']=[list(x) for x in Counter((r[a],r[bx]) for r in rows[1:] if len(r)>max(a,bx)).most_common(40)]
-                  else:
-                      text=b.decode('utf-8-sig',errors='replace')
-                      rows=list(csv.reader(io.StringIO(text)))
-                      meta['line_count']=len(rows); meta['first15']=rows[:15]
-              results[key]=meta
-          Path('r39_electricity/FIELDTEST_DISCOVERY.json').write_text(json.dumps(results,indent=2,sort_keys=True,default=str)+'\n')
-          PY
+        with: {python-version: '3.12'}
+      - run: python r39_electricity/direct_measurement.py
       - uses: actions/upload-artifact@v4
         with:
-          name: r39-electricity-fieldtest-discovery
-          path: r39_electricity/FIELDTEST_DISCOVERY.json
+          name: r39-direct-monetary-measurement
+          path: r39_electricity/DIRECT_MONETARY_MEASUREMENT_MAY2026.json
           retention-days: 3
