@@ -1,0 +1,966 @@
+{
+  "isone_da": {
+    "bytes": 307829,
+    "content_type": "text/csv",
+    "data_first5": [
+      [
+        "D",
+        "05/31/2026",
+        "01",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "01",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "02",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "02",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "03",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ]
+    ],
+    "data_rows": 3690,
+    "direction_counts": {
+      "N": 3690
+    },
+    "first_rows": [
+      [
+        "C",
+        "Day-Ahead Import and Export Historical Offer and Bid Report"
+      ],
+      [
+        "C",
+        "Filename: hbdayaheadimpexp_20260531.csv"
+      ],
+      [
+        "C",
+        "Report for: 05/31/2026 - 05/31/2026"
+      ],
+      [
+        "C",
+        "Report generated: 09/01/2026 09:07:52 EDT"
+      ],
+      [
+        "H",
+        "Day",
+        "Hour Ending",
+        "Market Type",
+        "Masked Customer ID",
+        "Masked Originating Location ID",
+        "Masked Destination Location ID",
+        "Emergency Flag",
+        "Direction",
+        "Transaction Type",
+        "Price",
+        "Bid MW"
+      ],
+      [
+        "H",
+        "Date",
+        "Number",
+        "String",
+        "Number",
+        "Number",
+        "Number",
+        "String",
+        "String",
+        "String",
+        "$",
+        "Mw"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "01",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "01",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "02",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "02",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "03",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "03",
+        "DA",
+        "167488",
+        "97805",
+        "97805",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ]
+    ],
+    "line_count": 3697,
+    "market_counts": {
+      "DA": 3690
+    },
+    "ok": true,
+    "sha256": "304fc7e4357f9b4531892d36af737b1c6c731f54368bb491a8cf325b04fe3d5b",
+    "status": 200,
+    "transaction_type_counts": {
+      "DISPATCHABLE": 1440,
+      "FIXED": 2250
+    },
+    "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-import-export/hbdayaheadimpexp_20260531.csv"
+  },
+  "isone_rt": {
+    "bytes": 101572,
+    "content_type": "text/csv",
+    "data_first5": [
+      [
+        "D",
+        "05/31/2026",
+        "01",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "02",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "03",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "04",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "05",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ]
+    ],
+    "data_rows": 1228,
+    "direction_counts": {
+      "N": 1228
+    },
+    "first_rows": [
+      [
+        "C",
+        "Real-Time Import and Export Historical Offer and Bid Report"
+      ],
+      [
+        "C",
+        "Filename: hbrealtimeimpexp_20260531.csv"
+      ],
+      [
+        "C",
+        "Report for: 05/31/2026 - 05/31/2026"
+      ],
+      [
+        "C",
+        "Report generated: 09/01/2026 09:07:52 EDT"
+      ],
+      [
+        "H",
+        "Day",
+        "Hour Ending",
+        "Market Type",
+        "Masked Customer ID",
+        "Masked Originating Location ID",
+        "Masked Destination Location ID",
+        "Emergency Flag",
+        "Direction",
+        "Transaction Type",
+        "Price",
+        "Bid MW"
+      ],
+      [
+        "H",
+        "Date",
+        "Number",
+        "String",
+        "Number",
+        "Number",
+        "Number",
+        "String",
+        "String",
+        "String",
+        "$",
+        "Mw"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "01",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "02",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "03",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "04",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "05",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ],
+      [
+        "D",
+        "05/31/2026",
+        "06",
+        "RT",
+        "276389",
+        "46625",
+        "46625",
+        "N",
+        "IMPORT",
+        "FIXED",
+        "",
+        "2.000000000"
+      ]
+    ],
+    "line_count": 1235,
+    "market_counts": {
+      "RT": 1228
+    },
+    "ok": true,
+    "sha256": "56efad93dbd5ab935aba0286dd16833d89b0fd5eb9f2adca0f44dd2d1b1a0277",
+    "status": 200,
+    "transaction_type_counts": {
+      "DISPATCHABLE": 304,
+      "FIXED": 924
+    },
+    "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-import-export/hbrealtimeimpexp_20260531.csv"
+  },
+  "nyiso_extflows": {
+    "bytes": 1130,
+    "content_type": "text/csv",
+    "first10": [
+      [
+        "Timestamp",
+        "Interface Name",
+        "Point ID",
+        "Flow (MWH)",
+        "Positive Limit (MWH)",
+        "Negative Limit (MWH)"
+      ],
+      [
+        "09/21/2026 06:55",
+        "CENTRAL EAST - VC",
+        "23330",
+        "1625.4",
+        "2690",
+        "-9999"
+      ],
+      [
+        "09/21/2026 06:55",
+        "DYSINGER EAST",
+        "23326",
+        "925.79",
+        "2850",
+        "-9999"
+      ],
+      [
+        "09/21/2026 06:55",
+        "MOSES SOUTH",
+        "23319",
+        "102.26",
+        "3400",
+        "-1600"
+      ],
+      [
+        "09/21/2026 06:55",
+        "SCH - HQ - NY",
+        "23324",
+        "-100",
+        "1500",
+        "-100"
+      ],
+      [
+        "09/21/2026 06:55",
+        "SCH - HQ_CEDARS",
+        "325274",
+        "0",
+        "49",
+        "0"
+      ],
+      [
+        "09/21/2026 06:55",
+        "SCH - HQ_CHPE",
+        "625211",
+        "550",
+        "1250",
+        "-1250"
+      ],
+      [
+        "09/21/2026 06:55",
+        "SCH - HQ_IMPORT_EXPORT",
+        "325376",
+        "-100",
+        "1310",
+        "-9999"
+      ],
+      [
+        "09/21/2026 06:55",
+        "SCH - NE - NY",
+        "23318",
+        "-980.35",
+        "1400",
+        "-1600"
+      ],
+      [
+        "09/21/2026 06:55",
+        "SCH - NPX_1385",
+        "325277",
+        "30",
+        "200",
+        "-200"
+      ]
+    ],
+    "line_count": 20,
+    "ok": true,
+    "sha256": "b054093a38f1003fcb139773fc32319ca7f0eb1ee6ea57dd630ec0f8d0594855",
+    "status": 200,
+    "url": "https://mis.nyiso.com/public/csv/ExternalLimitsFlows/currentExternalLimitsFlows.csv"
+  },
+  "nyiso_tran": {
+    "bytes": 8453625,
+    "content_type": "application/zip",
+    "control_area_pairs": [
+      [
+        [
+          " \"NYIS\"",
+          " ISNE"
+        ],
+        270308
+      ],
+      [
+        [
+          " \"\"",
+          " "
+        ],
+        138788
+      ],
+      [
+        [
+          " \"PJM\"",
+          " NYIS"
+        ],
+        58531
+      ],
+      [
+        [
+          " \"ISNE\"",
+          " NYIS"
+        ],
+        42757
+      ],
+      [
+        [
+          " \"ONT\"",
+          " NYIS"
+        ],
+        39340
+      ],
+      [
+        [
+          " \"NYIS\"",
+          " PJM"
+        ],
+        23570
+      ],
+      [
+        [
+          " \"HQT\"",
+          " NYIS"
+        ],
+        5428
+      ],
+      [
+        [
+          " \"NYIS\"",
+          " HQT"
+        ],
+        3516
+      ],
+      [
+        [
+          " \"HQT\"",
+          " ISNE"
+        ],
+        2019
+      ],
+      [
+        [
+          " \"NYIS\"",
+          " ONT"
+        ],
+        1927
+      ],
+      [
+        [
+          " \"NLSO\"",
+          " NYIS"
+        ],
+        1793
+      ],
+      [
+        [
+          " \"PJM\"",
+          " ONT"
+        ],
+        1245
+      ],
+      [
+        [
+          " \"PJM\"",
+          " ISNE"
+        ],
+        880
+      ],
+      [
+        [
+          " \"ONT\"",
+          " ISNE"
+        ],
+        361
+      ],
+      [
+        [
+          " \"ISNE\"",
+          " ONT"
+        ],
+        281
+      ],
+      [
+        [
+          " \"NYIS\"",
+          " MISO"
+        ],
+        159
+      ],
+      [
+        [
+          " \"ISNE\"",
+          " PJM"
+        ],
+        34
+      ],
+      [
+        [
+          " \"ONT\"",
+          " PJM"
+        ],
+        29
+      ],
+      [
+        [
+          " \"MISO\"",
+          " NYIS"
+        ],
+        8
+      ]
+    ],
+    "first5": [
+      [
+        "01JAN2025:05:00:00",
+        "                          8926180",
+        "                         34033750",
+        " DAM",
+        " \"NYIS\"",
+        " \"QWSWHT80\"",
+        " \"02165910\"",
+        " ",
+        " HQT",
+        " \"7\"",
+        " \"\"",
+        " ",
+        "     779.00",
+        " ",
+        " ",
+        "                         75701750",
+        "  2",
+        " 01JAN2025:05:00:00",
+        " 01JAN2025:05:59:59",
+        "     779.00",
+        "      54.60",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "  1"
+      ],
+      [
+        "01JAN2025:05:00:00",
+        "                         74033750",
+        "                         68926180",
+        " DAM",
+        " \"HQT\"",
+        " \"QWSWHT80\"",
+        " \"62165910\"",
+        " ",
+        " NYIS",
+        " \"7\"",
+        " \"\"",
+        " ",
+        "     201.00",
+        " ",
+        " ",
+        "                         75701750",
+        "  3",
+        " 01JAN2025:05:00:00",
+        " 01JAN2025:05:59:59",
+        "     201.00",
+        "      69.40",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "  1"
+      ],
+      [
+        "01JAN2025:05:00:00",
+        "                         21740750",
+        "                         21396180",
+        " DAM",
+        " \"NYIS\"",
+        " \"VXK26180\"",
+        " \"4979SXK0\"",
+        " ",
+        " ISNE",
+        " \"7\"",
+        " \"\"",
+        " ",
+        "       8.00",
+        " ",
+        " ",
+        "                         80980750",
+        "  5",
+        " 01JAN2025:05:00:00",
+        " 01JAN2025:05:59:59",
+        "       8.00",
+        "      33.07",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "  1"
+      ],
+      [
+        "01JAN2025:05:00:00",
+        "                         74033750",
+        "                         68926180",
+        " DAM",
+        " \"ONT\"",
+        " \"577PXE80\"",
+        " \"73852090\"",
+        " ",
+        " NYIS",
+        " \"7\"",
+        " \"\"",
+        " ",
+        "      48.00",
+        " ",
+        " ",
+        "                         18309750",
+        "  2",
+        " 01JAN2025:05:00:00",
+        " 01JAN2025:05:59:59",
+        "      48.00",
+        "      35.20",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "  1"
+      ],
+      [
+        "01JAN2025:05:00:00",
+        "                         74033750",
+        "                         68926180",
+        " DAM",
+        " \"ONT\"",
+        " \"577PXE80\"",
+        " \"16152090\"",
+        " ",
+        " NYIS",
+        " \"7\"",
+        " \"\"",
+        " ",
+        "      48.00",
+        " ",
+        " ",
+        "                         18309750",
+        "  2",
+        " 01JAN2025:05:00:00",
+        " 01JAN2025:05:59:59",
+        "      48.00",
+        "      19.35",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "  1"
+      ]
+    ],
+    "header": [
+      "Date Time",
+      "Masked Source ID",
+      "Masked Sink ID",
+      "Market",
+      "Sending Control Area",
+      "Masked PSE",
+      "Masked PSE Number",
+      "Spare",
+      "Receiving Control Area",
+      "Nerc Priority",
+      "User Ref",
+      "Spare",
+      "Bid Energy MW",
+      "Spare",
+      "Spare",
+      "Masked Bidder ID",
+      "Bid Schd Type ID",
+      "Curve Start Time",
+      "Curve End Time",
+      "Dispatch MW1",
+      "Dispatch $/MW1",
+      "Dispatch MW2",
+      "Dispatch $/MW2",
+      "Dispatch MW3",
+      "Dispatch $/MW3",
+      "Dispatch MW4",
+      "Dispatch $/MW4",
+      "Dispatch MW5",
+      "Dispatch $/MW5",
+      "Dispatch MW6",
+      "Dispatch $/MW6",
+      "Dispatch MW7",
+      "Dispatch $/MW7",
+      "Dispatch MW8",
+      "Dispatch $/MW8",
+      "Dispatch MW9",
+      "Dispatch $/MW9",
+      "Dispatch MW10",
+      "Dispatch $/MW10",
+      "Dispatch MW11",
+      "Dispatch $/MW11",
+      "Dispatch MW12",
+      "Dispatch $/MW12",
+      "Default Bid Curve"
+    ],
+    "line_count": 590975,
+    "market_counts": {
+      " DAM": 298871,
+      " HAM": 292103
+    },
+    "ok": true,
+    "sha256": "ef7c25ee8046aeccca6a21bc17bbd96df14182aac5b9c3a7fc9dc2a1ecb1a313",
+    "status": 200,
+    "url": "https://mis.nyiso.com/public/csv/biddata/20250101biddata_tranbids_csv.zip",
+    "zip_names": [
+      "20250101biddata_tranbids.csv"
+    ]
+  }
+}
