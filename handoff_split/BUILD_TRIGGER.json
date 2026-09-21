@@ -1,0 +1,8 @@
+{
+  "schema": "PCS_CFSC_SAC_SPLIT_HANDOFF_BUILD_TRIGGER_V1",
+  "source_public_final_commit": "2e57eb2c7b0215ed7e59ee4338c730bf88aa9577",
+  "reason": "single 718 MiB handoff exceeded chat upload limit",
+  "max_target_volume_bytes": 62914560,
+  "core_first": true,
+  "requested_at": "2026-08-04T20:36:00+09:00"
+}

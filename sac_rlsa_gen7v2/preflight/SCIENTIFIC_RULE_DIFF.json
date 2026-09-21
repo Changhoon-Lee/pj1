@@ -1,0 +1,27 @@
+{
+  "DELIVERY_ONLY_DIFF": 8,
+  "SCIENTIFIC_RULE_DIFF": 0,
+  "delivery_only_diffs": [
+    "remove base64 source bundle",
+    "remove chunk materializer",
+    "publish direct source files",
+    "replace workflow file paths",
+    "cross-platform shell portability",
+    "add environment self-tests",
+    "add single-use state machine",
+    "add history-only dry-run and resource preflight"
+  ],
+  "pass": true,
+  "schema": "SAC_GEN7_SCIENTIFIC_RULE_DIFF_AUDIT_V2",
+  "scientific_rule_diff_count": 0,
+  "scientific_rule_diffs": {},
+  "target_identity": {
+    "classification": "MANDATORY_NEW_PROSPECTIVE_TARGET_IDENTITY_NOT_A_RULE_RETUNE",
+    "pure_transport_supersession_possible": false,
+    "v1_seed_status": "CONSUMED_BY_PRIOR_LOCAL_REPORT_AND_FULL_TRUTH",
+    "v1_seeds": [2168, 912],
+    "v2_seeds": "PENDING_DETERMINISTIC_SELECTION_AFTER_HISTORY_DRY_RUN"
+  },
+  "v1_protected_digest": "acd00f33bf4ea2932148e49bf1871302b96d4c17cff2553133599b8822714843",
+  "v2_protected_digest": "acd00f33bf4ea2932148e49bf1871302b96d4c17cff2553133599b8822714843"
+}

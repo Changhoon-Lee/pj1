@@ -1,0 +1,18 @@
+{
+  "schema": "SAC_GEN7_V2R2_REPOSITORY_DISPATCH_BRIDGE_TRIGGER_V1",
+  "purpose": "Delivery-only one-shot bridge from the already-frozen target trigger to the default-branch repository_dispatch workflow",
+  "authority_c0_commit": "dd485518ea792d135f768759fe52814dd7ac1a9c",
+  "authority_c1_commit": "c58c53fe6ef9ab77864916c92e9591bed23b9e8a",
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "state_0_digest": "69f181690940914deee2c54f8ed3aa29f83b685fda2d7afdad1c617f205f038e",
+  "target_seed_digest": "3995a0f9525556df026f545eaf99af839774260d5e6fb6f3a9373a8ae01dc1fb",
+  "target_seeds": [884503672, 756621450],
+  "target_trigger_digest": "bd389bb052c82aa1e7af70e465e802908483b5d9000b7006e971d2f704ea3d43",
+  "event_type": "sac_gen7_v2r2_single_use_target",
+  "repository_dispatch_workflow": ".github/workflows/sac-gen7-v2-target-repository-dispatch.yml",
+  "prior_workflow_dispatch_failures": "DELIVERY_ONLY_BEFORE_EXECUTION_LEASE_OR_REPORTER",
+  "single_use": true,
+  "target_execution_authorized": true,
+  "target_reports_present_before_bridge": false,
+  "target_truth_accessed_before_bridge": false
+}

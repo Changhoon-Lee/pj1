@@ -1,0 +1,174 @@
+{
+  "authority": {
+    "freeze_a_v1": "SUPERSEDED_PRETARGET_DELIVERY_FREEZE",
+    "freeze_a_v2r1": "SUPERSEDED_PRETARGET_UNCOMMITTED_AUTHORITY_METADATA",
+    "freeze_a_v2r2": "AUTHORITATIVE_CONTENT_FREEZE",
+    "gen5_verdict": "SAC_RLSA_ACTION_SEMANTICS_UNSOUND",
+    "gen6_verdict": "SAC_RLSA_GEN6_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED",
+    "prior_gen7_verdict": "SAC_RLSA_GEN7_PUBLIC_CROSS_PLATFORM_CONFIRMATION_NOT_ESTABLISHED",
+    "prior_gen7_zip_sha256": "facc965a1533033ceef020517d0e3a4475fd64271ecdb1ef5e738070becb3993",
+    "wrong_or_unverified_zip_substitution_forbidden": true
+  },
+  "canonical_truth": {
+    "authority": "REFERENCE_DECIMAL_40DP_FROM_STRICT_BINARY64_RAW",
+    "cross_platform_gate": [
+      "same target bytes",
+      "same strict raw SHA-256",
+      "same canonical decimal-loss SHA-256",
+      "same canonical mean string",
+      "same decision"
+    ],
+    "loss": "Python Decimal context precision 80, Decimal.from_float(raw), fixed 40 decimal places ROUND_HALF_EVEN",
+    "serialization": "ASCII fixed point, 40 fractional digits, no exponent, negative zero normalized, trailing zeros retained, LF, original row order",
+    "strict_raw": "C++20, FMA disabled, FE_TONEAREST, exact binary64 raw bytes must match Ubuntu/macOS"
+  },
+  "content_anchor": "freeze_a_sha256; no containing Git commit SHA is embedded",
+  "cost_rule": {
+    "digest": "28c67390833d662ddccbdb3b39d9745fa476c482d1d252a9df4d06f6adf43d1e",
+    "full_b7_wall_lower_ns": 508151457.0,
+    "history_only_seeds": [
+      42,
+      73,
+      59,
+      63
+    ],
+    "selected_fixed_upper_ns": 3596970.0,
+    "selected_per_action_upper_ns": 3394.5582191780823
+  },
+  "digest_method": "SHA256(canonical JSON excluding freeze_a_sha256)",
+  "environment": {
+    "compiler_flags": [
+      "-x",
+      "c++",
+      "-O3",
+      "-std=c++20",
+      "-pthread",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ],
+    "numpy": "2.3.5",
+    "pytest": "8.4.2",
+    "python": "3.13",
+    "runtime_selftests_required": true,
+    "scikit_learn": "1.8.0",
+    "scipy": "1.17.0"
+  },
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "hard_gates": {
+    "canonical_truth_cross_platform": "100%",
+    "complete_B7_both_platforms": true,
+    "conservative_p05_over_p95": ">=10x each target/platform",
+    "critical_false_certification": 0,
+    "median_vs_B7": ">=30x each target/platform",
+    "public_freeze_BC_before_selected": true,
+    "public_freeze_before_report": true,
+    "report_binding": "100%",
+    "selected_before_full": true,
+    "strict_loss_bound": "PASS"
+  },
+  "history_qualification": {
+    "aggregate": true,
+    "github_run_id": 30778043938,
+    "macos": true,
+    "qualification_digest": "52a57af7dbb456a86a7157513c6e3da1e689f8ddebb516f67194b4fcedc6ff3c",
+    "qualification_trigger_commit": "05bfd84c107afea4d5e4ddb846bd2bb9293b20fd",
+    "summary_sha256": "93a345f77cb0a388ad949616a0c8ab62890b13a99e993e5df257e1d5c3af7684",
+    "target_seeds_used": false,
+    "ubuntu": true
+  },
+  "program": "SAC_RLSA_CANONICAL_TRUTH_PROSPECTIVE_CONFIRMATION_GEN7_V2",
+  "qualification_roles": {
+    "B7": "performance denominator only; complete portfolio C++1/C++4/vectorized sklearn",
+    "QUALIFICATION_PROTOCOL_DIFF": 1,
+    "SCIENTIFIC_RULE_DIFF": 0,
+    "package_native_raw_bits": "diagnostic only; loss tolerance, bound safety, and decision equivalence mandatory",
+    "protocol_sha256": "09e39b8a0eb3ff9dd7bbb0d1dc12ac2484f411c5d86e181b75ccef2a66aa55b8",
+    "scientific_rule_projection_sha256": "9140adc23bceea81b4e64837b8139106e2a88a7671f5b5d681224e2ef688f3c7",
+    "truth_authority": "strict independent C++ plus Decimal-40 only"
+  },
+  "research_mode": "CONFIRMATION_ONLY_NO_NEW_THEORY",
+  "schema": "SAC_GEN7_FREEZE_A_V2R2_AUTHORITATIVE_DIRECT_SOURCE_V1",
+  "scientific_rules": {
+    "audit_randomness": "uniform without replacement from Freeze-A content digest and Freeze-B digest",
+    "canonical_truth": "strict C++ raw exact cross-platform + Decimal precision80 fixed40 ROUND_HALF_EVEN ASCII/LF/original order",
+    "loss": "logaddexp(0,raw)-y01*raw; y01=1 iff y>0; no clipping; NaN/Inf fail-closed",
+    "loss_bound": "raw interval nextafter-outward each term/sum; Decimal-120 endpoint softplus; final binary64 nextafter(+inf)",
+    "population_N": 2500000,
+    "risk_alpha": 0.01,
+    "theory_gate": "30X_CERTIFIED 2/2 before truth",
+    "threshold": 0.5,
+    "tree": "binary32(x_j) <= stored binary64 threshold; ordered binary64 multiply then add; FE_TONEAREST; FMA disabled"
+  },
+  "seed_selection": {
+    "base_digest": "088f630d5491d7c9325d7bf96fc1e9ba08945681acad0158b0c27290799f4fbf",
+    "excluded": [
+      42,
+      59,
+      63,
+      73,
+      912,
+      2168,
+      543787274,
+      507852222,
+      1101247622,
+      1043729700
+    ],
+    "outcome_based": false,
+    "rule_digest": "b5ec845fa72df62ea16838db23bce7978868be8fbe1d0da6da5a57bd7c07949f",
+    "selected": [
+      884503672,
+      756621450
+    ],
+    "target_reports_accessed": false,
+    "target_truth_accessed": false
+  },
+  "source_authority": {
+    "history_trigger_commit": "05bfd84c107afea4d5e4ddb846bd2bb9293b20fd",
+    "qualification_source_commit": "dc1ea6bb5f029f497178a67ddd0672e1d9294517",
+    "source_completeness_sha256": "958729e52c633bde8837ea388a664a1918ffb2e12e2a1e825e045b14fd4fe70f",
+    "source_manifest_digest": "dea8bd04a6bda517cd6b8bac7ffba85f170c0e8d892f6f320365aa6fc6aab03c",
+    "starting_branch_head_before_authority_repair": "4791d8f49a8867b9a86397b6bb9ae67f402ba12b"
+  },
+  "state_machine": {
+    "0": "PRETARGET_FROZEN",
+    "1": "TARGET_REPORT_GENERATED",
+    "2": "FREEZE_B_C_PUBLIC",
+    "3": "SELECTED_AUDIT_COMPLETE",
+    "4": "FULL_TRUTH_COMPLETE",
+    "5": "CROSS_PLATFORM_COMPLETE",
+    "6": "FINAL_ADJUDICATED",
+    "single_use": "before STATE_1 failure seeds reusable; after any reporter output/STATE_1 seeds permanently consumed; n->n+1 only"
+  },
+  "strongest_b7": {
+    "cache_reuse": "inadmissible for first untouched validation",
+    "complete_portfolio_required_on": [
+      "ubuntu-latest x86_64",
+      "macos-14 arm64"
+    ],
+    "definition": "platform-specific minimum external wall median across qualified strict C++ 1-thread, strict C++ 4-thread, and package-native vectorized scikit-learn",
+    "qualification": "bound-safe, frozen-loss-tolerance and decision-equivalent; strict C++ raw exact; sklearn raw bit identity diagnostic"
+  },
+  "target_execution_authorized": false,
+  "target_reports_present": false,
+  "target_truth_accessed": false,
+  "untouched_target_seeds": [
+    884503672,
+    756621450
+  ],
+  "untouched_targets": [
+    {
+      "population": 2500000,
+      "report": "NOT_GENERATED",
+      "seed": 884503672,
+      "target_id": "GEN7V2R2_UNTOUCHED_SEED884503672",
+      "truth": "NOT_ACCESSED"
+    },
+    {
+      "population": 2500000,
+      "report": "NOT_GENERATED",
+      "seed": 756621450,
+      "target_id": "GEN7V2R2_UNTOUCHED_SEED756621450",
+      "truth": "NOT_ACCESSED"
+    }
+  ]
+}
