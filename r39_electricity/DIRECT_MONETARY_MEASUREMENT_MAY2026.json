@@ -1,0 +1,483 @@
+{
+  "T_stats": {
+    "max": null,
+    "mean": null,
+    "median": null,
+    "min": null,
+    "n": 0,
+    "p10": null,
+    "p25": null,
+    "p75": null,
+    "p90": null,
+    "sd": null
+  },
+  "direction_reversal_share": null,
+  "interpretation": {
+    "NE_proxy": ".I.ROSETON 345 1, Location ID 4011",
+    "NY_proxy": "N.E._GEN_SANDY PD, PTID 24062",
+    "T": "final real-time marginal gains from trade per MWh evaluated in the same precommitted direction",
+    "causal_claim": "NONE; direct measurement, not a causal W2-CQ test",
+    "price_object": "congestion-stripped proxy LMP = energy + marginal loss component; follows ISO-NE market-monitor convention for comparing underlying marginal costs across the seam",
+    "s": "day-ahead marginal gains from trade per MWh in the day-ahead efficient direction",
+    "wedge": "s-T, a directly observed monetary analogue of the option-destruction wedge for a fixed-direction marginal cross-border MWh"
+  },
+  "matched_hours": 0,
+  "ne_da_key_sample": [],
+  "ne_rt_key_sample": [],
+  "ny_da_key_sample": [
+    "05/01/2026|01",
+    "05/01/2026|02",
+    "05/01/2026|03",
+    "05/01/2026|04",
+    "05/01/2026|05"
+  ],
+  "ny_rt_key_sample": [
+    "05/01/2026|01",
+    "05/01/2026|02",
+    "05/01/2026|03",
+    "05/01/2026|04",
+    "05/01/2026|05"
+  ],
+  "rows": [],
+  "s_stats": {
+    "max": null,
+    "mean": null,
+    "median": null,
+    "min": null,
+    "n": 0,
+    "p10": null,
+    "p25": null,
+    "p75": null,
+    "p90": null,
+    "sd": null
+  },
+  "schema": "R39_ELECTRICITY_DIRECT_MONETARY_MEASUREMENT_V1",
+  "share_T_positive": null,
+  "share_wedge_positive": null,
+  "source_summary": {
+    "ISONE": {
+      "DA": {
+        "source_count": 31,
+        "sources": [
+          {
+            "bytes": 2471062,
+            "day": "20260501",
+            "sha256": "c190048e5ce9fe1970a1dd5b071da1cdb24820dec575b37115fad759557b7f74",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260501.csv"
+          },
+          {
+            "bytes": 2463736,
+            "day": "20260502",
+            "sha256": "1a600ee1ab4021a302be531e53fb71d16981c16b7bc15eb4ee7186e6fbfe882a",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260502.csv"
+          },
+          {
+            "bytes": 2470385,
+            "day": "20260503",
+            "sha256": "b89d7e7e7c9d10ce61974de87ad36074a906aa0bfb37eee705721f74fd6a00f2",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260503.csv"
+          },
+          {
+            "bytes": 2481626,
+            "day": "20260504",
+            "sha256": "13542e0e299ef218eb3fcc8e051b9d253818f1b49a0ceba89da91d53cfb96a9e",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260504.csv"
+          },
+          {
+            "bytes": 2490246,
+            "day": "20260505",
+            "sha256": "382758ceb0948ca5d43b81e868d9134bcb9b6544eb8278c4d6b1db7c6b2bdfa3",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260505.csv"
+          },
+          {
+            "bytes": 2477706,
+            "day": "20260506",
+            "sha256": "bc112bdb7e33d2147d1c2270bba7dc121bfd8148eb6262b9a286b4f1ab0e2d47",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260506.csv"
+          },
+          {
+            "bytes": 2458595,
+            "day": "20260507",
+            "sha256": "2714a9162cbe56463a501eaefd3cfcc45059732a96b8c33e5c1d9c245b93b0de",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260507.csv"
+          },
+          {
+            "bytes": 2467074,
+            "day": "20260508",
+            "sha256": "48625d74168fc1dc6bc419b1006bab65fcf764ad7fbc81432fd240ebc8fb1ddd",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260508.csv"
+          },
+          {
+            "bytes": 2471041,
+            "day": "20260509",
+            "sha256": "1d7473dca2ab1ca2a75cdfe3a7f86bb8240e478f5f1dea7ee573395499c2af54",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260509.csv"
+          },
+          {
+            "bytes": 2461612,
+            "day": "20260510",
+            "sha256": "4186a30cd9aa070b2db6225724d9d485bc8592782b9057a70fd22caf65cb25ea",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260510.csv"
+          },
+          {
+            "bytes": 2484681,
+            "day": "20260511",
+            "sha256": "0066997f3dd8d289d79914f9459e6c8117d304bcaa879c2bb645e13ef20902c8",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260511.csv"
+          },
+          {
+            "bytes": 2492851,
+            "day": "20260512",
+            "sha256": "84ac39311a119188a7bad711a5373d9dde2ea35a1dd0b2de5f162039e1fee44e",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260512.csv"
+          },
+          {
+            "bytes": 2479901,
+            "day": "20260513",
+            "sha256": "37d84396f1be7631c4b83156ea61ae036934c95562d89418fa36685e3f2af567",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260513.csv"
+          },
+          {
+            "bytes": 2486532,
+            "day": "20260514",
+            "sha256": "b7f7419ad3d98ce159b30e3c38913c15a008dc2c5d5e094eb7519e35ed490288",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260514.csv"
+          },
+          {
+            "bytes": 2461620,
+            "day": "20260515",
+            "sha256": "fb83b52eb917d782bc37877fa6eeb29278f554ba288c8f005006dd0561297570",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260515.csv"
+          },
+          {
+            "bytes": 2459254,
+            "day": "20260516",
+            "sha256": "323ca6c01b3d2eb14a3ff472af454ab1222ae51f56830e7047db1685a8e94ea3",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260516.csv"
+          },
+          {
+            "bytes": 2493370,
+            "day": "20260517",
+            "sha256": "bca7cc5691f145ccf5a03d964fe02b0c999abd5866473fa8f83c009db7d95e2d",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260517.csv"
+          },
+          {
+            "bytes": 2476335,
+            "day": "20260518",
+            "sha256": "0b1b542f082716b9400ebc248fc4e456c9d5845c351f31c397e2c97db72c446c",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260518.csv"
+          },
+          {
+            "bytes": 2498081,
+            "day": "20260519",
+            "sha256": "4620d93dfe2feb6609e0d6277be71324cfa0e9913dde0d2af4454f244a1d92e3",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260519.csv"
+          },
+          {
+            "bytes": 2496264,
+            "day": "20260520",
+            "sha256": "89862a3448633a4753bf94d5da36c0430e28c0197a4a77c4260f43bb40ad187e",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260520.csv"
+          },
+          {
+            "bytes": 2487411,
+            "day": "20260521",
+            "sha256": "c7f289c5e84016fc71c80262ee923991183305ba073a872d9d07f858ab08a57f",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260521.csv"
+          },
+          {
+            "bytes": 2468879,
+            "day": "20260522",
+            "sha256": "f203a2d9d893e2fcce3ad5eaac845b9f24a31d7be4ad16c4673803bbe2ab4ae3",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260522.csv"
+          },
+          {
+            "bytes": 2459685,
+            "day": "20260523",
+            "sha256": "5a02df2f85f79f730111f750cb11a099041a94f1ac01310952e69bd90dbdc0da",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260523.csv"
+          },
+          {
+            "bytes": 2460475,
+            "day": "20260524",
+            "sha256": "4b877b074fd328b03647e72e6a009456e5d2866eefc6706c11c7313e2b939674",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260524.csv"
+          },
+          {
+            "bytes": 2471727,
+            "day": "20260525",
+            "sha256": "81a75854641e893eb6862c44eb35d12df984b3d34c6b071e78ebd20f30e36731",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260525.csv"
+          },
+          {
+            "bytes": 2472210,
+            "day": "20260526",
+            "sha256": "deec4e56f63e830e635b1b0943ae3df5ad0bb1fa7ab628296935cd8c173db01e",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260526.csv"
+          },
+          {
+            "bytes": 2467310,
+            "day": "20260527",
+            "sha256": "51f7e3d28ba6ed2ac896fff0ecbb7288b6c9e4287803abe6ddb344d55385f6cd",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260527.csv"
+          },
+          {
+            "bytes": 2494657,
+            "day": "20260528",
+            "sha256": "8f2b13956262e43578835825905e30b64d393fc5ccbad443858a10a6fbcd789d",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260528.csv"
+          },
+          {
+            "bytes": 2486479,
+            "day": "20260529",
+            "sha256": "88ed0b5fae88c929db505929d1520975c7fd3095d0a73b715f74b587d3c15ab1",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260529.csv"
+          },
+          {
+            "bytes": 2484737,
+            "day": "20260530",
+            "sha256": "64471756131e34725de1f22522236b4a583b30ea8445afa07206c53ba58d4577",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260530.csv"
+          },
+          {
+            "bytes": 2484596,
+            "day": "20260531",
+            "sha256": "dd57270ab8118f154a531590e2792ce7ab781ef0440ebf13fd8a1378bbf658de",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260531.csv"
+          }
+        ]
+      },
+      "RT": {
+        "source_count": 31,
+        "sources": [
+          {
+            "bytes": 2413527,
+            "day": "20260501",
+            "sha256": "18829587fa1ad1471bbc154d58cb4b6c63bed9483b508693ee87e7976afe749d",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260501.csv"
+          },
+          {
+            "bytes": 2419205,
+            "day": "20260502",
+            "sha256": "3a6abcb763dd0a01b9cc0df7b3f1a34a9b3e3293021822572bc27d4820bbb81e",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260502.csv"
+          },
+          {
+            "bytes": 2409331,
+            "day": "20260503",
+            "sha256": "511c8c593656271e58445ac0c2b0dca94d270b1351ecd68bb9769d6eb6e638f8",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260503.csv"
+          },
+          {
+            "bytes": 2419875,
+            "day": "20260504",
+            "sha256": "84942faeb73ea343f31bfe1554e4ef17b12f55a7327777f7bf19bca850f0c19a",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260504.csv"
+          },
+          {
+            "bytes": 2427314,
+            "day": "20260505",
+            "sha256": "36fba4d8633071974136866fd2f0e8290c7091340bd8bd7721e84f2337db8a23",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260505.csv"
+          },
+          {
+            "bytes": 2413452,
+            "day": "20260506",
+            "sha256": "8e4b99e130356d96ceed262e032ab12c7cc0304fc03e073e77b75711c31d2ea9",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260506.csv"
+          },
+          {
+            "bytes": 2404480,
+            "day": "20260507",
+            "sha256": "1e165343ad79873e7c70b2ed6114687dec0639354c61b6f5c2c5b22a775a5eff",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260507.csv"
+          },
+          {
+            "bytes": 2409469,
+            "day": "20260508",
+            "sha256": "8183452d69f515537242e0044b50b850dab4da75df87f05df7db4cca5186df9c",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260508.csv"
+          },
+          {
+            "bytes": 2410758,
+            "day": "20260509",
+            "sha256": "fe0ad9811e18fabdb5ecdecf081c4616f1f942e32385bdaef0f4997e5f959bd8",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260509.csv"
+          },
+          {
+            "bytes": 2411080,
+            "day": "20260510",
+            "sha256": "9dd5ce51ea14002bc39333352661751d34e088936b649588b519f52042622104",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260510.csv"
+          },
+          {
+            "bytes": 2418634,
+            "day": "20260511",
+            "sha256": "42659634e403a0398659e1065d8e86cac9e6eb3fed61b3b64d62572113c9f4ad",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260511.csv"
+          },
+          {
+            "bytes": 2434833,
+            "day": "20260512",
+            "sha256": "0d87f697c1da28198306d2f0c0685ed3e7705455dbf895164fceb1c8237d9b41",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260512.csv"
+          },
+          {
+            "bytes": 2407521,
+            "day": "20260513",
+            "sha256": "4785521929b099f5bd8f62f19910ed1bb535264e67ff647a70725b142208d068",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260513.csv"
+          },
+          {
+            "bytes": 2409520,
+            "day": "20260514",
+            "sha256": "db11236b38a378929c7a8642c16b226eeeb0cc7ebf0db06bd93a5cd2f4755269",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260514.csv"
+          },
+          {
+            "bytes": 2396308,
+            "day": "20260515",
+            "sha256": "963ede1d790078aee8d6cc7c4cf37b86eb6fd22125f77e2509d8b8358b363d8e",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260515.csv"
+          },
+          {
+            "bytes": 2428314,
+            "day": "20260516",
+            "sha256": "aa5a0ec68f44a0dcc991da38107a536857ba19ece6360cd67e24abaa52bda57d",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260516.csv"
+          },
+          {
+            "bytes": 2426081,
+            "day": "20260517",
+            "sha256": "fde2144ab99dbba381f9320b3ed70ea5df66a20cc600784d36ce443f1ebdf8e1",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260517.csv"
+          },
+          {
+            "bytes": 2421158,
+            "day": "20260518",
+            "sha256": "b88475c2e7ec8952025f6b64b584e590ed44ecd5cd4da9c84ba5bce0a3bbece3",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260518.csv"
+          },
+          {
+            "bytes": 2430879,
+            "day": "20260519",
+            "sha256": "d51c7594b48d6e564bd4d54d462dd1c724a608cbe60c0d33e9200d99c59c4a8a",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260519.csv"
+          },
+          {
+            "bytes": 2434364,
+            "day": "20260520",
+            "sha256": "1cb1dfa4e78672bc4a115b08f4d7ac34131a128436162b0f8481c7ddab9759c5",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260520.csv"
+          },
+          {
+            "bytes": 2440303,
+            "day": "20260521",
+            "sha256": "7140b8dced75ff76aef2a33361b58e4ae5d045cc52e277ce6f502b5c99a2cbc7",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260521.csv"
+          },
+          {
+            "bytes": 2420501,
+            "day": "20260522",
+            "sha256": "2f9136c8cbfd8d8715703f2de9d98dd273fdde9b97c241b8c09d955b26d294e3",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260522.csv"
+          },
+          {
+            "bytes": 2407852,
+            "day": "20260523",
+            "sha256": "12b022b671cede25ffaac7d182033f801c506072bdfcfee148107300a57d05a8",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260523.csv"
+          },
+          {
+            "bytes": 2403444,
+            "day": "20260524",
+            "sha256": "05c9ec171a4acbfc58d10d7b3551b6a44d3618d985f885cb8d16b6e2bfffc340",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260524.csv"
+          },
+          {
+            "bytes": 2413983,
+            "day": "20260525",
+            "sha256": "62703436d6554da6409e74cebb1083a51bef6ab47e21f6abf46a9baafadec3b4",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260525.csv"
+          },
+          {
+            "bytes": 2410361,
+            "day": "20260526",
+            "sha256": "075c84cfedef403c40c9ce911d8c34cba9839b0c4149053c3e023a5d829bf273",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260526.csv"
+          },
+          {
+            "bytes": 2428319,
+            "day": "20260527",
+            "sha256": "b29bcbf1020af0f3f1670e56e2743cfb81585869794212e57fc5b4f32a61461c",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260527.csv"
+          },
+          {
+            "bytes": 2432605,
+            "day": "20260528",
+            "sha256": "e4ff0943412b4ba43ab0763fbb2d997bf5da91d515fae522ed732dd82e7627f0",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260528.csv"
+          },
+          {
+            "bytes": 2409628,
+            "day": "20260529",
+            "sha256": "28c8e0fa3d579d96b8cd17907e4c992ae5d78bef18213d2c167a2c808ffd8bee",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260529.csv"
+          },
+          {
+            "bytes": 2409752,
+            "day": "20260530",
+            "sha256": "0dacf8fba73ae362ce054cb195a2aa3043b420271047141fedea6be037047654",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260530.csv"
+          },
+          {
+            "bytes": 2408633,
+            "day": "20260531",
+            "sha256": "77a1173501373baffc071d0a48bcbcf03f5b0e3fee3cdfc2c2727667f1c61e2d",
+            "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260531.csv"
+          }
+        ]
+      }
+    },
+    "NYISO": {
+      "DA": {
+        "header": [
+          "Time Stamp",
+          "Name",
+          "PTID",
+          "LBMP ($/MWHr)",
+          "Marginal Cost Losses ($/MWHr)",
+          "Marginal Cost Congestion ($/MWHr)"
+        ],
+        "n": 744,
+        "sha256": "a5b0183429725c6f15b58cbcef20916b2e35f84c4a824a3cb5874eb99873ffbe",
+        "url": "https://mis.nyiso.com/public/csv/damlbmp/20260501damlbmp_gen_csv.zip"
+      },
+      "RT": {
+        "header": [
+          "Time Stamp",
+          "Name",
+          "PTID",
+          "LBMP ($/MWHr)",
+          "Marginal Cost Losses ($/MWHr)",
+          "Marginal Cost Congestion ($/MWHr)"
+        ],
+        "n": 744,
+        "sha256": "b126d03580091426693aa084b5b9a8b7998c55ddecf4fb49250d71d6acf30009",
+        "url": "https://mis.nyiso.com/public/csv/rtlbmp/20260501rtlbmp_gen_csv.zip"
+      }
+    }
+  },
+  "wedge_stats": {
+    "max": null,
+    "mean": null,
+    "median": null,
+    "min": null,
+    "n": 0,
+    "p10": null,
+    "p25": null,
+    "p75": null,
+    "p90": null,
+    "sd": null
+  }
+}
