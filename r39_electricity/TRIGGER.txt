@@ -1,2 +1,2 @@
-R39 electricity public-data discovery trigger
-2026-09-21
+R39 electricity deep public-data discovery trigger
+2026-09-21T19:30+09:00
