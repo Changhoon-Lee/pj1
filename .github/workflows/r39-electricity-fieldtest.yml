@@ -79,7 +79,7 @@ jobs:
                   ne[market]['sources'].append({'day':ds,'url':url,'sha256':sha,'bytes':len(b)})
                   for r in rr:
                       if not r or r[0]!='D' or len(r)<10: continue
-                      if clean(r[4])!='4011' and clean(r[5])!='.I.ROSETON 345 1': continue
+                      if clean(r[3])!='4011' and clean(r[4])!='.I.ROSETON 345 1': continue
                       date=clean(r[1]); he=int(clean(r[2])); lmp=f(r[6]); energy=f(r[7]); cong=f(r[8]); loss=f(r[9])
                       key=(date,he)
                       stripped=lmp-cong if lmp is not None and cong is not None else (energy+loss if energy is not None and loss is not None else None)
