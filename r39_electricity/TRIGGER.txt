@@ -1,2 +1,2 @@
-R39 direct measurement final retry
-2026-09-21T20:25+09:00
+R39 PR-bridge direct measurement trigger
+2026-09-21T20:34+09:00
