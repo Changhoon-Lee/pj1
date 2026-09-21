@@ -1,0 +1,2178 @@
+{
+  "isone_lmp_20260531": {
+    "da": {
+      "bytes": 2484596,
+      "content_type": "text/csv",
+      "external_like_count": 408,
+      "external_like_first30": [
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "565",
+          "UN.HIGHGATE46  SHEL",
+          "NETWORK NODE",
+          "37.84",
+          "37.73",
+          "0.11",
+          "0.0"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4010",
+          ".I.SALBRYNB345 1",
+          "EXT. NODE",
+          "37.52",
+          "37.73",
+          "0.11",
+          "-0.32"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4011",
+          ".I.ROSETON 345 1",
+          "EXT. NODE",
+          "36.0",
+          "37.73",
+          "-0.04",
+          "-1.69"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4232",
+          "LD.VALLEYNB23",
+          "NETWORK NODE",
+          "38.35",
+          "37.73",
+          "0.12",
+          "0.5"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4448",
+          "LD.HIGHGATE46",
+          "NETWORK NODE",
+          "37.84",
+          "37.73",
+          "0.11",
+          "0.0"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4543",
+          "LD.E_NBRITN13.8",
+          "NETWORK NODE",
+          "37.41",
+          "37.73",
+          "0.24",
+          "-0.56"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4594",
+          "LD.STONY_HL13.8",
+          "NETWORK NODE",
+          "35.04",
+          "37.73",
+          "-1.16",
+          "-1.53"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4602",
+          "LD.GLENBROK13.2",
+          "NETWORK NODE",
+          "35.55",
+          "37.73",
+          "-0.77",
+          "-1.41"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "12510",
+          "UN.HIGHGATE13.8SWC1",
+          "NETWORK NODE",
+          "37.84",
+          "37.73",
+          "0.11",
+          "0.0"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "12511",
+          "UN.HIGHGATE13.8SWC2",
+          "NETWORK NODE",
+          "37.84",
+          "37.73",
+          "0.11",
+          "0.0"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "47741",
+          "UN.VALLEYNB23  FGW",
+          "NETWORK NODE",
+          "38.35",
+          "37.73",
+          "0.12",
+          "0.5"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "69256",
+          "UN.POWERSVL115 MLNB",
+          "NETWORK NODE",
+          "37.44",
+          "37.73",
+          "0.11",
+          "-0.4"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "69257",
+          "AR.POWERSVL115 MLNBD",
+          "NETWORK NODE",
+          "37.44",
+          "37.73",
+          "0.11",
+          "-0.4"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "69801",
+          "UN.CANTRBRY34.5QNBS",
+          "NETWORK NODE",
+          "37.0",
+          "37.73",
+          "0.1",
+          "-0.83"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "73278",
+          "UN.W_BUXTON34.5BONB",
+          "NETWORK NODE",
+          "37.77",
+          "37.73",
+          "0.11",
+          "-0.07"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "73280",
+          "AR.W_BUXTON34.5BONBD",
+          "NETWORK NODE",
+          "37.77",
+          "37.73",
+          "0.11",
+          "-0.07"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "74366",
+          "UN.BLACK_RK69  NBFC",
+          "NETWORK NODE",
+          "37.04",
+          "37.73",
+          "0.72",
+          "-1.41"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "565",
+          "UN.HIGHGATE46  SHEL",
+          "NETWORK NODE",
+          "38.18",
+          "38.11",
+          "0.11",
+          "-0.04"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4010",
+          ".I.SALBRYNB345 1",
+          "EXT. NODE",
+          "38.06",
+          "38.11",
+          "0.12",
+          "-0.17"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4011",
+          ".I.ROSETON 345 1",
+          "EXT. NODE",
+          "36.32",
+          "38.11",
+          "-0.05",
+          "-1.74"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4232",
+          "LD.VALLEYNB23",
+          "NETWORK NODE",
+          "38.69",
+          "38.11",
+          "0.12",
+          "0.46"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4448",
+          "LD.HIGHGATE46",
+          "NETWORK NODE",
+          "38.18",
+          "38.11",
+          "0.11",
+          "-0.04"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4543",
+          "LD.E_NBRITN13.8",
+          "NETWORK NODE",
+          "37.75",
+          "38.11",
+          "0.25",
+          "-0.61"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4594",
+          "LD.STONY_HL13.8",
+          "NETWORK NODE",
+          "35.31",
+          "38.11",
+          "-1.21",
+          "-1.59"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4602",
+          "LD.GLENBROK13.2",
+          "NETWORK NODE",
+          "35.82",
+          "38.11",
+          "-0.8",
+          "-1.49"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "12510",
+          "UN.HIGHGATE13.8SWC1",
+          "NETWORK NODE",
+          "38.18",
+          "38.11",
+          "0.11",
+          "-0.04"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "12511",
+          "UN.HIGHGATE13.8SWC2",
+          "NETWORK NODE",
+          "38.18",
+          "38.11",
+          "0.11",
+          "-0.04"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "47741",
+          "UN.VALLEYNB23  FGW",
+          "NETWORK NODE",
+          "38.69",
+          "38.11",
+          "0.12",
+          "0.46"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "69256",
+          "UN.POWERSVL115 MLNB",
+          "NETWORK NODE",
+          "37.97",
+          "38.11",
+          "0.12",
+          "-0.26"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "69257",
+          "AR.POWERSVL115 MLNBD",
+          "NETWORK NODE",
+          "37.97",
+          "38.11",
+          "0.12",
+          "-0.26"
+        ]
+      ],
+      "first15": [
+        [
+          "C",
+          "Day-Ahead Energy Market Hourly LMP Report"
+        ],
+        [
+          "C",
+          "Filename: WW_DALMP_ISO_20260531.csv"
+        ],
+        [
+          "C",
+          "Report for: 05/31/2026 - 05/31/2026"
+        ],
+        [
+          "C",
+          "Report generated: 05/30/2026 12:32:12 EDT"
+        ],
+        [
+          "H",
+          "Date",
+          "Hour Ending",
+          "Location ID",
+          "Location Name",
+          "Location Type",
+          "Locational Marginal Price",
+          "Energy Component",
+          "Congestion Component",
+          "Marginal Loss Component"
+        ],
+        [
+          "H",
+          "Date",
+          "HE",
+          "String",
+          "String",
+          "String",
+          "Number",
+          "Number",
+          "Number",
+          "Number"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "321",
+          "UN.FRNKLNSQ13.810CC",
+          "NETWORK NODE",
+          "37.48",
+          "37.73",
+          "0.11",
+          "-0.36"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "322",
+          "UN.FRNKLNSQ13.811CC",
+          "NETWORK NODE",
+          "37.48",
+          "37.73",
+          "0.11",
+          "-0.36"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "323",
+          "UN.FRNKLNSQ13.89CC",
+          "NETWORK NODE",
+          "37.48",
+          "37.73",
+          "0.11",
+          "-0.36"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "326",
+          "UN.ALTRESCO13.8ALTR",
+          "NETWORK NODE",
+          "36.53",
+          "37.73",
+          "0.08",
+          "-1.28"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "327",
+          "UN.EDDY    34.5AMOS",
+          "NETWORK NODE",
+          "38.32",
+          "37.73",
+          "0.11",
+          "0.48"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "328",
+          "UN.GULFISLD34.5GULF",
+          "NETWORK NODE",
+          "37.72",
+          "37.73",
+          "0.11",
+          "-0.12"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "329",
+          "UN.ASCUTNEY46  ASCU",
+          "NETWORK NODE",
+          "37.98",
+          "37.73",
+          "0.11",
+          "0.14"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "330",
+          "UN.PEMIGWAS34.5AYER",
+          "NETWORK NODE",
+          "38.34",
+          "37.73",
+          "0.11",
+          "0.5"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "331",
+          "UN.ROXBURY 34.5AZIS",
+          "NETWORK NODE",
+          "37.45",
+          "37.73",
+          "0.11",
+          "-0.39"
+        ]
+      ],
+      "lines": 29071,
+      "ok": true,
+      "sha256": "dd57270ab8118f154a531590e2792ce7ab781ef0440ebf13fd8a1378bbf658de",
+      "status": 200,
+      "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-lmp/WW_DALMP_ISO_20260531.csv"
+    },
+    "rt": {
+      "bytes": 2408633,
+      "content_type": "text/csv",
+      "external_like_count": 408,
+      "external_like_first30": [
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "565",
+          "UN.HIGHGATE46  SHEL",
+          "NETWORK NODE",
+          "32.63",
+          "33.72",
+          "0.0",
+          "-1.09"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4010",
+          ".I.SALBRYNB345 1",
+          "EXT. NODE",
+          "33.79",
+          "33.72",
+          "0.0",
+          "0.07"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4011",
+          ".I.ROSETON 345 1",
+          "EXT. NODE",
+          "32.2",
+          "33.72",
+          "-0.1",
+          "-1.42"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4232",
+          "LD.VALLEYNB23",
+          "NETWORK NODE",
+          "34.19",
+          "33.72",
+          "0.0",
+          "0.47"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4448",
+          "LD.HIGHGATE46",
+          "NETWORK NODE",
+          "32.63",
+          "33.72",
+          "0.0",
+          "-1.09"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4543",
+          "LD.E_NBRITN13.8",
+          "NETWORK NODE",
+          "33.25",
+          "33.72",
+          "0.0",
+          "-0.47"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4594",
+          "LD.STONY_HL13.8",
+          "NETWORK NODE",
+          "32.35",
+          "33.72",
+          "0.0",
+          "-1.37"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "4602",
+          "LD.GLENBROK13.2",
+          "NETWORK NODE",
+          "32.42",
+          "33.72",
+          "0.0",
+          "-1.3"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "12510",
+          "UN.HIGHGATE13.8SWC1",
+          "NETWORK NODE",
+          "32.63",
+          "33.72",
+          "0.0",
+          "-1.09"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "12511",
+          "UN.HIGHGATE13.8SWC2",
+          "NETWORK NODE",
+          "32.63",
+          "33.72",
+          "0.0",
+          "-1.09"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "47741",
+          "UN.VALLEYNB23  FGW",
+          "NETWORK NODE",
+          "34.19",
+          "33.72",
+          "0.0",
+          "0.47"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "69256",
+          "UN.POWERSVL115 MLNB",
+          "NETWORK NODE",
+          "33.76",
+          "33.72",
+          "0.0",
+          "0.04"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "69257",
+          "AR.POWERSVL115 MLNBD",
+          "NETWORK NODE",
+          "33.76",
+          "33.72",
+          "0.0",
+          "0.04"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "69801",
+          "UN.CANTRBRY34.5QNBS",
+          "NETWORK NODE",
+          "33.03",
+          "33.72",
+          "0.0",
+          "-0.69"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "73278",
+          "UN.W_BUXTON34.5BONB",
+          "NETWORK NODE",
+          "33.82",
+          "33.72",
+          "0.0",
+          "0.1"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "73280",
+          "AR.W_BUXTON34.5BONBD",
+          "NETWORK NODE",
+          "33.82",
+          "33.72",
+          "0.0",
+          "0.1"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "74366",
+          "UN.BLACK_RK69  NBFC",
+          "NETWORK NODE",
+          "32.46",
+          "33.72",
+          "0.0",
+          "-1.26"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "565",
+          "UN.HIGHGATE46  SHEL",
+          "NETWORK NODE",
+          "31.09",
+          "31.65",
+          "0.0",
+          "-0.56"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4010",
+          ".I.SALBRYNB345 1",
+          "EXT. NODE",
+          "31.68",
+          "31.65",
+          "0.0",
+          "0.03"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4011",
+          ".I.ROSETON 345 1",
+          "EXT. NODE",
+          "28.62",
+          "31.65",
+          "-1.65",
+          "-1.38"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4232",
+          "LD.VALLEYNB23",
+          "NETWORK NODE",
+          "32.09",
+          "31.65",
+          "0.0",
+          "0.44"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4448",
+          "LD.HIGHGATE46",
+          "NETWORK NODE",
+          "31.09",
+          "31.65",
+          "0.0",
+          "-0.56"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4543",
+          "LD.E_NBRITN13.8",
+          "NETWORK NODE",
+          "31.19",
+          "31.65",
+          "0.0",
+          "-0.46"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4594",
+          "LD.STONY_HL13.8",
+          "NETWORK NODE",
+          "30.34",
+          "31.65",
+          "0.0",
+          "-1.31"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "4602",
+          "LD.GLENBROK13.2",
+          "NETWORK NODE",
+          "30.4",
+          "31.65",
+          "0.0",
+          "-1.25"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "12510",
+          "UN.HIGHGATE13.8SWC1",
+          "NETWORK NODE",
+          "31.09",
+          "31.65",
+          "0.0",
+          "-0.56"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "12511",
+          "UN.HIGHGATE13.8SWC2",
+          "NETWORK NODE",
+          "31.09",
+          "31.65",
+          "0.0",
+          "-0.56"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "47741",
+          "UN.VALLEYNB23  FGW",
+          "NETWORK NODE",
+          "32.09",
+          "31.65",
+          "0.0",
+          "0.44"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "69256",
+          "UN.POWERSVL115 MLNB",
+          "NETWORK NODE",
+          "31.65",
+          "31.65",
+          "0.0",
+          "0.0"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "69257",
+          "AR.POWERSVL115 MLNBD",
+          "NETWORK NODE",
+          "31.65",
+          "31.65",
+          "0.0",
+          "0.0"
+        ]
+      ],
+      "first15": [
+        [
+          "C",
+          "Real-Time Energy Market Hourly LMP Report"
+        ],
+        [
+          "C",
+          "Filename: lmp_rt_final_20260531.csv"
+        ],
+        [
+          "C",
+          "Report for: 05/31/2026 - 05/31/2026"
+        ],
+        [
+          "C",
+          "Report generated: 06/01/2026 16:35:48 EDT"
+        ],
+        [
+          "H",
+          "Date",
+          "Hour Ending",
+          "Location ID",
+          "Location Name",
+          "Location Type",
+          "Locational Marginal Price",
+          "Energy Component",
+          "Congestion Component",
+          "Marginal Loss Component"
+        ],
+        [
+          "H",
+          "Date",
+          "HE",
+          "String",
+          "String",
+          "String",
+          "Number",
+          "Number",
+          "Number",
+          "Number"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "321",
+          "UN.FRNKLNSQ13.810CC",
+          "NETWORK NODE",
+          "33.39",
+          "33.72",
+          "0.0",
+          "-0.33"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "322",
+          "UN.FRNKLNSQ13.811CC",
+          "NETWORK NODE",
+          "33.39",
+          "33.72",
+          "0.0",
+          "-0.33"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "323",
+          "UN.FRNKLNSQ13.89CC",
+          "NETWORK NODE",
+          "33.39",
+          "33.72",
+          "0.0",
+          "-0.33"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "326",
+          "UN.ALTRESCO13.8ALTR",
+          "NETWORK NODE",
+          "32.73",
+          "33.72",
+          "0.0",
+          "-0.99"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "327",
+          "UN.EDDY    34.5AMOS",
+          "NETWORK NODE",
+          "34.2",
+          "33.72",
+          "0.0",
+          "0.48"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "328",
+          "UN.GULFISLD34.5GULF",
+          "NETWORK NODE",
+          "33.88",
+          "33.72",
+          "0.0",
+          "0.16"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "329",
+          "UN.ASCUTNEY46  ASCU",
+          "NETWORK NODE",
+          "33.87",
+          "33.72",
+          "0.0",
+          "0.15"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "330",
+          "UN.PEMIGWAS34.5AYER",
+          "NETWORK NODE",
+          "34.2",
+          "33.72",
+          "0.0",
+          "0.48"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "331",
+          "UN.ROXBURY 34.5AZIS",
+          "NETWORK NODE",
+          "33.7",
+          "33.72",
+          "0.0",
+          "-0.02"
+        ]
+      ],
+      "lines": 29071,
+      "ok": true,
+      "sha256": "77a1173501373baffc071d0a48bcbcf03f5b0e3fee3cdfc2c2727667f1c61e2d",
+      "status": 200,
+      "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-lmp/lmp_rt_final_20260531.csv"
+    }
+  },
+  "isone_match_20260531": {
+    "da": {
+      "bytes": 307829,
+      "content_type": "text/csv",
+      "first5": [
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "DA",
+          "167488",
+          "97805",
+          "97805",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "DA",
+          "167488",
+          "97805",
+          "97805",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "DA",
+          "167488",
+          "97805",
+          "97805",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "DA",
+          "167488",
+          "97805",
+          "97805",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "03",
+          "DA",
+          "167488",
+          "97805",
+          "97805",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ]
+      ],
+      "header": [
+        "H",
+        "Day",
+        "Hour Ending",
+        "Market Type",
+        "Masked Customer ID",
+        "Masked Originating Location ID",
+        "Masked Destination Location ID",
+        "Emergency Flag",
+        "Direction",
+        "Transaction Type",
+        "Price",
+        "Bid MW"
+      ],
+      "ok": true,
+      "rows": 3690,
+      "sha256": "304fc7e4357f9b4531892d36af737b1c6c731f54368bb491a8cf325b04fe3d5b",
+      "status": 200,
+      "url": "https://www.iso-ne.com/static-transform/csv/histRpts/da-import-export/hbdayaheadimpexp_20260531.csv"
+    },
+    "da_keys": 1050,
+    "dispatchable_unique_pairs": 43,
+    "overlap_keys": 210,
+    "priced_dispatchable_pairs": 43,
+    "rt": {
+      "bytes": 101572,
+      "content_type": "text/csv",
+      "first5": [
+        [
+          "D",
+          "05/31/2026",
+          "01",
+          "RT",
+          "276389",
+          "46625",
+          "46625",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "02",
+          "RT",
+          "276389",
+          "46625",
+          "46625",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "03",
+          "RT",
+          "276389",
+          "46625",
+          "46625",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "04",
+          "RT",
+          "276389",
+          "46625",
+          "46625",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ],
+        [
+          "D",
+          "05/31/2026",
+          "05",
+          "RT",
+          "276389",
+          "46625",
+          "46625",
+          "N",
+          "IMPORT",
+          "FIXED",
+          "",
+          "2.000000000"
+        ]
+      ],
+      "header": [
+        "H",
+        "Day",
+        "Hour Ending",
+        "Market Type",
+        "Masked Customer ID",
+        "Masked Originating Location ID",
+        "Masked Destination Location ID",
+        "Emergency Flag",
+        "Direction",
+        "Transaction Type",
+        "Price",
+        "Bid MW"
+      ],
+      "ok": true,
+      "rows": 1228,
+      "sha256": "56efad93dbd5ab935aba0286dd16833d89b0fd5eb9f2adca0f44dd2d1b1a0277",
+      "status": 200,
+      "url": "https://www.iso-ne.com/static-transform/csv/histRpts/rt-import-export/hbrealtimeimpexp_20260531.csv"
+    },
+    "rt_keys": 572,
+    "rt_minus_da_bid_price": {
+      "max": 0.0,
+      "mean": -0.6511627906976745,
+      "median": 0.0,
+      "min": -8.0,
+      "n": 43,
+      "p10": -3.999999999999999,
+      "p25": 0.0,
+      "p75": 0.0,
+      "p90": 0.0
+    },
+    "unique_link_pairs": 54
+  },
+  "nyiso_cts_prices": {
+    "bytes": 356798,
+    "content_type": "text/csv",
+    "file_count": 1,
+    "first10": [
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 00:30",
+        "1",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "39.76",
+        "34.76"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 00:45",
+        "2",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "37.39",
+        "32.39"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 01:00",
+        "3",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "36.49",
+        "31.49"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 01:15",
+        "4",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "36.49",
+        "31.49"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 01:30",
+        "5",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "35.22",
+        "30.22"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 01:45",
+        "6",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "34.36",
+        "29.36"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 02:00",
+        "7",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "37.78",
+        "28.16"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 02:15",
+        "8",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "36.32",
+        "28.16"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 02:30",
+        "9",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "35.45",
+        "28.16"
+      ],
+      [
+        "09/10/2026 00:00",
+        "09/10/2026 02:45",
+        "10",
+        "N.E._GEN_SANDY PD",
+        "24062",
+        "35.38",
+        "28.16"
+      ]
+    ],
+    "header": [
+      "RTC Execution Time",
+      "RTC End Time Stamp",
+      "RTC Timestep",
+      "Gen Name",
+      "Gen PTID",
+      "Gen LBMP",
+      "External RTO CTS Price"
+    ],
+    "ok": true,
+    "rows": 4800,
+    "sha256": "f578dc6624b11d977a2cbef79c5e63c8b5219f62d49582502f2053456ac25faf",
+    "status": 200,
+    "top_External RTO CTS Price": [
+      [
+        "40.10",
+        19
+      ],
+      [
+        "28.13",
+        18
+      ],
+      [
+        "25.36",
+        15
+      ],
+      [
+        "23.45",
+        15
+      ],
+      [
+        "29.80",
+        14
+      ],
+      [
+        "33.01",
+        13
+      ],
+      [
+        "36.52",
+        13
+      ],
+      [
+        "35.33",
+        13
+      ],
+      [
+        "32.51",
+        12
+      ],
+      [
+        "28.42",
+        12
+      ],
+      [
+        "28.04",
+        12
+      ],
+      [
+        "32.49",
+        12
+      ]
+    ],
+    "top_Gen LBMP": [
+      [
+        "52.28",
+        29
+      ],
+      [
+        "32.16",
+        19
+      ],
+      [
+        "37.40",
+        17
+      ],
+      [
+        "47.00",
+        13
+      ],
+      [
+        "42.17",
+        13
+      ],
+      [
+        "50.06",
+        12
+      ],
+      [
+        "51.11",
+        12
+      ],
+      [
+        "35.83",
+        11
+      ],
+      [
+        "46.96",
+        11
+      ],
+      [
+        "50.96",
+        10
+      ],
+      [
+        "35.86",
+        10
+      ],
+      [
+        "49.91",
+        10
+      ]
+    ],
+    "top_Gen Name": [
+      [
+        "N.E._GEN_SANDY PD",
+        960
+      ],
+      [
+        "PJM_GEN_HTP_PROXY",
+        960
+      ],
+      [
+        "PJM_GEN_KEYSTONE",
+        960
+      ],
+      [
+        "PJM_GEN_NEPTUNE_PROXY",
+        960
+      ],
+      [
+        "PJM_GEN_VFT_PROXY",
+        960
+      ]
+    ],
+    "top_Gen PTID": [
+      [
+        "24062",
+        960
+      ],
+      [
+        "323702",
+        960
+      ],
+      [
+        "24065",
+        960
+      ],
+      [
+        "323594",
+        960
+      ],
+      [
+        "323633",
+        960
+      ]
+    ],
+    "top_RTC End Time Stamp": [
+      [
+        "09/10/2026 02:45",
+        50
+      ],
+      [
+        "09/10/2026 03:00",
+        50
+      ],
+      [
+        "09/10/2026 03:15",
+        50
+      ],
+      [
+        "09/10/2026 03:30",
+        50
+      ],
+      [
+        "09/10/2026 03:45",
+        50
+      ],
+      [
+        "09/10/2026 04:00",
+        50
+      ],
+      [
+        "09/10/2026 04:15",
+        50
+      ],
+      [
+        "09/10/2026 04:30",
+        50
+      ],
+      [
+        "09/10/2026 04:45",
+        50
+      ],
+      [
+        "09/10/2026 05:00",
+        50
+      ],
+      [
+        "09/10/2026 05:15",
+        50
+      ],
+      [
+        "09/10/2026 05:30",
+        50
+      ]
+    ],
+    "top_RTC Execution Time": [
+      [
+        "09/10/2026 00:00",
+        50
+      ],
+      [
+        "09/10/2026 00:15",
+        50
+      ],
+      [
+        "09/10/2026 00:30",
+        50
+      ],
+      [
+        "09/10/2026 00:45",
+        50
+      ],
+      [
+        "09/10/2026 01:00",
+        50
+      ],
+      [
+        "09/10/2026 01:15",
+        50
+      ],
+      [
+        "09/10/2026 01:30",
+        50
+      ],
+      [
+        "09/10/2026 01:45",
+        50
+      ],
+      [
+        "09/10/2026 02:00",
+        50
+      ],
+      [
+        "09/10/2026 02:15",
+        50
+      ],
+      [
+        "09/10/2026 02:30",
+        50
+      ],
+      [
+        "09/10/2026 02:45",
+        50
+      ]
+    ],
+    "top_RTC Timestep": [
+      [
+        "1",
+        480
+      ],
+      [
+        "2",
+        480
+      ],
+      [
+        "3",
+        480
+      ],
+      [
+        "4",
+        480
+      ],
+      [
+        "5",
+        480
+      ],
+      [
+        "6",
+        480
+      ],
+      [
+        "7",
+        480
+      ],
+      [
+        "8",
+        480
+      ],
+      [
+        "9",
+        480
+      ],
+      [
+        "10",
+        480
+      ]
+    ],
+    "tries": [
+      {
+        "error": "<HTTPError 404: 'Not Found'>",
+        "ok": false,
+        "url": "https://mis.nyiso.com/public/csv/extrtoctsprice/20260501ext_rto_cts_price_csv.zip"
+      },
+      {
+        "error": "<HTTPError 404: 'Not Found'>",
+        "ok": false,
+        "url": "https://mis.nyiso.com/public/csv/extrtoctsprice/20260531ext_rto_cts_price.csv"
+      },
+      {
+        "bytes": 356798,
+        "content_type": "text/csv",
+        "ok": true,
+        "sha256": "f578dc6624b11d977a2cbef79c5e63c8b5219f62d49582502f2053456ac25faf",
+        "status": 200,
+        "url": "https://mis.nyiso.com/public/csv/extrtoctsprice/20260910ext_rto_cts_price.csv"
+      }
+    ],
+    "url": "https://mis.nyiso.com/public/csv/extrtoctsprice/20260910ext_rto_cts_price.csv"
+  },
+  "nyiso_extflows_may2026": {
+    "bytes": 1015967,
+    "content_type": "application/zip",
+    "file_count": 31,
+    "header": [
+      "Timestamp",
+      "Interface Name",
+      "Point ID",
+      "Flow (MWH)",
+      "Positive Limit (MWH)",
+      "Negative Limit (MWH)"
+    ],
+    "interfaces": [
+      [
+        "CENTRAL EAST - VC",
+        9007
+      ],
+      [
+        "DYSINGER EAST",
+        9007
+      ],
+      [
+        "MOSES SOUTH",
+        9007
+      ],
+      [
+        "SCH - HQ - NY",
+        9007
+      ],
+      [
+        "SCH - HQ_CEDARS",
+        9007
+      ],
+      [
+        "SCH - HQ_CHPE",
+        9007
+      ],
+      [
+        "SCH - HQ_IMPORT_EXPORT",
+        9007
+      ],
+      [
+        "SCH - NE - NY",
+        9007
+      ],
+      [
+        "SCH - NPX_1385",
+        9007
+      ],
+      [
+        "SCH - NPX_CSC",
+        9007
+      ],
+      [
+        "SCH - OH - NY",
+        9007
+      ],
+      [
+        "SCH - PJ - NY",
+        9007
+      ],
+      [
+        "SCH - PJM_HTP",
+        9007
+      ],
+      [
+        "SCH - PJM_NEPTUNE",
+        9007
+      ],
+      [
+        "SCH - PJM_VFT",
+        9007
+      ],
+      [
+        "SPR/DUN-SOUTH",
+        9007
+      ],
+      [
+        "TOTAL EAST",
+        9007
+      ],
+      [
+        "UPNY CONED",
+        9007
+      ],
+      [
+        "WEST CENTRAL",
+        9007
+      ]
+    ],
+    "ne_like_first10": [
+      [
+        "05/01/2026 00:00",
+        "SCH - NE - NY",
+        "23318",
+        "-1362.86",
+        "1400",
+        "-1600"
+      ],
+      [
+        "05/01/2026 00:00",
+        "SCH - NPX_1385",
+        "325277",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "05/01/2026 00:00",
+        "SCH - NPX_CSC",
+        "325154",
+        "140",
+        "330",
+        "-330"
+      ],
+      [
+        "05/01/2026 00:00",
+        "SCH - PJM_NEPTUNE",
+        "325305",
+        "522",
+        "660",
+        "-660"
+      ],
+      [
+        "05/01/2026 00:00",
+        "UPNY CONED",
+        "23315",
+        "1858.08",
+        "6065",
+        "-9999"
+      ],
+      [
+        "05/01/2026 00:05",
+        "SCH - NE - NY",
+        "23318",
+        "-1400.05",
+        "1400",
+        "-1600"
+      ],
+      [
+        "05/01/2026 00:05",
+        "SCH - NPX_1385",
+        "325277",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "05/01/2026 00:05",
+        "SCH - NPX_CSC",
+        "325154",
+        "100",
+        "330",
+        "-330"
+      ],
+      [
+        "05/01/2026 00:05",
+        "SCH - PJM_NEPTUNE",
+        "325305",
+        "450",
+        "660",
+        "-660"
+      ],
+      [
+        "05/01/2026 00:05",
+        "UPNY CONED",
+        "23315",
+        "1846.58",
+        "6065",
+        "-9999"
+      ]
+    ],
+    "ne_like_flow": {
+      "max": 5053.08,
+      "mean": 430.8281552126124,
+      "median": 20.0,
+      "min": -1816.72,
+      "n": 45035,
+      "p10": -1185.3179999999998,
+      "p25": 0.0,
+      "p75": 660.0,
+      "p90": 2454.2799999999997
+    },
+    "ne_like_rows": 45035,
+    "ok": true,
+    "rows": 171133,
+    "sha256": "925963f363162f39ad3a6f55ffcd799a65e710291dd2cc930c576675e8cef7d8",
+    "status": 200,
+    "url": "https://mis.nyiso.com/public/csv/ExternalLimitsFlows/20260501ExternalLimitsFlows_csv.zip"
+  },
+  "nyiso_tran_may2026": {
+    "bid_schedule_type_counts": {
+      "1": 136755,
+      "2": 45752,
+      "3": 41801,
+      "5": 336661
+    },
+    "bytes": 7498913,
+    "content_type": "application/zip",
+    "control_area_pairs": [
+      [
+        [
+          "NYIS",
+          "ISNE"
+        ],
+        272597
+      ],
+      [
+        [
+          "",
+          ""
+        ],
+        136755
+      ],
+      [
+        [
+          "ISNE",
+          "NYIS"
+        ],
+        55054
+      ],
+      [
+        [
+          "PJM",
+          "NYIS"
+        ],
+        32730
+      ],
+      [
+        [
+          "ONT",
+          "NYIS"
+        ],
+        26545
+      ],
+      [
+        [
+          "NYIS",
+          "PJM"
+        ],
+        23092
+      ],
+      [
+        [
+          "HQT",
+          "NYIS"
+        ],
+        4861
+      ],
+      [
+        [
+          "NYIS",
+          "ONT"
+        ],
+        4507
+      ],
+      [
+        [
+          "NYIS",
+          "HQT"
+        ],
+        2560
+      ],
+      [
+        [
+          "HQT",
+          "ISNE"
+        ],
+        1415
+      ],
+      [
+        [
+          "ISNE",
+          "ONT"
+        ],
+        432
+      ],
+      [
+        [
+          "NLSO",
+          "NYIS"
+        ],
+        307
+      ],
+      [
+        [
+          "ISNE",
+          "PJM"
+        ],
+        62
+      ],
+      [
+        [
+          "ONT",
+          "PJM"
+        ],
+        42
+      ],
+      [
+        [
+          "PJM",
+          "ONT"
+        ],
+        5
+      ],
+      [
+        [
+          "NYIS",
+          "MISO"
+        ],
+        5
+      ]
+    ],
+    "cts_rows": 244382,
+    "dam_ham_linkage": {
+      "dam_keys": 176038,
+      "ham_keys": 59566,
+      "overlap_keys": 17204,
+      "overlap_share_ham": 0.28882248262431587
+    },
+    "header": [
+      "Date Time",
+      "Masked Source ID",
+      "Masked Sink ID",
+      "Market",
+      "Sending Control Area",
+      "Masked PSE",
+      "Masked PSE Number",
+      "Spare",
+      "Receiving Control Area",
+      "Nerc Priority",
+      "User Ref",
+      "Spare",
+      "Bid Energy MW",
+      "Spare",
+      "Spare",
+      "Masked Bidder ID",
+      "Bid Schd Type ID",
+      "Curve Start Time",
+      "Curve End Time",
+      "Dispatch MW1",
+      "Dispatch $/MW1",
+      "Dispatch MW2",
+      "Dispatch $/MW2",
+      "Dispatch MW3",
+      "Dispatch $/MW3",
+      "Dispatch MW4",
+      "Dispatch $/MW4",
+      "Dispatch MW5",
+      "Dispatch $/MW5",
+      "Dispatch MW6",
+      "Dispatch $/MW6",
+      "Dispatch MW7",
+      "Dispatch $/MW7",
+      "Dispatch MW8",
+      "Dispatch $/MW8",
+      "Dispatch MW9",
+      "Dispatch $/MW9",
+      "Dispatch MW10",
+      "Dispatch $/MW10",
+      "Dispatch MW11",
+      "Dispatch $/MW11",
+      "Dispatch MW12",
+      "Dispatch $/MW12",
+      "Default Bid Curve"
+    ],
+    "market_counts": {
+      "DAM": 274605,
+      "HAM": 286364
+    },
+    "nyis_isne_cts_curve_prices": {
+      "max": 1000.0,
+      "mean": -638.3842761598484,
+      "median": -1000.0,
+      "min": -1000.0,
+      "n": 234147,
+      "p10": -1000.0,
+      "p25": -1000.0,
+      "p75": -40.0,
+      "p90": 5.0
+    },
+    "nyis_isne_cts_first5": [
+      {
+        "Bid Energy MW": "45.00",
+        "Bid Schd Type ID": "5",
+        "Curve End Time": "01MAY2026:04:14:59",
+        "Curve Start Time": "01MAY2026:04:00:00",
+        "Date Time": "01MAY2026:04:00:00",
+        "Default Bid Curve": "1",
+        "Dispatch $/MW1": "-20.00",
+        "Dispatch MW1": "45.00",
+        "Market": "HAM",
+        "Masked Bidder ID": "54666750",
+        "Masked PSE": "77706180",
+        "Masked PSE Number": "55035770",
+        "Masked Sink ID": "68926180",
+        "Masked Source ID": "43796180",
+        "Nerc Priority": "7",
+        "Receiving Control Area": "NYIS",
+        "Sending Control Area": "ISNE"
+      },
+      {
+        "Bid Energy MW": "45.00",
+        "Bid Schd Type ID": "5",
+        "Curve End Time": "01MAY2026:04:29:59",
+        "Curve Start Time": "01MAY2026:04:15:00",
+        "Date Time": "01MAY2026:04:00:00",
+        "Default Bid Curve": "1",
+        "Dispatch $/MW1": "-20.00",
+        "Dispatch MW1": "45.00",
+        "Market": "HAM",
+        "Masked Bidder ID": "54666750",
+        "Masked PSE": "77706180",
+        "Masked PSE Number": "55035770",
+        "Masked Sink ID": "68926180",
+        "Masked Source ID": "43796180",
+        "Nerc Priority": "7",
+        "Receiving Control Area": "NYIS",
+        "Sending Control Area": "ISNE"
+      },
+      {
+        "Bid Energy MW": "45.00",
+        "Bid Schd Type ID": "5",
+        "Curve End Time": "01MAY2026:04:44:59",
+        "Curve Start Time": "01MAY2026:04:30:00",
+        "Date Time": "01MAY2026:04:00:00",
+        "Default Bid Curve": "1",
+        "Dispatch $/MW1": "-20.00",
+        "Dispatch MW1": "45.00",
+        "Market": "HAM",
+        "Masked Bidder ID": "54666750",
+        "Masked PSE": "77706180",
+        "Masked PSE Number": "55035770",
+        "Masked Sink ID": "68926180",
+        "Masked Source ID": "43796180",
+        "Nerc Priority": "7",
+        "Receiving Control Area": "NYIS",
+        "Sending Control Area": "ISNE"
+      },
+      {
+        "Bid Energy MW": "45.00",
+        "Bid Schd Type ID": "5",
+        "Curve End Time": "01MAY2026:04:59:59",
+        "Curve Start Time": "01MAY2026:04:45:00",
+        "Date Time": "01MAY2026:04:00:00",
+        "Default Bid Curve": "1",
+        "Dispatch $/MW1": "-20.00",
+        "Dispatch MW1": "45.00",
+        "Market": "HAM",
+        "Masked Bidder ID": "54666750",
+        "Masked PSE": "77706180",
+        "Masked PSE Number": "55035770",
+        "Masked Sink ID": "68926180",
+        "Masked Source ID": "43796180",
+        "Nerc Priority": "7",
+        "Receiving Control Area": "NYIS",
+        "Sending Control Area": "ISNE"
+      },
+      {
+        "Bid Energy MW": "5.00",
+        "Bid Schd Type ID": "5",
+        "Curve End Time": "01MAY2026:04:59:59",
+        "Curve Start Time": "01MAY2026:04:00:00",
+        "Date Time": "01MAY2026:04:00:00",
+        "Default Bid Curve": "1",
+        "Dispatch $/MW1": "25.00",
+        "Dispatch MW1": "5.00",
+        "Market": "HAM",
+        "Masked Bidder ID": "80876750",
+        "Masked PSE": "57HVZ180",
+        "Masked PSE Number": "W92512X0",
+        "Masked Sink ID": "21396180",
+        "Masked Source ID": "8926180",
+        "Nerc Priority": "7",
+        "Receiving Control Area": "ISNE",
+        "Sending Control Area": "NYIS"
+      }
+    ],
+    "nyis_isne_cts_mw": {
+      "max": 303.0,
+      "mean": 24.663083447577804,
+      "median": 5.0,
+      "min": 0.0,
+      "n": 234147,
+      "p10": 1.0,
+      "p25": 2.0,
+      "p75": 24.0,
+      "p90": 75.0
+    },
+    "nyis_isne_cts_rows": 234147,
+    "nyis_isne_cts_schedule_types": {
+      "5": 234147
+    },
+    "nyis_isne_cts_unique_bidders": 48,
+    "nyis_isne_cts_unique_pse": 43,
+    "ok": true,
+    "rows": 560969,
+    "sha256": "49d9458df8fc4ed12d8175dd21262be349ed201a4e45649985386be81122f31b",
+    "status": 200,
+    "url": "https://mis.nyiso.com/public/csv/biddata/20260501biddata_tranbids_csv.zip",
+    "zip_names": [
+      "20260501biddata_tranbids.csv"
+    ]
+  }
+}
