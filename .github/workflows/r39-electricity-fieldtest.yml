@@ -36,6 +36,7 @@ jobs:
               return a[lo]*(1-w)+a[hi]*w
           def stats(a):
               a=[x for x in a if x is not None and math.isfinite(x)]
+              if not a: return {'n':0,'mean':None,'sd':None,'min':None,'p10':None,'p25':None,'median':None,'p75':None,'p90':None,'max':None}
               return {'n':len(a),'mean':sum(a)/len(a),'sd':(sum((x-sum(a)/len(a))**2 for x in a)/(len(a)-1))**.5 if len(a)>1 else 0,
                       'min':min(a),'p10':quant(a,.1),'p25':quant(a,.25),'median':quant(a,.5),'p75':quant(a,.75),'p90':quant(a,.9),'max':max(a)}
           # NYISO monthly archives
@@ -126,7 +127,7 @@ jobs:
             },
             'source_summary':{'NYISO':{m:{k:v for k,v in ny[m].items() if k!='obs'} for m in ny},
                               'ISONE':{m:{'source_count':len(ne[m]['sources']),'sources':ne[m]['sources']} for m in ne}},
-            'matched_hours':len(rows),'ny_da_key_sample':list(nym['DA'])[:5],'ny_rt_key_sample':list(nym['RT'])[:5],'ne_da_key_sample':list(ne['DA']['obs'])[:5],'ne_rt_key_sample':list(ne['RT']['obs'])[:5],
+            'matched_hours':len(rows),'ny_da_key_sample':list(nym['DA'])[:10],'ny_rt_key_sample':list(nym['RT'])[:10],'ne_da_key_sample':list(ne['DA']['obs'])[:10],'ne_rt_key_sample':list(ne['RT']['obs'])[:10],'ny_da_key_sample':list(nym['DA'])[:5],'ny_rt_key_sample':list(nym['RT'])[:5],'ne_da_key_sample':list(ne['DA']['obs'])[:5],'ne_rt_key_sample':list(ne['RT']['obs'])[:5],
             's_stats':stats([r['s_DA_usd_per_mwh'] for r in rows]),
             'T_stats':stats([r['T_RT_same_direction_usd_per_mwh'] for r in rows]),
             'wedge_stats':stats([r['option_destruction_wedge_s_minus_T'] for r in rows]),
