@@ -1,0 +1,16 @@
+{
+  "authoritative_endpoint": "wall clock",
+  "calibration_seeds": [42, 73],
+  "cost_rule_digest": "4b474b9135c3dff95e93b5e13e5d6542bee446fcf9428c332260262385664227",
+  "derivation": {
+    "fixed_upper": "1.50 * maximum calibration selected-s=1 p95",
+    "full_lower": "0.90 * minimum calibration full median",
+    "per_action_upper": "1.75 * maximum calibration incremental p95 slope over s in {512,1024,2048,4096,8192}"
+  },
+  "full_b7_wall_lower_ns": 269816477.40000004,
+  "new_target_seeds_excluded": [42, 73],
+  "schema": "SAC_GEN6_FROZEN_COST_RULE_V1",
+  "selected_fixed_upper_ns": 599783.9999999999,
+  "selected_per_action_upper_ns": 3447.6546531509503,
+  "truth_for_new_targets_accessed": false
+}

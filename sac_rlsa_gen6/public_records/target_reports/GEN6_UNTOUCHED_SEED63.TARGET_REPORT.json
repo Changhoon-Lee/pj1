@@ -1,0 +1,77 @@
+{
+  "files": {
+    "loss": {
+      "bytes": 8000000,
+      "path": "GEN6_UNTOUCHED_SEED63.reported_loss.f64",
+      "sha256": "e980270708d600b1b234cab633df536128471ae5c4f745d6e54ea1215b11354e"
+    },
+    "model": {
+      "bytes": 26064,
+      "path": "GEN6_UNTOUCHED_SEED63.model.bin",
+      "sha256": "2ed3ef6f7511f152eaa4ea602b3f101ce20b04fd3467e62c192a12c6cf0216d4"
+    },
+    "raw": {
+      "bytes": 8000000,
+      "path": "GEN6_UNTOUCHED_SEED63.reported_raw.f64",
+      "sha256": "e366b5945e3b5d2bd4e4c346fa436e7eee7e1d8725dba1483b367cb12d3b85ee"
+    },
+    "x": {
+      "bytes": 80000000,
+      "path": "GEN6_UNTOUCHED_SEED63.X.f64",
+      "sha256": "0b4d088b9518ca318f821c6d61a63b379099e69aa2ad3d0f3fde03a7e488ff02"
+    },
+    "y": {
+      "bytes": 8000000,
+      "path": "GEN6_UNTOUCHED_SEED63.y.f64",
+      "sha256": "57c9fc04d4d451022ecbef31e6442e29c12762e37d8b996555c84df2b7f54100"
+    }
+  },
+  "model_bounds": {
+    "derivation": "max(softplus(raw_max),softplus(-raw_min)) over y01 in {0,1}",
+    "init_raw": 0.03400327590139321,
+    "loss_upper": 15.234618558692091,
+    "n_features": 10,
+    "n_trees": 100,
+    "raw_max": 15.23461831676234,
+    "raw_min": -1.3875533851444168,
+    "rounding": "outward_nextafter_each_tree_term_and_sum"
+  },
+  "parameters": {
+    "learning_rate": 0.1,
+    "max_depth": 2,
+    "max_features": 2,
+    "min_samples_split": 5,
+    "n_estimators": 100
+  },
+  "policy": {
+    "decision": "PASS iff mean_loss < 0.5",
+    "formula": "logaddexp(0,raw)-y01*raw",
+    "label_mapping": "y01=1 iff make_hastie label >0",
+    "metric": "mean Bernoulli log loss from raw logits",
+    "probability_clipping": "NONE_AUTHORITATIVE_RAW_LOGIT_PATH",
+    "threshold": 0.5
+  },
+  "population": 1000000,
+  "report_digest": "1b1462cfa284b40eb75bf5e12444190ac3cd5c72bf3e71bce5bc2d96af158164",
+  "report_generation_wall_ns": 837728124,
+  "reported_decision": true,
+  "reported_max_loss": 1.8750553686430609,
+  "reported_mean_loss": 0.44589599699886984,
+  "reported_min_loss": 0.0032363297033937144,
+  "schema": "SAC_GEN6_TARGET_REPORT_V1",
+  "seed": 63,
+  "software": {
+    "numpy": "2.3.5",
+    "platform": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+    "python": "3.13.14",
+    "sklearn": "1.8.0"
+  },
+  "target_id": "GEN6_UNTOUCHED_SEED63",
+  "target_truth_accessed": false,
+  "training_population": 2000,
+  "tree_semantics": {
+    "comparison": "float32(x_feature) <= stored float64 threshold",
+    "feature_input_cast": "float32 before each split comparison",
+    "leaf_accumulation": "float64 init + learning_rate * leaf values"
+  }
+}
