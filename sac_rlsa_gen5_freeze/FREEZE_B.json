@@ -1,0 +1,13 @@
+{
+  "schema":"SAC_GEN5_FREEZE_B_PUBLIC_V1",
+  "freeze_b_sha256":"e24d09d35cc06c661a09d6b02aaf72860079ae717c569a816896480a66c3a751",
+  "freeze_a_sha256":"fb2ebac92d408ee9ec0ade74e4c0be51e18f8975326820a083dc4ed691d5414c",
+  "target_truth_accessed":false,
+  "audit_randomness_exists":false,
+  "partitions":[
+    {"id":"A","classification":"30X_CERTIFIED","q_low":330,"q_high":94,"sample_pass":7884,"sample_fail":266,"sample_total":8150,"predicted_wall_speedup_lower":38.20500444345249,"predicted_cpu_speedup_lower":44.15077511329046},
+    {"id":"B","classification":"30X_CERTIFIED","q_low":331,"q_high":93,"sample_pass":7860,"sample_fail":268,"sample_total":8128,"predicted_wall_speedup_lower":38.28203867007556,"predicted_cpu_speedup_lower":44.25632735153597}
+  ],
+  "theory":"Gen4 support-complete exact fixed-size minimax hypergeometric theorem",
+  "strongest_baseline":"compiled full C++ independent audit, 4 threads"
+}
