@@ -1,0 +1,39 @@
+{
+  "audit_actions": "independent C++ forward-Cusum recomputation of a selected sequence",
+  "b7": "compiled C++ full independent audit of all 500000 sequences, 4 threads, same artifact and decision logic",
+  "bad_states": [
+    "lower-bound flip: at least q_low reported-pass units are actual failures",
+    "upper-bound flip: at least q_high reported-fail units are actual passes"
+  ],
+  "created_date": "2026-08-02",
+  "freeze_a_sha256": "fb2ebac92d408ee9ec0ade74e4c0be51e18f8975326820a083dc4ed691d5414c",
+  "freeze_stage": "POLICY_AND_SEMANTICS",
+  "negative_controls": ["G1 singleton", "G2 NumPy all-mandatory KAT", "G3 small-population fixed-overhead"],
+  "policy": {
+    "authority": "NIST SP 800-22 Rev.1a Section 4.2.1",
+    "campaign_decision": "reported pass proportion lies in p_hat plus/minus 3 sqrt(p_hat(1-p_hat)/m), p_hat=0.99",
+    "risk_allocation": {"lower_assertion": 0.005, "upper_assertion": 0.005},
+    "risk_limit": 0.01,
+    "sequence_pass": "p_value >= 0.01",
+    "sequence_test": "forward cumulative sums"
+  },
+  "schema": "SAC_GEN5_FREEZE_A_V1",
+  "source_digests": {
+    "authority_instructions": "4a17d00651c16a96abf62231d75f7441331737e5433205708554912470169709",
+    "b10_cusum.cpp": "544519727537d7fda570806132b9e02837c0476a637ef3302ba7eadc507845e7",
+    "candidate_register": "7db4d2cf3f2111a0b7288328f5c77ab95030b2017ba9cbade935300bbf55fea8",
+    "development_calibration": "8962b47ca86737263b55c5c84b4d594ef771e2b3da37574733a22fdd35c1aad6",
+    "producer_cusum.py": "c8ceac60e6ca1cfa34cf345fddff34a4d47ff66e9fd7a7a895ffa5a66989635e"
+  },
+  "target_artifact": {
+    "format": "little-endian uint64 row-major",
+    "generator": "numpy.random.PCG64DXSM",
+    "nbits": 1024,
+    "nseq": 500000,
+    "numpy_version": "2.3.5",
+    "partitions": [{"id":"A","seed":202608020101},{"id":"B","seed":202608020202}]
+  },
+  "target_results_present": false,
+  "target_truth_accessed": false,
+  "unit_definition": "one 1024-bit sequence"
+}
