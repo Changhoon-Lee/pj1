@@ -1,0 +1,11 @@
+{
+  "history_only_seeds": [42, 73, 59, 63],
+  "population_per_target": 2500000,
+  "post_selection_target_access": false,
+  "replacement_or_reroll_forbidden": true,
+  "schema": "SAC_GEN7_SEED_SELECTION_RULE_V1",
+  "seed_rule_digest": "deb1e8f75673639198c7bfdb4bff260ee8bf1f442e279c506dcff8881d47828f",
+  "selection_provenance": "preserved historical rule; targets subsequently consumed by local report and full truth",
+  "consumed_seeds": [2168, 912],
+  "prospective_reuse_authorized": false
+}

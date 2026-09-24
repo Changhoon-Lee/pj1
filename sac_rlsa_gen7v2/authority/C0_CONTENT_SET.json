@@ -1,0 +1,46 @@
+{
+  "branch": "sac-rlsa-gen7-authoritative-v2",
+  "content_files": {
+    "freeze/FREEZE_A_V2_AUTHORITATIVE_DIRECT_SOURCE.json": {
+      "bytes": 6998,
+      "git_blob_sha1": "e4f674383c1df89d3e8c7eabb6b9e8e176981c93",
+      "sha256": "27c4e1b404c6f8cc13f86493e56b95910c6c39180e3057b111d783fc01c4078b"
+    },
+    "freeze/PUBLIC_FREEZE_A_V2.md": {
+      "bytes": 1019,
+      "git_blob_sha1": "9ca62b9cf87c9f21d431490542b2e0cb0e1a1435",
+      "sha256": "15a5a2d2a495e091f5626e35c3fa36c1af2070f423ec0a804b7edae54ae6c222"
+    },
+    "freeze/SEED_SELECTION_RULE_V2.json": {
+      "bytes": 2281,
+      "git_blob_sha1": "9fd445df4735039d0c9dbbe1b03cc9515066f209",
+      "sha256": "e6285fe0e9d971828e098bd71278526d72656c4707ef8f16a532d4a5fa8138e3"
+    },
+    "preflight/HISTORY_DRY_RUN_QUALIFIED.json": {
+      "bytes": 3213,
+      "git_blob_sha1": "37446f98fa8cfa39b9faafab888c3d0d390722c3",
+      "sha256": "7071a51e7cf4e3efad3376e820a5c27cdc922f1700fe53b110a0a07880d3196b"
+    },
+    "state/STATE_0.json": {
+      "bytes": 682,
+      "git_blob_sha1": "e62cbea6f67768d1e0196379120c418d870314a4",
+      "sha256": "d0c103e331366ddf3c9067fd184dea2ce4d848407e2e7913e58275fe84899d37"
+    }
+  },
+  "content_set_digest": "c1c281bbdde6427a33d3b1028ac692693e7a862283056df4718548bf8b47594a",
+  "digest_method": "SHA256(canonical JSON excluding content_set_digest)",
+  "freeze_a_sha256": "4cb76ee4bbc5796350a10151491feb0ed34266ca0f34f0853245413083b24053",
+  "history_qualification_digest": "52a57af7dbb456a86a7157513c6e3da1e689f8ddebb516f67194b4fcedc6ff3c",
+  "repository": "Changhoon-Lee/pj1",
+  "role": "SELF_REFERENCE_FREE_AUTHORITY_CONTENT_INDEX",
+  "schema": "SAC_GEN7_V2R2_C0_CONTENT_SET_V1",
+  "seed_rule_digest": "b5ec845fa72df62ea16838db23bce7978868be8fbe1d0da6da5a57bd7c07949f",
+  "state_0_digest": "69f181690940914deee2c54f8ed3aa29f83b685fda2d7afdad1c617f205f038e",
+  "target_reports_present": false,
+  "target_trigger_present": false,
+  "target_truth_accessed": false,
+  "untouched_seeds": [
+    884503672,
+    756621450
+  ]
+}
